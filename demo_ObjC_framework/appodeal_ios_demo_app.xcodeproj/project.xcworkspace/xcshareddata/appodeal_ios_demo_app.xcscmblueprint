@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A35E4AF1F752779929F3F1C7639753BB2792215E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "1949D46F4167921EF89D2FBF5C1A79D8AE760130" : 9223372036854775807,
+    "A35E4AF1F752779929F3F1C7639753BB2792215E" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3F3F0044-AFC3-485B-B871-C99CAB0C724A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "1949D46F4167921EF89D2FBF5C1A79D8AE760130" : "appodeal_ios_demo_app\/demo_ObjC_framework\/appodeal-ios-sdk-mobile-adapters\/",
+    "A35E4AF1F752779929F3F1C7639753BB2792215E" : "appodeal_ios_demo_app\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "appodeal_ios_demo_app",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "demo_ObjC_framework\/appodeal_ios_demo_app.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:appodeal\/appodeal-ios-sdk-mobile-adapters.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1949D46F4167921EF89D2FBF5C1A79D8AE760130"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:appodeal\/appodeal-ios-new-demo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A35E4AF1F752779929F3F1C7639753BB2792215E"
+    }
+  ]
+}
