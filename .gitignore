@@ -1,0 +1,72 @@
+# Mac OS X
+.DS_Store
+
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## Build generated
+
+#demo_ObjC_framework
+#demo_ObjC_pod
+#demo_Swift_framework
+#demo_Swift_pod
+
+*/build/
+*/DerivedData
+
+build/
+DerivedData
+
+## Various settings
+
+*/*.pbxuser
+*/!default.pbxuser
+*/*.mode1v3
+*/!default.mode1v3
+*/*.mode2v3
+*/!default.mode2v3
+*/*.perspectivev3
+*/!default.perspectivev3
+*/xcuserdata
+
+## Other
+
+*/*.xccheckout
+*/*.moved-aside
+*/*.xcuserstate
+*/*.xcscmblueprint
+
+## Obj-C/Swift specific
+*/*.hmap
+*/*.ipa
+
+# CocoaPods
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+#
+
+*/Pods/
+*/Pods
+*/Podfile.lock
+
+# Carthage
+#
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+# Carthage/Checkouts
+
+Carthage/Build
+
+# Appodeal.framework
+# AppodealResouces
+#
+
+*/Appodeal.framework
+*/Appodeal.bundle
+
+*/Appodeal
+*/appodeal-ios-sdk-mobile-adapters-master
+
+# Adapters -->
