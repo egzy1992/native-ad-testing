@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "AppodealToast.h"
 #import <Appodeal/Appodeal.h>
-#include <stdlib.h>
-
-#define GRADIENT                                1
 
 @interface APDRootViewController : UIViewController
 
@@ -22,7 +19,5 @@
 -(void) apdBannerViewOnBottom;
 
 - (void)wasInitializedLikeDeprecated;
-
--(CAGradientLayer *) gradientWithFrame:(CGRect)frame;
 
 @end

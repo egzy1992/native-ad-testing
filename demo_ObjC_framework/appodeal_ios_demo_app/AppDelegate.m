@@ -7,10 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "APDRootNavigationController.h"
 #import "APDStartScreenViewController.h"
-#import "APDAdTypePresentationViewController.h"
-#import "APDFavoriteAdTypePresentationViewController.h"
+#import "APDDisableNetworkViewController.h"
+#import "APDHUBViewController.h"
 
 @interface AppDelegate ()
 
@@ -44,16 +43,41 @@
     [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.9 green:0.0 blue:0.0 alpha:0.95]];
 }
 
-- (void) initializeSdk:(AppodealAdType)adType testMode:(BOOL)testMode debugMode:(BOOL)debug locationTracking:(BOOL)locationTracking autoCache:(BOOL)autoCache userData:(BOOL)userData toast:(BOOL)toastMode{
+- (void) initializeSdkWithParams:(APDDemoModel *)params andApiVersion:(BOOL)api {
+    if (api) {
+        [self initAPDWithParams:params];
+    } else {
+        [self initAppodealWithParams:params];
+    }
+}
+
+- (void) initAPDWithParams:(APDDemoModel *)params {
     NSString * apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppodealAppKey"];
     
-//    [Appodeal disableNetworkForAdType:AppodealAdTypeBanner name:@"admob"];
+    [APDSdk sharedSdkWithApiKey:apiKey];
+    [self disableNetworkForArray:self.disabledAdNetwork];
     
-    [Appodeal setTestingEnabled:testMode];
-    [Appodeal setDebugEnabled:debug];
-    [Appodeal setLocationTracking:!locationTracking];
+    [[APDSdk sharedSdk] setTesingMode:params.testMode];
+    [[APDSdk sharedSdk] setLocationTracking:params.locationTracking];
+    [[APDSdk sharedSdk] initializeForAdTypes:(APDType)params.adType];
     
-    if (userData) {
+    {
+        APDHUBViewController * rootController = [APDHUBViewController new];
+        rootController.toastMode = params.toastMode;
+        UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:rootController];
+        self.window.rootViewController = navigationController;
+    }
+}
+
+- (void) initAppodealWithParams:(APDDemoModel *)params {
+    NSString * apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppodealAppKey"];
+    
+    
+    [self disableNetworkForArray:self.disabledAdNetwork];
+    [Appodeal setTestingEnabled:params.testMode];
+    [Appodeal setLocationTracking:params.locationTracking];
+    
+    if (params.userSettings) {
         [Appodeal setUserId:@"user_id"];
         [Appodeal setUserEmail:@"dt@email.net"];
         [Appodeal setUserBirthday:[NSDate date]];
@@ -65,33 +89,34 @@
         [Appodeal setUserAlcoholAttitude:AppodealUserAlcoholAttitudeNeutral];
         [Appodeal setUserInterests:@"other"];
     }
-    [Appodeal setAutocache:autoCache types:adType];
-    [Appodeal initializeWithApiKey:apiKey types:adType];
+    [Appodeal setAutocache:params.autoCache types:params.adType];
+    [Appodeal initializeWithApiKey:apiKey types:params.adType];
     
     {
-        APDAdTypePresentationViewController * rootController = [APDAdTypePresentationViewController new];
+        APDHUBViewController * rootController = [APDHUBViewController new];
         [rootController wasInitializedLikeDeprecated];
-        rootController.toastMode = toastMode;
-        rootController.isAutoCache = autoCache;
-        APDRootNavigationController * navigationController = [[APDRootNavigationController alloc] initWithRootViewController:rootController];
+        rootController.toastMode = params.toastMode;
+        rootController.isAutoCache = params.autoCache;
+        UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:rootController];
         self.window.rootViewController = navigationController;
     }
 }
 
-- (void) initializeSdk:(APDAdType)adType testMode:(BOOL)testMode locationTracking:(BOOL)locationTracking toast:(BOOL)toastMode{
-    NSString * apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppodealAppKey"];
+- (void)disableNetworkForArray:(NSArray *)disabledNetwork{
+    if (!disabledNetwork) {
+        return;
+    }
     
-    [APDSdk sharedSdkWithApiKey:apiKey];
-    [[APDSdk sharedSdk] setTesingMode:testMode];
-    [[APDSdk sharedSdk] setLocationTracking:locationTracking];
-    [[APDSdk sharedSdk] initializeForAdTypes:adType];
-//    [[APDSdk sharedSdk] setLogLevel:APDLogLevelDebug];
-    
-    {
-        APDFavoriteAdTypePresentationViewController * rootController = [APDFavoriteAdTypePresentationViewController new];
-        rootController.toastMode = toastMode;
-        APDRootNavigationController * navigationController = [[APDRootNavigationController alloc] initWithRootViewController:rootController];
-        self.window.rootViewController = navigationController;
+    for (NetworkProperty * property in disabledNetwork) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        [Appodeal disableNetworkForAdType:AppodealAdTypeNativeAd name:property.networkName];
+        [Appodeal disableNetworkForAdType:AppodealAdTypeSkippableVideo name:property.networkName];
+        [Appodeal disableNetworkForAdType:AppodealAdTypeRewardedVideo name:property.networkName];
+        [Appodeal disableNetworkForAdType:AppodealAdTypeMREC name:property.networkName];
+        [Appodeal disableNetworkForAdType:AppodealAdTypeInterstitial name:property.networkName];
+        [Appodeal disableNetworkForAdType:AppodealAdTypeBanner name:property.networkName];
+#pragma clang diagnostic pop
     }
 }
 

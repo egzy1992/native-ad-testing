@@ -8,12 +8,10 @@
 
 #import "APDRootViewController.h"
 #import "Masonry.h"
-//#import "APDCollectionViewPlacer.h"
-//#import "APDTableViewAdPlacer.h"
 
 static BOOL deprecated = NO;
 
-@interface APDRootViewController () <APDBannerViewDelegate>
+@interface APDRootViewController ()
 
 @property (nonatomic, strong) APDBannerView * bannerView;
 
@@ -75,36 +73,11 @@ static BOOL deprecated = NO;
 }
 
 - (void)orientationChanged:(NSNotification *)notification{
-    //UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
     [self.view updateConstraints];
-/*    for (id subview in self.view.subviews) {
-        if ([subview isKindOfClass:[UICollectionView class]]) {
-            [(UICollectionView *)subview apd_reloadData];
-        }
-        if ([subview isKindOfClass:[UITableView class]]) {
-            [(UITableView *)subview apd_reloadData];
-        }
-    } */
 }
 
 - (BOOL) prefersStatusBarHidden{
     return YES;
-}
-
-- (CAGradientLayer *) gradientWithFrame:(CGRect)frame{
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    
-    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
-    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
-    UIColor *color = GRADIENT ? [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:0.5] : UIColor.whiteColor;
-    
-    gradient.frame = frame;
-    gradient.colors = [NSArray arrayWithObjects:
-                       (id)[color CGColor],
-                       (id)[[UIColor whiteColor] CGColor],
-                       nil];
-    return gradient;
 }
 
 -(void) apdBannerViewOnBottom {
