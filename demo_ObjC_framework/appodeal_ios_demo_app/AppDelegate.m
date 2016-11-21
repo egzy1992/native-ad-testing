@@ -76,6 +76,9 @@
     [self disableNetworkForArray:self.disabledAdNetwork];
     [Appodeal setTestingEnabled:params.testMode];
     [Appodeal setLocationTracking:params.locationTracking];
+    [Appodeal setSmartBannersEnabled:params.bannerSmartSize];
+    [Appodeal setBannerBackgroundVisible:params.bannerBackground];
+    [Appodeal setBannerAnimationEnabled:params.bannerAnimation];
     
     if (params.userSettings) {
         [Appodeal setUserId:@"user_id"];
