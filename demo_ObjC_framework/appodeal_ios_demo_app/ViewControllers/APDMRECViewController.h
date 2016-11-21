@@ -8,6 +8,6 @@
 
 #import "APDRootViewController.h"
 
-@interface APDMRECBannerViewController : APDRootViewController
+@interface APDMRECViewController : APDRootViewController
 
 @end

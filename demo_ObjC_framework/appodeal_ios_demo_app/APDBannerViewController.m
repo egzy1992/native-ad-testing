@@ -6,10 +6,10 @@
 //  Copyright © 2016 appodeal. All rights reserved.
 //
 
-#import "BannerViewController.h"
+#import "APDBannerViewController.h"
 #import "Masonry.h"
 
-@interface BannerViewController () <AppodealBannerDelegate, AppodealBannerViewDelegate, APDBannerViewDelegate>
+@interface APDBannerViewController () <AppodealBannerDelegate, AppodealBannerViewDelegate, APDBannerViewDelegate>
 
 @property (nonatomic, strong) UIButton * bannerTop;
 @property (nonatomic, strong) UIButton * bannerBottom;
@@ -24,10 +24,10 @@
 
 @end
 
-@implementation BannerViewController
+@implementation APDBannerViewController
 
 + (instancetype)bannerCustom:(BOOL)custom{
-    BannerViewController * bannerController = [BannerViewController new];
+    APDBannerViewController * bannerController = [APDBannerViewController new];
     bannerController.custom = custom;
     return bannerController;
 }

@@ -8,15 +8,6 @@
 
 #import "APDNativeShowStyleViewController.h"
 #import "APDNativeShowStyleView.h"
-
-#import "APDContentFeedViewController.h"
-#import "APDContentStreamViewController.h"
-#import "APDCollectionContentViewController.h"
-#import "APDBannerContentViewController.h"
-
-//#import "APDHelperTableViewController.h"
-//#import "APDHelperCollectionViewController.h"
-
 #import "APDCustomContentViewController.h"
 
 #import "RSSStream.h"
@@ -99,76 +90,6 @@
     nextController.toastMode = self.toastMode;
     nextController.nativeType = _nativeShowStyle.segmentControl.selectedSegmentIndex;
     [self.navigationController pushViewController:nextController animated:YES];
-}
-
-//#pragma mark --- ACTIONS WITH HELPER
-//
-//- (IBAction)collectionHelperClick:(id)sender {
-//    [_nativeShowStyle.collectionHelperContent apdSpinnerShowOnRight];
-//    
-//    APDHelperCollectionViewController * nextController = [APDHelperCollectionViewController new];
-//    nextController.toastMode = self.toastMode;
-//    
-//    switch (_nativeShowStyle.apdTypeSegmentedControl.selectedSegmentIndex) {
-//        case 0: // NATIVE
-//        {
-//            nextController.adType = APDAdTypeNativeAd;
-//        } break;
-//        case 1: // BANNER
-//        {
-//            nextController.adType = APDAdTypeBanner;
-//        } break;
-//        case 2: // MREC
-//        {
-//            nextController.adType = APDAdTypeMREC;
-//        } break;
-//    }
-//    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        _rssStream = [[RSSStream alloc] initWithURL:@"http://lenta.ru/rss/news" andController:self];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.view apdSpinnerHide];
-//            nextController.contentArray = _contentArray;
-//            [self.navigationController pushViewController:nextController animated:YES];
-//        });
-//    });
-//}
-//
-//- (IBAction)tableHelperClick:(id)sender {
-//    [_nativeShowStyle.tableHelperContent apdSpinnerShowOnRight];
-//    
-//    APDHelperTableViewController * nextController = [APDHelperTableViewController new];
-//    nextController.toastMode = self.toastMode;
-//    
-//    switch (_nativeShowStyle.apdTypeSegmentedControl.selectedSegmentIndex) {
-//        case 0: // NATIVE
-//        {
-//            nextController.adType = APDAdTypeNativeAd;
-//        } break;
-//        case 1: // BANNER
-//        {
-//            nextController.adType = APDAdTypeBanner;
-//        } break;
-//        case 2: // MREC
-//        {
-//            nextController.adType = APDAdTypeMREC;
-//        } break;
-//    }
-//    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        _rssStream = [[RSSStream alloc] initWithURL:@"http://lenta.ru/rss/news" andController:self];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.view apdSpinnerHide];
-//            nextController.contentArray = _contentArray;
-//            [self.navigationController pushViewController:nextController animated:YES];
-//        });
-//    });
-//}
-
-#pragma mark --- RSSDELEGATE
-
--(void) rssStreamWithArray:(NSArray *) array{
-    _contentArray = array;
 }
 
 @end

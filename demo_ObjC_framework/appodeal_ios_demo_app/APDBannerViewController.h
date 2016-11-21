@@ -8,7 +8,7 @@
 
 #import "APDRootViewController.h"
 
-@interface BannerViewController : APDRootViewController
+@interface APDBannerViewController : APDRootViewController
 
 @property (nonatomic, assign) BOOL custom;
 

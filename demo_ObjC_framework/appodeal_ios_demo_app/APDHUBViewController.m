@@ -10,8 +10,8 @@
 #import "APDViewModel.h"
 #import "Masonry.h"
 
-#import "BannerViewController.h"
-#import "APDMRECBannerViewController.h"
+#import "APDBannerViewController.h"
+#import "APDMRECViewController.h"
 #import "APDNativeShowStyleViewController.h"
 #import "APDBackgroundWorkPresentationViewController.h"
 #import "APDViewabillityPresentationViewController.h"
@@ -302,14 +302,14 @@
         {
             if (self.deprecateApi) {
                 switch (indexPath.row) {
-                    case 0: [self pushOnViewController:[BannerViewController bannerCustom:NO]];                 break; // banner
-                    case 1: [self pushOnViewController:[BannerViewController bannerCustom:YES]];                break; // custom banner
-                    case 2: [self pushOnViewController:[APDMRECBannerViewController new]];                      break; // mrec
+                    case 0: [self pushOnViewController:[APDBannerViewController bannerCustom:NO]];                  break; // banner
+                    case 1: [self pushOnViewController:[APDBannerViewController bannerCustom:YES]];                 break; // custom banner
+                    case 2: [self pushOnViewController:[APDMRECViewController new]];                                break; // mrec
                 } break;
             } else {
                 switch (indexPath.row) {
-                    case 0: [self pushOnViewController:[BannerViewController bannerCustom:YES]];                 break; // custom banner
-                    case 1:  [self pushOnViewController:[APDMRECBannerViewController new]];                     break; // mrec
+                    case 0: [self pushOnViewController:[APDBannerViewController bannerCustom:YES]];                 break; // custom banner
+                    case 1: [self pushOnViewController:[APDMRECViewController new]];                                break; // mrec
                 } break;
             }
         } break;
