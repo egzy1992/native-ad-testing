@@ -62,7 +62,6 @@
 		B93895701D745EAD0048E85A /* APDSVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B938956F1D745EAD0048E85A /* APDSVC.m */; };
 		B97A5D681DA510E7001784A4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B97A5D671DA510E7001784A4 /* CoreText.framework */; };
 		B99508BA1D59AFA4005AEF1F /* APDCustomContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508B91D59AFA4005AEF1F /* APDCustomContentViewController.m */; };
-		B99508BE1D59AFED005AEF1F /* APDCustomContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508BD1D59AFED005AEF1F /* APDCustomContentView.m */; };
 		B99508C11D59B859005AEF1F /* APDCustomNativeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508C01D59B859005AEF1F /* APDCustomNativeView.m */; };
 		B99508C51D59CF6C005AEF1F /* RSSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508C41D59CF6C005AEF1F /* RSSModel.m */; };
 		B99508C81D59CF7B005AEF1F /* RSSStream.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508C71D59CF7B005AEF1F /* RSSStream.m */; };
@@ -92,29 +91,16 @@
 		B99509541D59EC5E005AEF1F /* APDTripleBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99509521D59EC5E005AEF1F /* APDTripleBannerViewController.m */; };
 		B99509611D59ECB0005AEF1F /* APDVideoHiddenView.m in Sources */ = {isa = PBXBuildFile; fileRef = B995095E1D59ECB0005AEF1F /* APDVideoHiddenView.m */; };
 		B99509621D59ECB0005AEF1F /* APDVideoHiddenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99509601D59ECB0005AEF1F /* APDVideoHiddenViewController.m */; };
-		B99509781D59F23A005AEF1F /* APDRSSStreamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B99509771D59F23A005AEF1F /* APDRSSStreamCell.m */; };
-		B995097B1D59F906005AEF1F /* APDRSSCollectionStreamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B995097A1D59F906005AEF1F /* APDRSSCollectionStreamCell.m */; };
 		B995097E1D5A26B8005AEF1F /* APDViewabillityPresentationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B995097D1D5A26B8005AEF1F /* APDViewabillityPresentationViewController.m */; };
 		B99509841D5A2740005AEF1F /* APDViewabillityPresentationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B99509831D5A2740005AEF1F /* APDViewabillityPresentationView.m */; };
 		B99509871D5A278A005AEF1F /* APDBackgoundWorkPresentationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B99509861D5A278A005AEF1F /* APDBackgoundWorkPresentationView.m */; };
 		B995098B1D5A27C5005AEF1F /* APDBackgroundWorkPresentationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B995098A1D5A27C5005AEF1F /* APDBackgroundWorkPresentationViewController.m */; };
 		B9CA38441D10076200A5F3B4 /* APDMRECViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CA38431D10076200A5F3B4 /* APDMRECViewController.m */; };
 		B9CA384F1D10182400A5F3B4 /* APDNativeShowStyleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CA384E1D10182400A5F3B4 /* APDNativeShowStyleViewController.m */; };
-		B9CA38541D10189400A5F3B4 /* APDNativeShowStyleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CA38531D10189400A5F3B4 /* APDNativeShowStyleView.m */; };
-		B9CA385B1D10248000A5F3B4 /* APDContentFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CA385A1D10248000A5F3B4 /* APDContentFeedViewController.m */; };
-		B9CA385F1D1024E200A5F3B4 /* APDContentFeedView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CA385E1D1024E200A5F3B4 /* APDContentFeedView.m */; };
-		B9CA38621D10251100A5F3B4 /* APDContentStreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CA38611D10251100A5F3B4 /* APDContentStreamViewController.m */; };
-		B9CA38661D10254200A5F3B4 /* APDContentStreamView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CA38651D10254200A5F3B4 /* APDContentStreamView.m */; };
-		B9CA38691D10257900A5F3B4 /* APDCollectionContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CA38681D10257900A5F3B4 /* APDCollectionContentViewController.m */; };
-		B9CA386E1D1025AB00A5F3B4 /* APDCollectionContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CA386D1D1025AB00A5F3B4 /* APDCollectionContentView.m */; };
-		B9CA38781D10264700A5F3B4 /* APDBannerContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CA38771D10264700A5F3B4 /* APDBannerContentViewController.m */; };
-		B9CA387C1D10266F00A5F3B4 /* APDBannerContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CA387B1D10266F00A5F3B4 /* APDBannerContentView.m */; };
 		B9D9D9831DDEE81B00DC028B /* APDDisableNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9D9821DDEE81B00DC028B /* APDDisableNetworkViewController.m */; };
 		B9D9D98C1DDF1C0900DC028B /* APDDemoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9D98B1DDF1C0900DC028B /* APDDemoModel.m */; };
 		B9D9D98F1DDF2E5F00DC028B /* APDHUBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9D98E1DDF2E5F00DC028B /* APDHUBViewController.m */; };
 		B9D9D9921DDF412C00DC028B /* APDBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D9D9911DDF412C00DC028B /* APDBannerViewController.m */; };
-		B9E0CACB1D17D593009A7079 /* APDContentFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0CACA1D17D593009A7079 /* APDContentFeedCell.m */; };
-		B9E0CAD01D17E634009A7079 /* APDContentStreamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0CACF1D17E634009A7079 /* APDContentStreamCell.m */; };
 		B9E0CAE31D17EF94009A7079 /* HNKCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0CAD41D17EF94009A7079 /* HNKCache.m */; };
 		B9E0CAE41D17EF94009A7079 /* HNKDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0CAD61D17EF94009A7079 /* HNKDiskCache.m */; };
 		B9E0CAE51D17EF94009A7079 /* HNKDiskFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0CAD81D17EF94009A7079 /* HNKDiskFetcher.m */; };
@@ -123,7 +109,6 @@
 		B9E0CAE81D17EF94009A7079 /* UIButton+Haneke.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0CADE1D17EF94009A7079 /* UIButton+Haneke.m */; };
 		B9E0CAE91D17EF94009A7079 /* UIImageView+Haneke.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0CAE01D17EF94009A7079 /* UIImageView+Haneke.m */; };
 		B9E0CAEA1D17EF94009A7079 /* UIView+Haneke.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0CAE21D17EF94009A7079 /* UIView+Haneke.m */; };
-		B9E0CAED1D17F334009A7079 /* APDContentCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0CAEC1D17F334009A7079 /* APDContentCollectionCell.m */; };
 		B9F5DC0F1D5C572300C3B54A /* UIView+APD_Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F5DC0E1D5C572300C3B54A /* UIView+APD_Spinner.m */; };
 /* End PBXBuildFile section */
 
@@ -220,21 +205,9 @@
 		B93553091D77487E00C11662 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B938956E1D745EAD0048E85A /* APDSVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDSVC.h; path = ViewControllers/APDSVC.h; sourceTree = "<group>"; };
 		B938956F1D745EAD0048E85A /* APDSVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDSVC.m; path = ViewControllers/APDSVC.m; sourceTree = "<group>"; };
-		B966DC0B1D58A77100A04A83 /* APDHelperTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDHelperTableViewController.h; path = ViewControllers/APDHelperTableViewController.h; sourceTree = "<group>"; };
-		B966DC0C1D58A77100A04A83 /* APDHelperTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDHelperTableViewController.m; path = ViewControllers/APDHelperTableViewController.m; sourceTree = "<group>"; };
-		B966DC101D58A7C000A04A83 /* APDHelperTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDHelperTableView.h; path = ViewControllers/APDHelperTableView.h; sourceTree = "<group>"; };
-		B966DC111D58A7C000A04A83 /* APDHelperTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDHelperTableView.m; path = ViewControllers/APDHelperTableView.m; sourceTree = "<group>"; };
-		B966DC131D58AE9000A04A83 /* APDHelperCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDHelperCollectionViewController.h; path = ViewControllers/APDHelperCollectionViewController.h; sourceTree = "<group>"; };
-		B966DC141D58AE9000A04A83 /* APDHelperCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDHelperCollectionViewController.m; path = ViewControllers/APDHelperCollectionViewController.m; sourceTree = "<group>"; };
-		B966DC171D58AFE100A04A83 /* APDHelperCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDHelperCollectionView.h; path = ViewControllers/APDHelperCollectionView.h; sourceTree = "<group>"; };
-		B966DC181D58AFE100A04A83 /* APDHelperCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDHelperCollectionView.m; path = ViewControllers/APDHelperCollectionView.m; sourceTree = "<group>"; };
-		B966DC2E1D58B85600A04A83 /* APDNativeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDNativeView.h; path = ViewControllers/APDNativeView.h; sourceTree = "<group>"; };
-		B966DC2F1D58B85600A04A83 /* APDNativeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDNativeView.m; path = ViewControllers/APDNativeView.m; sourceTree = "<group>"; };
 		B97A5D671DA510E7001784A4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		B99508B81D59AFA4005AEF1F /* APDCustomContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDCustomContentViewController.h; path = ViewControllers/APDCustomContentViewController.h; sourceTree = "<group>"; };
 		B99508B91D59AFA4005AEF1F /* APDCustomContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDCustomContentViewController.m; path = ViewControllers/APDCustomContentViewController.m; sourceTree = "<group>"; };
-		B99508BC1D59AFED005AEF1F /* APDCustomContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDCustomContentView.h; path = ViewControllers/APDCustomContentView.h; sourceTree = "<group>"; };
-		B99508BD1D59AFED005AEF1F /* APDCustomContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDCustomContentView.m; path = ViewControllers/APDCustomContentView.m; sourceTree = "<group>"; };
 		B99508BF1D59B859005AEF1F /* APDCustomNativeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDCustomNativeView.h; path = ViewControllers/APDCustomNativeView.h; sourceTree = "<group>"; };
 		B99508C01D59B859005AEF1F /* APDCustomNativeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDCustomNativeView.m; path = ViewControllers/APDCustomNativeView.m; sourceTree = "<group>"; };
 		B99508C31D59CF6C005AEF1F /* RSSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSSModel.h; path = RSS/RSSModel.h; sourceTree = "<group>"; };
@@ -295,10 +268,6 @@
 		B995095E1D59ECB0005AEF1F /* APDVideoHiddenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDVideoHiddenView.m; path = ViewControllers/APDVideoHiddenView.m; sourceTree = "<group>"; };
 		B995095F1D59ECB0005AEF1F /* APDVideoHiddenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDVideoHiddenViewController.h; path = ViewControllers/APDVideoHiddenViewController.h; sourceTree = "<group>"; };
 		B99509601D59ECB0005AEF1F /* APDVideoHiddenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDVideoHiddenViewController.m; path = ViewControllers/APDVideoHiddenViewController.m; sourceTree = "<group>"; };
-		B99509761D59F23A005AEF1F /* APDRSSStreamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDRSSStreamCell.h; path = ViewControllers/APDRSSStreamCell.h; sourceTree = "<group>"; };
-		B99509771D59F23A005AEF1F /* APDRSSStreamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDRSSStreamCell.m; path = ViewControllers/APDRSSStreamCell.m; sourceTree = "<group>"; };
-		B99509791D59F906005AEF1F /* APDRSSCollectionStreamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDRSSCollectionStreamCell.h; path = ViewControllers/APDRSSCollectionStreamCell.h; sourceTree = "<group>"; };
-		B995097A1D59F906005AEF1F /* APDRSSCollectionStreamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDRSSCollectionStreamCell.m; path = ViewControllers/APDRSSCollectionStreamCell.m; sourceTree = "<group>"; };
 		B995097C1D5A26B8005AEF1F /* APDViewabillityPresentationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDViewabillityPresentationViewController.h; path = ViewControllers/APDViewabillityPresentationViewController.h; sourceTree = "<group>"; };
 		B995097D1D5A26B8005AEF1F /* APDViewabillityPresentationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDViewabillityPresentationViewController.m; path = ViewControllers/APDViewabillityPresentationViewController.m; sourceTree = "<group>"; };
 		B99509821D5A2740005AEF1F /* APDViewabillityPresentationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDViewabillityPresentationView.h; path = ViewControllers/APDViewabillityPresentationView.h; sourceTree = "<group>"; };
@@ -311,24 +280,6 @@
 		B9CA38431D10076200A5F3B4 /* APDMRECViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDMRECViewController.m; path = ViewControllers/APDMRECViewController.m; sourceTree = "<group>"; };
 		B9CA384D1D10182400A5F3B4 /* APDNativeShowStyleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDNativeShowStyleViewController.h; path = ViewControllers/APDNativeShowStyleViewController.h; sourceTree = "<group>"; };
 		B9CA384E1D10182400A5F3B4 /* APDNativeShowStyleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDNativeShowStyleViewController.m; path = ViewControllers/APDNativeShowStyleViewController.m; sourceTree = "<group>"; };
-		B9CA38521D10189400A5F3B4 /* APDNativeShowStyleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDNativeShowStyleView.h; path = ViewControllers/APDNativeShowStyleView.h; sourceTree = "<group>"; };
-		B9CA38531D10189400A5F3B4 /* APDNativeShowStyleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDNativeShowStyleView.m; path = ViewControllers/APDNativeShowStyleView.m; sourceTree = "<group>"; };
-		B9CA38591D10248000A5F3B4 /* APDContentFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDContentFeedViewController.h; path = ViewControllers/APDContentFeedViewController.h; sourceTree = "<group>"; };
-		B9CA385A1D10248000A5F3B4 /* APDContentFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDContentFeedViewController.m; path = ViewControllers/APDContentFeedViewController.m; sourceTree = "<group>"; };
-		B9CA385D1D1024E200A5F3B4 /* APDContentFeedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDContentFeedView.h; path = ViewControllers/APDContentFeedView.h; sourceTree = "<group>"; };
-		B9CA385E1D1024E200A5F3B4 /* APDContentFeedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDContentFeedView.m; path = ViewControllers/APDContentFeedView.m; sourceTree = "<group>"; };
-		B9CA38601D10251100A5F3B4 /* APDContentStreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDContentStreamViewController.h; path = ViewControllers/APDContentStreamViewController.h; sourceTree = "<group>"; };
-		B9CA38611D10251100A5F3B4 /* APDContentStreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDContentStreamViewController.m; path = ViewControllers/APDContentStreamViewController.m; sourceTree = "<group>"; };
-		B9CA38641D10254200A5F3B4 /* APDContentStreamView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDContentStreamView.h; path = ViewControllers/APDContentStreamView.h; sourceTree = "<group>"; };
-		B9CA38651D10254200A5F3B4 /* APDContentStreamView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDContentStreamView.m; path = ViewControllers/APDContentStreamView.m; sourceTree = "<group>"; };
-		B9CA38671D10257900A5F3B4 /* APDCollectionContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDCollectionContentViewController.h; path = ViewControllers/APDCollectionContentViewController.h; sourceTree = "<group>"; };
-		B9CA38681D10257900A5F3B4 /* APDCollectionContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDCollectionContentViewController.m; path = ViewControllers/APDCollectionContentViewController.m; sourceTree = "<group>"; };
-		B9CA386C1D1025AB00A5F3B4 /* APDCollectionContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDCollectionContentView.h; path = ViewControllers/APDCollectionContentView.h; sourceTree = "<group>"; };
-		B9CA386D1D1025AB00A5F3B4 /* APDCollectionContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDCollectionContentView.m; path = ViewControllers/APDCollectionContentView.m; sourceTree = "<group>"; };
-		B9CA38761D10264700A5F3B4 /* APDBannerContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDBannerContentViewController.h; path = ViewControllers/APDBannerContentViewController.h; sourceTree = "<group>"; };
-		B9CA38771D10264700A5F3B4 /* APDBannerContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDBannerContentViewController.m; path = ViewControllers/APDBannerContentViewController.m; sourceTree = "<group>"; };
-		B9CA387A1D10266F00A5F3B4 /* APDBannerContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDBannerContentView.h; path = ViewControllers/APDBannerContentView.h; sourceTree = "<group>"; };
-		B9CA387B1D10266F00A5F3B4 /* APDBannerContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDBannerContentView.m; path = ViewControllers/APDBannerContentView.m; sourceTree = "<group>"; };
 		B9D9D9811DDEE81B00DC028B /* APDDisableNetworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APDDisableNetworkViewController.h; sourceTree = "<group>"; };
 		B9D9D9821DDEE81B00DC028B /* APDDisableNetworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDDisableNetworkViewController.m; sourceTree = "<group>"; };
 		B9D9D98A1DDF1C0900DC028B /* APDDemoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APDDemoModel.h; sourceTree = "<group>"; };
@@ -337,10 +288,6 @@
 		B9D9D98E1DDF2E5F00DC028B /* APDHUBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDHUBViewController.m; sourceTree = "<group>"; };
 		B9D9D9901DDF412C00DC028B /* APDBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APDBannerViewController.h; sourceTree = "<group>"; };
 		B9D9D9911DDF412C00DC028B /* APDBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDBannerViewController.m; sourceTree = "<group>"; };
-		B9E0CAC91D17D593009A7079 /* APDContentFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDContentFeedCell.h; path = ViewControllers/APDContentFeedCell.h; sourceTree = "<group>"; };
-		B9E0CACA1D17D593009A7079 /* APDContentFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDContentFeedCell.m; path = ViewControllers/APDContentFeedCell.m; sourceTree = "<group>"; };
-		B9E0CACE1D17E634009A7079 /* APDContentStreamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDContentStreamCell.h; path = ViewControllers/APDContentStreamCell.h; sourceTree = "<group>"; };
-		B9E0CACF1D17E634009A7079 /* APDContentStreamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDContentStreamCell.m; path = ViewControllers/APDContentStreamCell.m; sourceTree = "<group>"; };
 		B9E0CAD21D17EF94009A7079 /* Haneke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Haneke.h; sourceTree = "<group>"; };
 		B9E0CAD31D17EF94009A7079 /* HNKCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNKCache.h; sourceTree = "<group>"; };
 		B9E0CAD41D17EF94009A7079 /* HNKCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNKCache.m; sourceTree = "<group>"; };
@@ -358,8 +305,6 @@
 		B9E0CAE01D17EF94009A7079 /* UIImageView+Haneke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Haneke.m"; sourceTree = "<group>"; };
 		B9E0CAE11D17EF94009A7079 /* UIView+Haneke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Haneke.h"; sourceTree = "<group>"; };
 		B9E0CAE21D17EF94009A7079 /* UIView+Haneke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Haneke.m"; sourceTree = "<group>"; };
-		B9E0CAEB1D17F334009A7079 /* APDContentCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDContentCollectionCell.h; path = ViewControllers/APDContentCollectionCell.h; sourceTree = "<group>"; };
-		B9E0CAEC1D17F334009A7079 /* APDContentCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDContentCollectionCell.m; path = ViewControllers/APDContentCollectionCell.m; sourceTree = "<group>"; };
 		B9EA63F61D5CB5B1002C7CD0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B9F5DC0D1D5C572300C3B54A /* UIView+APD_Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+APD_Spinner.h"; path = "Root/UIView+APD_Spinner.h"; sourceTree = "<group>"; };
 		B9F5DC0E1D5C572300C3B54A /* UIView+APD_Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+APD_Spinner.m"; path = "Root/UIView+APD_Spinner.m"; sourceTree = "<group>"; };
@@ -564,7 +509,6 @@
 			children = (
 				B92338C21D0AB0D300AC37D1 /* APDInitializeBlock */,
 				B92339061D0B051500AC37D1 /* APDPresentationBlock */,
-				B9CA38501D10182B00A5F3B4 /* APDNativeBlock */,
 				B99509631D59EEB1005AEF1F /* APDAdditionsFunction */,
 			);
 			name = APDViewControllers;
@@ -601,6 +545,7 @@
 				B9D9D98E1DDF2E5F00DC028B /* APDHUBViewController.m */,
 				B9FD887F1DE31DB7000C0559 /* Banner */,
 				B9FD88801DE31DBE000C0559 /* MREC */,
+				B9FD88BE1DE327EE000C0559 /* Native */,
 			);
 			name = APDPresentationBlock;
 			sourceTree = "<group>";
@@ -614,74 +559,11 @@
 			name = APDSRC;
 			sourceTree = "<group>";
 		};
-		B966DC0A1D58A71D00A04A83 /* WithoutHelper */ = {
-			isa = PBXGroup;
-			children = (
-				B99508B71D59AC53005AEF1F /* UnusedVersion */,
-				B99508BB1D59AFB6005AEF1F /* APDCustomContent */,
-			);
-			name = WithoutHelper;
-			sourceTree = "<group>";
-		};
-		B966DC0E1D58A77B00A04A83 /* WithHelper */ = {
-			isa = PBXGroup;
-			children = (
-				B99509711D59F185005AEF1F /* APDModel */,
-				B966DC161D58AE9700A04A83 /* APDHelperCollectionContent */,
-				B966DC0F1D58A78700A04A83 /* APDHelperTableContent */,
-			);
-			name = WithHelper;
-			sourceTree = "<group>";
-		};
-		B966DC0F1D58A78700A04A83 /* APDHelperTableContent */ = {
-			isa = PBXGroup;
-			children = (
-				B966DC101D58A7C000A04A83 /* APDHelperTableView.h */,
-				B966DC111D58A7C000A04A83 /* APDHelperTableView.m */,
-				B966DC0B1D58A77100A04A83 /* APDHelperTableViewController.h */,
-				B966DC0C1D58A77100A04A83 /* APDHelperTableViewController.m */,
-			);
-			name = APDHelperTableContent;
-			sourceTree = "<group>";
-		};
-		B966DC161D58AE9700A04A83 /* APDHelperCollectionContent */ = {
-			isa = PBXGroup;
-			children = (
-				B966DC171D58AFE100A04A83 /* APDHelperCollectionView.h */,
-				B966DC181D58AFE100A04A83 /* APDHelperCollectionView.m */,
-				B966DC131D58AE9000A04A83 /* APDHelperCollectionViewController.h */,
-				B966DC141D58AE9000A04A83 /* APDHelperCollectionViewController.m */,
-			);
-			name = APDHelperCollectionContent;
-			sourceTree = "<group>";
-		};
-		B966DC5F1D58C82900A04A83 /* APDNativeViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				B966DC2E1D58B85600A04A83 /* APDNativeView.h */,
-				B966DC2F1D58B85600A04A83 /* APDNativeView.m */,
-			);
-			name = APDNativeViewModel;
-			sourceTree = "<group>";
-		};
-		B99508B71D59AC53005AEF1F /* UnusedVersion */ = {
-			isa = PBXGroup;
-			children = (
-				B9CA385C1D10248B00A5F3B4 /* APDContentFeed */,
-				B9CA38631D10251700A5F3B4 /* APDContentStream */,
-				B9CA386A1D10257D00A5F3B4 /* APDCollectionContent */,
-				B9CA38791D10264B00A5F3B4 /* APDBannerContent */,
-			);
-			name = UnusedVersion;
-			sourceTree = "<group>";
-		};
 		B99508BB1D59AFB6005AEF1F /* APDCustomContent */ = {
 			isa = PBXGroup;
 			children = (
 				B99508BF1D59B859005AEF1F /* APDCustomNativeView.h */,
 				B99508C01D59B859005AEF1F /* APDCustomNativeView.m */,
-				B99508BC1D59AFED005AEF1F /* APDCustomContentView.h */,
-				B99508BD1D59AFED005AEF1F /* APDCustomContentView.m */,
 				B99508B81D59AFA4005AEF1F /* APDCustomContentViewController.h */,
 				B99508B91D59AFA4005AEF1F /* APDCustomContentViewController.m */,
 			);
@@ -873,26 +755,6 @@
 			name = APDAdditionsPresented;
 			sourceTree = "<group>";
 		};
-		B99509711D59F185005AEF1F /* APDModel */ = {
-			isa = PBXGroup;
-			children = (
-				B99509751D59F202005AEF1F /* APDRSSStreamCell */,
-				B966DC5F1D58C82900A04A83 /* APDNativeViewModel */,
-			);
-			name = APDModel;
-			sourceTree = "<group>";
-		};
-		B99509751D59F202005AEF1F /* APDRSSStreamCell */ = {
-			isa = PBXGroup;
-			children = (
-				B99509761D59F23A005AEF1F /* APDRSSStreamCell.h */,
-				B99509771D59F23A005AEF1F /* APDRSSStreamCell.m */,
-				B99509791D59F906005AEF1F /* APDRSSCollectionStreamCell.h */,
-				B995097A1D59F906005AEF1F /* APDRSSCollectionStreamCell.m */,
-			);
-			name = APDRSSStreamCell;
-			sourceTree = "<group>";
-		};
 		B99509811D5A270C005AEF1F /* APDViewablillityPresented */ = {
 			isa = PBXGroup;
 			children = (
@@ -913,77 +775,6 @@
 				B995098A1D5A27C5005AEF1F /* APDBackgroundWorkPresentationViewController.m */,
 			);
 			name = APDBackgroundWorkPresented;
-			sourceTree = "<group>";
-		};
-		B9CA38501D10182B00A5F3B4 /* APDNativeBlock */ = {
-			isa = PBXGroup;
-			children = (
-				B9CA38511D10184700A5F3B4 /* APDNativeShowStyleViewController */,
-				B966DC0A1D58A71D00A04A83 /* WithoutHelper */,
-				B966DC0E1D58A77B00A04A83 /* WithHelper */,
-			);
-			name = APDNativeBlock;
-			sourceTree = "<group>";
-		};
-		B9CA38511D10184700A5F3B4 /* APDNativeShowStyleViewController */ = {
-			isa = PBXGroup;
-			children = (
-				B9CA38521D10189400A5F3B4 /* APDNativeShowStyleView.h */,
-				B9CA38531D10189400A5F3B4 /* APDNativeShowStyleView.m */,
-				B9CA384D1D10182400A5F3B4 /* APDNativeShowStyleViewController.h */,
-				B9CA384E1D10182400A5F3B4 /* APDNativeShowStyleViewController.m */,
-			);
-			name = APDNativeShowStyleViewController;
-			sourceTree = "<group>";
-		};
-		B9CA385C1D10248B00A5F3B4 /* APDContentFeed */ = {
-			isa = PBXGroup;
-			children = (
-				B9E0CAC91D17D593009A7079 /* APDContentFeedCell.h */,
-				B9E0CACA1D17D593009A7079 /* APDContentFeedCell.m */,
-				B9CA385D1D1024E200A5F3B4 /* APDContentFeedView.h */,
-				B9CA385E1D1024E200A5F3B4 /* APDContentFeedView.m */,
-				B9CA38591D10248000A5F3B4 /* APDContentFeedViewController.h */,
-				B9CA385A1D10248000A5F3B4 /* APDContentFeedViewController.m */,
-			);
-			name = APDContentFeed;
-			sourceTree = "<group>";
-		};
-		B9CA38631D10251700A5F3B4 /* APDContentStream */ = {
-			isa = PBXGroup;
-			children = (
-				B9E0CACE1D17E634009A7079 /* APDContentStreamCell.h */,
-				B9E0CACF1D17E634009A7079 /* APDContentStreamCell.m */,
-				B9CA38641D10254200A5F3B4 /* APDContentStreamView.h */,
-				B9CA38651D10254200A5F3B4 /* APDContentStreamView.m */,
-				B9CA38601D10251100A5F3B4 /* APDContentStreamViewController.h */,
-				B9CA38611D10251100A5F3B4 /* APDContentStreamViewController.m */,
-			);
-			name = APDContentStream;
-			sourceTree = "<group>";
-		};
-		B9CA386A1D10257D00A5F3B4 /* APDCollectionContent */ = {
-			isa = PBXGroup;
-			children = (
-				B9E0CAEB1D17F334009A7079 /* APDContentCollectionCell.h */,
-				B9E0CAEC1D17F334009A7079 /* APDContentCollectionCell.m */,
-				B9CA386C1D1025AB00A5F3B4 /* APDCollectionContentView.h */,
-				B9CA386D1D1025AB00A5F3B4 /* APDCollectionContentView.m */,
-				B9CA38671D10257900A5F3B4 /* APDCollectionContentViewController.h */,
-				B9CA38681D10257900A5F3B4 /* APDCollectionContentViewController.m */,
-			);
-			name = APDCollectionContent;
-			sourceTree = "<group>";
-		};
-		B9CA38791D10264B00A5F3B4 /* APDBannerContent */ = {
-			isa = PBXGroup;
-			children = (
-				B9CA387A1D10266F00A5F3B4 /* APDBannerContentView.h */,
-				B9CA387B1D10266F00A5F3B4 /* APDBannerContentView.m */,
-				B9CA38761D10264700A5F3B4 /* APDBannerContentViewController.h */,
-				B9CA38771D10264700A5F3B4 /* APDBannerContentViewController.m */,
-			);
-			name = APDBannerContent;
 			sourceTree = "<group>";
 		};
 		B9E0CAD11D17EF94009A7079 /* Haneke */ = {
@@ -1026,6 +817,16 @@
 				B9CA38431D10076200A5F3B4 /* APDMRECViewController.m */,
 			);
 			name = MREC;
+			sourceTree = "<group>";
+		};
+		B9FD88BE1DE327EE000C0559 /* Native */ = {
+			isa = PBXGroup;
+			children = (
+				B99508BB1D59AFB6005AEF1F /* APDCustomContent */,
+				B9CA384D1D10182400A5F3B4 /* APDNativeShowStyleViewController.h */,
+				B9CA384E1D10182400A5F3B4 /* APDNativeShowStyleViewController.m */,
+			);
+			name = Native;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1125,32 +926,24 @@
 				B99509621D59ECB0005AEF1F /* APDVideoHiddenViewController.m in Sources */,
 				B91581E81D0FD985000FC33F /* UIView+Toast.m in Sources */,
 				B91581DE1D0FD985000FC33F /* MASCompositeConstraint.m in Sources */,
-				B9CA38541D10189400A5F3B4 /* APDNativeShowStyleView.m in Sources */,
 				B9E0CAE91D17EF94009A7079 /* UIImageView+Haneke.m in Sources */,
 				B99509461D59EBFF005AEF1F /* APDInterstitialDoubleView.m in Sources */,
 				B99508C81D59CF7B005AEF1F /* RSSStream.m in Sources */,
 				B99508C11D59B859005AEF1F /* APDCustomNativeView.m in Sources */,
 				B99508DC1D59D0CE005AEF1F /* NSString+HTML.m in Sources */,
 				B99508F81D59EA39005AEF1F /* APDVideoView.m in Sources */,
-				B9CA38691D10257900A5F3B4 /* APDCollectionContentViewController.m in Sources */,
 				B99509061D59EAA2005AEF1F /* APDTimerViewController.m in Sources */,
 				B92338911D0AA58D00AC37D1 /* AppDelegate.m in Sources */,
 				B91581DF1D0FD985000FC33F /* MASConstraint.m in Sources */,
-				B9CA387C1D10266F00A5F3B4 /* APDBannerContentView.m in Sources */,
 				B99508D91D59D0CE005AEF1F /* MWFeedItem.m in Sources */,
 				B99508EB1D59E9E5005AEF1F /* APDGeoView.m in Sources */,
 				B99508D81D59D0CE005AEF1F /* MWFeedInfo.m in Sources */,
 				B995092D1D59EB57005AEF1F /* APDPhoneCallViewController.m in Sources */,
 				B995098B1D5A27C5005AEF1F /* APDBackgroundWorkPresentationViewController.m in Sources */,
-				B995097B1D59F906005AEF1F /* APDRSSCollectionStreamCell.m in Sources */,
 				B928038A1D0ED1240043CA68 /* AppodealToast.m in Sources */,
 				B9E0CAE71D17EF94009A7079 /* HNKSimpleFetcher.m in Sources */,
-				B9CA38781D10264700A5F3B4 /* APDBannerContentViewController.m in Sources */,
 				B9E0CAE41D17EF94009A7079 /* HNKDiskCache.m in Sources */,
-				B9CA38661D10254200A5F3B4 /* APDContentStreamView.m in Sources */,
 				B923388E1D0AA58D00AC37D1 /* main.m in Sources */,
-				B9E0CAED1D17F334009A7079 /* APDContentCollectionCell.m in Sources */,
-				B9CA386E1D1025AB00A5F3B4 /* APDCollectionContentView.m in Sources */,
 				B995097E1D5A26B8005AEF1F /* APDViewabillityPresentationViewController.m in Sources */,
 				B9CA384F1D10182400A5F3B4 /* APDNativeShowStyleViewController.m in Sources */,
 				B91581E11D0FD985000FC33F /* MASLayoutConstraint.m in Sources */,
@@ -1163,14 +956,10 @@
 				B99509201D59EB17005AEF1F /* APDBluetoothViewController.m in Sources */,
 				B92338AF1D0AAB8A00AC37D1 /* APDRootViewController.m in Sources */,
 				B99509131D59EAD4005AEF1F /* APDAudioRecordingViewController.m in Sources */,
-				B99509781D59F23A005AEF1F /* APDRSSStreamCell.m in Sources */,
 				B99508EC1D59E9E5005AEF1F /* APDGeoViewController.m in Sources */,
 				B9D9D98F1DDF2E5F00DC028B /* APDHUBViewController.m in Sources */,
-				B9CA385F1D1024E200A5F3B4 /* APDContentFeedView.m in Sources */,
 				B99509531D59EC5E005AEF1F /* APDTripleBanerView.m in Sources */,
-				B9CA38621D10251100A5F3B4 /* APDContentStreamViewController.m in Sources */,
 				B91581E51D0FD985000FC33F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
-				B9CA385B1D10248000A5F3B4 /* APDContentFeedViewController.m in Sources */,
 				B9E0CAE51D17EF94009A7079 /* HNKDiskFetcher.m in Sources */,
 				B99508BA1D59AFA4005AEF1F /* APDCustomContentViewController.m in Sources */,
 				B99509051D59EAA2005AEF1F /* APDTimerView.m in Sources */,
@@ -1180,10 +969,7 @@
 				B99508DB1D59D0CE005AEF1F /* NSDate+InternetDateTime.m in Sources */,
 				B93895701D745EAD0048E85A /* APDSVC.m in Sources */,
 				B99509841D5A2740005AEF1F /* APDViewabillityPresentationView.m in Sources */,
-				B99508BE1D59AFED005AEF1F /* APDCustomContentView.m in Sources */,
 				B995091F1D59EB17005AEF1F /* APDBluetoothView.m in Sources */,
-				B9E0CACB1D17D593009A7079 /* APDContentFeedCell.m in Sources */,
-				B9E0CAD01D17E634009A7079 /* APDContentStreamCell.m in Sources */,
 				B99509471D59EBFF005AEF1F /* APDInterstitialDoubleViewController.m in Sources */,
 				B995093A1D59EBA2005AEF1F /* APDBannerHiddenViewController.m in Sources */,
 				B99509541D59EC5E005AEF1F /* APDTripleBannerViewController.m in Sources */,
