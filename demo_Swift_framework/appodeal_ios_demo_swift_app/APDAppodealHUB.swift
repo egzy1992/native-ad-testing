@@ -9,14 +9,12 @@
 import UIKit
 import Appodeal
 
-class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDataSource, AppodealInterstitialDelegate, AppodealSkippableVideoDelegate, AppodealRewardedVideoDelegate {
+class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDataSource, AppodealInterstitialDelegate, AppodealRewardedVideoDelegate {
     
     var isAutoCache : Bool = false;
     
     var appodealHubView : APDAppodealHUBView!
-    var _cellDictName : NSMutableDictionary = NSMutableDictionary()
     var _cellStatusName : NSMutableDictionary = NSMutableDictionary()
-    var _cellHeaderName : NSMutableDictionary = NSMutableDictionary()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +24,6 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
         appodealHubView.tableView.dataSource = self
         self.view = appodealHubView
 
-        _cellDictName = self.cellDictName()
-        _cellHeaderName = self.cellHeaderName()
         _cellStatusName = self.cellStatusName()
         
         Appodeal.setInterstitialDelegate(self)
@@ -40,8 +36,6 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
     func cellDictName() -> NSMutableDictionary {
         let dict : NSMutableDictionary = [
             self.i_Ps(0, index: 0) : NSLocalizedString("Interstitial", comment: ""),
-            self.i_Ps(0, index: 1) : NSLocalizedString("Skippable Video", comment: ""),
-            self.i_Ps(0, index: 2) : NSLocalizedString("Video or Interstitial", comment: ""),
             self.i_Ps(0, index: 3) : NSLocalizedString("Rewarded Video", comment: ""),
             self.i_Ps(1, index: 0) : NSLocalizedString("Banner", comment: ""),
             self.i_Ps(1, index: 1) : NSLocalizedString("MREC", comment: ""),
@@ -65,17 +59,6 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
         return _cellStatusName
     }
     
-    func cellHeaderName() -> NSMutableDictionary {
-        let dict : NSMutableDictionary = [
-            0 : NSLocalizedString("Presented", comment: ""),
-            1 : NSLocalizedString("Banner", comment: ""),
-            1 : NSLocalizedString("Native", comment: ""),
-            1 : NSLocalizedString("Background Work", comment: ""),
-            1 : NSLocalizedString("Viewabillity", comment: "")]
-        _cellHeaderName = dict
-        return _cellHeaderName
-    }
-    
     func i_Ps(_ section : Int, index : Int) ->  IndexPath{
         return IndexPath.init(row: index, section: section)
     }
@@ -97,38 +80,8 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
         appodealHubView.tableView.reloadRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.none)
     }
     
-    func apd_updateVideoStatusWithStatus(_ status : APD_STATUS) {
-        let indexPath : IndexPath! = self.i_Ps(0, index: 1)
-        var statusString : String = ""
-        switch status {
-        case .kAPD_STATUS_LOAD: statusString = NSLocalizedString("video start load", comment: ""); break
-        case .kAPD_STATUS_FAIL_TO_LOAD: statusString = NSLocalizedString("video did fail to load", comment: ""); break
-        case .kAPD_STATUS_FAIL_TO_PRESENT: statusString = NSLocalizedString("video did fail to present", comment: ""); break
-        case .kAPD_STATUS_LOADED: statusString = NSLocalizedString("video loaded", comment: ""); break
-        case .kAPD_STATUS_PRESENTED: statusString = NSLocalizedString("video presented", comment: ""); break
-        case .kAPD_STATUS_NILL: statusString = NSLocalizedString("", comment: ""); break
-        }
-        _cellStatusName[indexPath] = statusString
-        appodealHubView.tableView.reloadRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.none)
-    }
-    
-    func apd_updateInterstitialOrVideoStatusWithStatus(_ status : APD_STATUS) {
-        let indexPath : IndexPath! = self.i_Ps(0, index: 2)
-        var statusString : String = ""
-        switch status {
-        case .kAPD_STATUS_LOAD: statusString = NSLocalizedString("start load", comment: ""); break
-        case .kAPD_STATUS_FAIL_TO_LOAD: statusString = NSLocalizedString("did fail to load", comment: ""); break
-        case .kAPD_STATUS_FAIL_TO_PRESENT: statusString = NSLocalizedString("did fail to present", comment: ""); break
-        case .kAPD_STATUS_LOADED: statusString = NSLocalizedString("loaded", comment: ""); break
-        case .kAPD_STATUS_PRESENTED: statusString = NSLocalizedString("presented", comment: ""); break
-        case .kAPD_STATUS_NILL: statusString = NSLocalizedString("", comment: ""); break
-        }
-        _cellStatusName[indexPath] = statusString
-        appodealHubView.tableView.reloadRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.none)
-    }
-    
     func apd_updateRewardedVideoStatusWithStatus(_ status : APD_STATUS) {
-        let indexPath : IndexPath! = self.i_Ps(0, index: 3)
+        let indexPath : IndexPath! = self.i_Ps(1, index: 0)
         var statusString : String = ""
         switch status {
         case .kAPD_STATUS_LOAD: statusString = NSLocalizedString("rewarded video start load", comment: ""); break
@@ -149,28 +102,28 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 4 : section == 1 ? 3 : 1
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if _cellHeaderName[section] == nil {
-            return nil;
+        switch section {
+        case 0: return 1; break
+        case 1: return 1; break
+        case 2: return 3; break
+        case 3: return 1; break
+        case 4: return 2; break
         }
-        return appodealHubView.headerView(withTitle: _cellHeaderName[section] as! String,
-                                          tintColor: UIColor.black,
-                                          fontSize: 12,
-                                          backgroundColor: UIColor.init(white: 0.95, alpha: 1))
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellName : String = String(describing: self)
+        
         var cell : UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: cellName)
         
         if ((cell == nil)) {
             cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellName)
             cell.selectionStyle = UITableViewCellSelectionStyle.none
         }
+        
+        var text : String = "";
+        var detail : String = _cellStatusName[indexPath] ? _cellStatusName[indexPath] : "";
         
         if (_cellDictName[indexPath] != nil) {
             cell.textLabel?.attributedText = NSAttributedString.init(string: (_cellDictName[indexPath] as! String),
@@ -190,7 +143,7 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
         
         switch indexPath.section {
         case 0: break
-        case 1: cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator; break
+        case 1: text = "Rewarded video"; break
         case 2: cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator; break
         case 3: cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator; break
         case 4: cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator; break
