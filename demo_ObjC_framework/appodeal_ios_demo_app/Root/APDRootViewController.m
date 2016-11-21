@@ -86,7 +86,7 @@ static BOOL deprecated = NO;
         return;
     }
     self.bannerView = [[APDBannerView alloc] initWithSize:IS_IPAD? kAPDAdSize728x90:kAPDAdSize320x50];
-    self.bannerView.delegate = self;
+//    self.bannerView.delegate = self;
     self.bannerView.rootViewController = self;
     [self.bannerView loadAd];
     [self.view addSubview:self.bannerView];
