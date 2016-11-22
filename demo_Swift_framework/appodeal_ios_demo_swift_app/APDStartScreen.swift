@@ -22,7 +22,7 @@ class APDStartScreen: APDRootViewController {
     }
     
     func appodealApiClick(){
-        let nextController : APDAppodealConfiguration! = APDAppodealConfiguration();
+        let nextController : APDDisableNetwork! = APDDisableNetwork();
         nextController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve;
         self.navigationController?.pushViewController(nextController, animated: true)
     }

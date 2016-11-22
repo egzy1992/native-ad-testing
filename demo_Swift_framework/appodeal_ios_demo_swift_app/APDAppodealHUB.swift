@@ -22,32 +22,17 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
         appodealHubView = APDAppodealHUBView.init(frame: self.view.frame)
         appodealHubView.tableView.delegate = self
         appodealHubView.tableView.dataSource = self
+        appodealHubView.tableView.register(APDDescriptionCell.classForCoder(), forCellReuseIdentifier:"cellWithAccessory")
+        appodealHubView.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier:"withDescription")
         self.view = appodealHubView
 
         _cellStatusName = self.cellStatusName()
         
         Appodeal.setInterstitialDelegate(self)
         Appodeal.setRewardedVideoDelegate(self)
-        Appodeal.setSkippableVideoDelegate(self)
     }
     
     //MARK: --- CELL_NAME
-    
-    func cellDictName() -> NSMutableDictionary {
-        let dict : NSMutableDictionary = [
-            self.i_Ps(0, index: 0) : NSLocalizedString("Interstitial", comment: ""),
-            self.i_Ps(0, index: 3) : NSLocalizedString("Rewarded Video", comment: ""),
-            self.i_Ps(1, index: 0) : NSLocalizedString("Banner", comment: ""),
-            self.i_Ps(1, index: 1) : NSLocalizedString("MREC", comment: ""),
-            self.i_Ps(1, index: 2) : NSLocalizedString("Banner View", comment: ""),
-            self.i_Ps(2, index: 0) : NSLocalizedString("Native ADS", comment: ""),
-            self.i_Ps(3, index: 0) : NSLocalizedString("Background Work", comment: ""),
-            self.i_Ps(4, index: 0) : NSLocalizedString("Viewabillity", comment: "")]
-        
-        _cellDictName = dict
-        return _cellDictName
-    }
-    
     func cellStatusName() -> NSMutableDictionary {
         let statusString : String = isAutoCache ? "load" : ""
         let dict : NSMutableDictionary = [
@@ -98,88 +83,78 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
     //MARK: TableViewDelegate
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return 1; break
-        case 1: return 1; break
-        case 2: return 3; break
-        case 3: return 1; break
-        case 4: return 2; break
+        case 0: return 1;
+        case 1: return 1;
+        case 2: return 3;
+        case 3: return 1;
+        default : return 0;
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cellName : String = String(describing: self)
+        let cellName : String = indexPath.section > 1 ? "withDescription" : "cellWithAccessory"
+        let cell : UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath)
         
-        var cell : UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: cellName)
-        
-        if ((cell == nil)) {
-            cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellName)
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
-        }
         
         var text : String = "";
-        var detail : String = _cellStatusName[indexPath] ? _cellStatusName[indexPath] : "";
+        let detail : String = (_cellStatusName[indexPath] != nil) ? _cellStatusName[indexPath] as! String : "";
         
-        if (_cellDictName[indexPath] != nil) {
-            cell.textLabel?.attributedText = NSAttributedString.init(string: (_cellDictName[indexPath] as! String),
-                                                                     attributes: [
-                                                                        NSForegroundColorAttributeName : UIColor.black,
-                                                                        NSFontAttributeName : UIFont.systemFont(ofSize: 16),
-                                                                        NSKernAttributeName : 1.2])
+        switch (indexPath.section) {
+        case 0: text = "Interstitial";                              break
+        case 1: text = "Rewarded Video";                            break
+        case 2:
+            switch (indexPath.row) {
+            case 0: text = "Appodeal Banner";                       break
+            case 1: text = "Appodeal Custom Banner";                break
+            case 2: text = "MREC"; break;
+            default : break
+            }; break;
+        case 3: text = "Native Ads";                                break
+        default : break
         }
         
-        if (_cellStatusName[indexPath] != nil) {
-            cell.detailTextLabel?.attributedText = NSAttributedString.init(string: (_cellStatusName[indexPath] as! String),
-                                                                     attributes: [
+        
+        cell.textLabel?.attributedText = NSAttributedString.init(string: text,
+                                                                 attributes: [
+                                                                    NSForegroundColorAttributeName : UIColor.black,
+                                                                    NSFontAttributeName : UIFont.systemFont(ofSize: 16),
+                                                                    NSKernAttributeName : 1.2])
+        
+        cell.detailTextLabel?.attributedText = NSAttributedString.init(string: detail,
+                                                                       attributes: [
                                                                         NSForegroundColorAttributeName : UIColor.lightGray,
                                                                         NSFontAttributeName : UIFont.systemFont(ofSize: 12),
                                                                         NSKernAttributeName : 1.2])
-        }
         
-        switch indexPath.section {
-        case 0: break
-        case 1: text = "Rewarded video"; break
-        case 2: cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator; break
-        case 3: cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator; break
-        case 4: cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator; break
-        default: break
-        }
         return cell;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 0:
-            switch indexPath.row {
-            case 0: Appodeal.showAd(AppodealShowStyle.interstitial, rootViewController: self); break
-            case 1: Appodeal.showAd(AppodealShowStyle.skippableVideo, rootViewController: self); break
-            case 2: Appodeal.showAd(AppodealShowStyle.videoOrInterstitial, rootViewController: self); break
-            case 3: Appodeal.showAd(AppodealShowStyle.rewardedVideo, rootViewController: self); break
-            default : break
-            }; break
-        case 1:
+        case 0: Appodeal.showAd(AppodealShowStyle.interstitial, rootViewController: self); break
+        case 1: Appodeal.showAd(AppodealShowStyle.rewardedVideo, rootViewController: self); break
+        case 2 :
             switch indexPath.row {
             case 0:
                 let nextController : APDAppodealBanner = APDAppodealBanner()
                 self.navigationController?.pushViewController(nextController, animated: true); break
             case 1:
-                let nextController : APDAppodealMREC = APDAppodealMREC()
+                let nextController : APDBanner = APDBanner()
                 self.navigationController?.pushViewController(nextController, animated: true); break
             case 2:
-                let nextController : APDBanner = APDBanner()
+                let nextController : APDAppodealMREC = APDAppodealMREC()
                 self.navigationController?.pushViewController(nextController, animated: true); break
             default : break
             }; break
-        case 2 :
+        case 3:
             let nextController : APDNativeHUB = APDNativeHUB()
             self.navigationController?.pushViewController(nextController, animated: true); break
-        case 3: break
-        case 4: break
         default:break
         }
     }
@@ -199,27 +174,6 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
         self.apd_updateInterstitialStatusWithStatus(APD_STATUS.kAPD_STATUS_NILL)
     }
     func interstitialDidClick(){
-        
-    }
-    
-    //MARK: Skippable delegate
-
-    func skippableVideoDidLoadAd(){
-        self.apd_updateVideoStatusWithStatus(APD_STATUS.kAPD_STATUS_LOADED)
-    }
-    func skippableVideoDidFailToLoadAd(){
-        self.apd_updateVideoStatusWithStatus(APD_STATUS.kAPD_STATUS_FAIL_TO_LOAD)
-    }
-    func skippableVideoDidPresent(){
-        self.apd_updateVideoStatusWithStatus(APD_STATUS.kAPD_STATUS_PRESENTED)
-    }
-    func skippableVideoWillDismiss(){
-        self.apd_updateVideoStatusWithStatus(APD_STATUS.kAPD_STATUS_NILL)
-    }
-    func skippableVideoDidFinish(){
-        
-    }
-    func skippableVideoDidClick(){
         
     }
     

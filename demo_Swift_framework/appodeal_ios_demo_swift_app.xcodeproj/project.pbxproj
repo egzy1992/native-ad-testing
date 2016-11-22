@@ -52,6 +52,7 @@
 		B9563E161D81B15D00052053 /* APDAppodealConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9563E151D81B15D00052053 /* APDAppodealConfiguration.swift */; };
 		B9C2708B1D818AA400C7FF15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C2708A1D818AA400C7FF15 /* AppDelegate.swift */; };
 		B9C270921D818AA400C7FF15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9C270911D818AA400C7FF15 /* Assets.xcassets */; };
+		B9FD80761DE41C9800545C05 /* APDDisableNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD80751DE41C9800545C05 /* APDDisableNetwork.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		B9C2708A1D818AA400C7FF15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9C270911D818AA400C7FF15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9C270961D818AA400C7FF15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9FD80751DE41C9800545C05 /* APDDisableNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDDisableNetwork.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				B903264D1D819756004004EA /* APDStartScreen.swift */,
+				B9FD80751DE41C9800545C05 /* APDDisableNetwork.swift */,
 				B9563E151D81B15D00052053 /* APDAppodealConfiguration.swift */,
 				B9061C781D82C72C005B7B21 /* APDAppodealHUB.swift */,
 				B91418B61D82DF59004C6280 /* APDAppodealBanner.swift */,
@@ -337,6 +340,7 @@
 				B9C2708B1D818AA400C7FF15 /* AppDelegate.swift in Sources */,
 				B9061C791D82C72C005B7B21 /* APDAppodealHUB.swift in Sources */,
 				B9563E161D81B15D00052053 /* APDAppodealConfiguration.swift in Sources */,
+				B9FD80761DE41C9800545C05 /* APDDisableNetwork.swift in Sources */,
 				B91418DD1D82FA7A004C6280 /* APDNativeOnView.swift in Sources */,
 				B90326491D819631004004EA /* APDRootViewController.swift in Sources */,
 			);

@@ -13,6 +13,7 @@ import Appodeal
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var disabledNetworks : NSArray = []
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -32,12 +33,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = true
     }
     
-    func initializeSdk(withAdType adType:AppodealAdType, testMode:Bool, locationTracking:Bool, autoCache:Bool, userData:Bool, toastMode toast:Bool){
+    func initializeSdk(withParams params:APDDemoModel){
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "AppodealAppKey") as! String
-        Appodeal.setTestingEnabled(testMode)
-        Appodeal.setLocationTracking(!locationTracking)
+        Appodeal.setTestingEnabled(params.testMode)
+        Appodeal.setLocationTracking(params.locationTracking)
+        Appodeal.setBannerAnimationEnabled(params.bannerAnimation)
+        Appodeal.setBannerBackgroundVisible(params.bannerBackground)
+        Appodeal.setSmartBannersEnabled(params.bannerSmartSize)
         
-        if userData {
+        if params.userSettings {
             Appodeal.setUserId("user_id")
             Appodeal.setUserEmail("dt@email.net")
             Appodeal.setUserBirthday(Date() as Date!)
@@ -50,25 +54,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Appodeal.setUserInterests("other")
         }
         
-        Appodeal.setAutocache(autoCache, types: adType)
-//        let adTypes: AppodealAdType = [.banner, .interstitial] //
-        Appodeal.initialize(withApiKey: apiKey, types: adType)
-
-        let rootViewVontroller : APDAppodealHUB = APDAppodealHUB()
-        rootViewVontroller.isAutoCache = autoCache
-        self.window?.rootViewController = UINavigationController.init(rootViewController: rootViewVontroller)
+        Appodeal.setAutocache(params.autoCache, types: params.adType)
+        Appodeal.initialize(withApiKey: apiKey, types: params.adType)
         
-        //
-        //    {
-        //    APDAdTypePresentationViewController * rootController = [APDAdTypePresentationViewController new];
-        //    [rootController wasInitializedLikeDeprecated];
-        //    rootController.toastMode = toastMode;
-        //    rootController.isAutoCache = autoCache;
-        //    APDRootNavigationController * navigationController = [[APDRootNavigationController alloc] initWithRootViewController:rootController];
-        //    self.window.rootViewController = navigationController;
-        //    }
+        let rootViewVontroller : APDAppodealHUB = APDAppodealHUB()
+        rootViewVontroller.isAutoCache = params.autoCache
+        self.window?.rootViewController = UINavigationController.init(rootViewController: rootViewVontroller)
     }
-    
 //    
 //    - (void) initializeSdk:(APDAdType)adType testMode:(BOOL)testMode locationTracking:(BOOL)locationTracking toast:(BOOL)toastMode{
 //    NSString * apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppodealAppKey"];

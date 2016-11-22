@@ -89,10 +89,12 @@
                                  @{@"SpotX" : @"spotx"},
                                  @{@"StartApp" : @"startapp"},
                                  @{@"Mail.ru" : @"mailru"},
+                                 @{@"Tapjoy" : @"tapjoy"},
                                  @{@"Tapsense" : @"tapsense"},
                                  @{@"Unity" : @"unity_ads"},
                                  @{@"Vungle" : @"vungle"},
                                  @{@"Yandex" : @"yandex"},
+                                 @{@"Zplay" : @"zplay"},
                                  @{@"Appodeal" : @"appodeal"},
                                  @{@"Mraid" : @"mraid"},
                                  @{@"Vast" : @"vast"}];
@@ -120,12 +122,12 @@
 }
 
 -(NSInteger)tagWithIndexPath:(NSIndexPath *)indexPath{
-    NSInteger tag = indexPath.section * 10 + indexPath.row;
+    NSInteger tag = indexPath.section * 1000 + indexPath.row;
     return tag;
 }
 
 -(NSIndexPath *)indexPathFromTag:(NSInteger)tag{
-    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:(tag % 10) inSection:(tag / 10)];
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:(tag % 1000) inSection:(tag / 1000)];
     return indexPath;
 }
 
@@ -215,7 +217,8 @@
 
 - (void)segueToNextController {
     
-    [(AppDelegate *)[[UIApplication sharedApplication] delegate] setDisabledAdNetwork: [self disabledNetwork:self.mapOfNetworkValue]];
+    NSArray * disabledNetwork =  [self disabledNetwork:self.mapOfNetworkValue];
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] setDisabledAdNetwork: disabledNetwork];
     
     APDInitilizeViewController * nextController = [APDInitilizeViewController new];
     nextController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
