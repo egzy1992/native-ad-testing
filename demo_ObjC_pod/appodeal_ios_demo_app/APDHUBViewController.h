@@ -1,14 +1,14 @@
 //
-//  APDAdTypePresentationViewController.h
+//  APDHUBViewController.h
 //  appodeal_ios_demo_app
 //
-//  Created by Lozhkin Ilya on 6/10/16.
+//  Created by Lozhkin Ilya on 11/18/16.
 //  Copyright © 2016 Lozhkin Ilya. All rights reserved.
 //
 
 #import "APDRootViewController.h"
 
-@interface APDAdTypePresentationViewController : APDRootViewController
+@interface APDHUBViewController : APDRootViewController
 
 @property (nonatomic, assign) BOOL isAutoCache;
 
