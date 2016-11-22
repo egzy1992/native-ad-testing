@@ -114,7 +114,6 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         [Appodeal disableNetworkForAdType:AppodealAdTypeNativeAd name:property.networkName];
-        [Appodeal disableNetworkForAdType:AppodealAdTypeSkippableVideo name:property.networkName];
         [Appodeal disableNetworkForAdType:AppodealAdTypeRewardedVideo name:property.networkName];
         [Appodeal disableNetworkForAdType:AppodealAdTypeMREC name:property.networkName];
         [Appodeal disableNetworkForAdType:AppodealAdTypeInterstitial name:property.networkName];

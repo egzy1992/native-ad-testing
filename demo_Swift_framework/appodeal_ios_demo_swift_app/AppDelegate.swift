@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Appodeal.setBannerAnimationEnabled(params.bannerAnimation)
         Appodeal.setBannerBackgroundVisible(params.bannerBackground)
         Appodeal.setSmartBannersEnabled(params.bannerSmartSize)
+        disableNetworkForArray(disabledNetwork: disabledNetworks)
         
         if params.userSettings {
             Appodeal.setUserId("user_id")
@@ -61,7 +62,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         rootViewVontroller.isAutoCache = params.autoCache
         self.window?.rootViewController = UINavigationController.init(rootViewController: rootViewVontroller)
     }
-//    
+    
+    func disableNetworkForArray(disabledNetwork : NSArray){
+        if  disabledNetwork.count == 0{
+            return
+        }
+    
+        for networkName in disabledNetwork {
+            Appodeal.disableNetwork(for: AppodealAdType.interstitial, name: networkName as! String)
+            Appodeal.disableNetwork(for: AppodealAdType.banner, name: networkName as! String)
+            Appodeal.disableNetwork(for: AppodealAdType.rewardedVideo, name: networkName as! String)
+            Appodeal.disableNetwork(for: AppodealAdType.MREC, name: networkName as! String)
+            Appodeal.disableNetwork(for: AppodealAdType.nativeAd, name: networkName as! String)
+        }
+        
+    }
+    
+//
 //    - (void) initializeSdk:(APDAdType)adType testMode:(BOOL)testMode locationTracking:(BOOL)locationTracking toast:(BOOL)toastMode{
 //    NSString * apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppodealAppKey"];
 //    
