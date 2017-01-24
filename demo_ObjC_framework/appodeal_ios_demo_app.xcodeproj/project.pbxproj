@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C8192EC1E376A06002B347E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C8192EB1E376A06002B347E /* StoreKit.framework */; };
 		B90EC5681D5B00C700182B20 /* APDViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B90EC5671D5B00C700182B20 /* APDViewModel.m */; };
 		B91581DE1D0FD985000FC33F /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = B91581C31D0FD985000FC33F /* MASCompositeConstraint.m */; };
 		B91581DF1D0FD985000FC33F /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = B91581C61D0FD985000FC33F /* MASConstraint.m */; };
@@ -126,6 +127,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9C8192EB1E376A06002B347E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B90EC5661D5B00C700182B20 /* APDViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDViewModel.h; path = Root/APDViewModel.h; sourceTree = "<group>"; };
 		B90EC5671D5B00C700182B20 /* APDViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDViewModel.m; path = Root/APDViewModel.m; sourceTree = "<group>"; };
 		B91581C21D0FD985000FC33F /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C8192EC1E376A06002B347E /* StoreKit.framework in Frameworks */,
 				B97A5D681DA510E7001784A4 /* CoreText.framework in Frameworks */,
 				B92338EC1D0AF9B300AC37D1 /* MessageUI.framework in Frameworks */,
 				B92339001D0AFA0200AC37D1 /* WebKit.framework in Frameworks */,
@@ -356,6 +359,7 @@
 		1C163E09495AE60F795672CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9C8192EB1E376A06002B347E /* StoreKit.framework */,
 				B97A5D671DA510E7001784A4 /* CoreText.framework */,
 				B93553091D77487E00C11662 /* GLKit.framework */,
 				B92339011D0AFA0700AC37D1 /* CoreBluetooth.framework */,

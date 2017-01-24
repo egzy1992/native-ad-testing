@@ -10,7 +10,7 @@
 #import "APDCustomNativeView.h"
 #import "Masonry.h"
 
-@interface APDCustomContentViewController () <APDNativeAdLoaderDelegate>
+@interface APDCustomContentViewController () <APDNativeAdLoaderDelegate, APDNativeAdPresentationDelegate>
 {
     APDNativeAdLoader * _nativeAdLoader;
     NSArray <__kindof APDNativeAd *> * _nativeArray;
@@ -194,6 +194,9 @@
         [AppodealToast showToastInView:self.view withMessage:@"nativeAdLoader didLoadNativeAd"];
     }
     _nativeArray = nativeAds;
+    [_nativeArray enumerateObjectsUsingBlock:^(__kindof APDNativeAd * _Nonnull nativeAd, NSUInteger idx, BOOL * _Nonnull stop) {
+        nativeAd.delegate = self;
+    }];
     [self.loadNativeButton apdSpinnerHide];
     
     {
@@ -217,6 +220,20 @@
     {
         self.loadNativeButton.enabled = YES;
         [self.loadNativeButton apdSpinnerHide];
+    }
+}
+
+#pragma mark - APDNativeAdPresentationDelegate
+
+- (void)nativeAdWillLogImpression:(APDNativeAd *)nativeAd {
+    if (self.toastMode) {
+        [AppodealToast showToastInView:self.view withMessage:[NSString stringWithFormat:@"nativeAdWillLogImpression at index %lu", (unsigned long)[_nativeArray indexOfObject:nativeAd]]];
+    }
+}
+
+- (void)nativeAdWillLogUserInteraction:(APDNativeAd *)nativeAd {
+    if (self.toastMode) {
+        [AppodealToast showToastInView:self.view withMessage:[NSString stringWithFormat:@"nativeAdWillLogUserInteraction at index %lu", (unsigned long)[_nativeArray indexOfObject:nativeAd]]];
     }
 }
 
