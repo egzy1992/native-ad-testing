@@ -9,11 +9,23 @@
 import UIKit
 import Appodeal
 
-class APDNativeOnView: APDRootViewController, APDNativeAdLoaderDelegate {
+class APDNativeOnView: APDRootViewController {
 
+    var capacity : Int = 1
+    var type : APDNativeAdType = .auto
+    
     fileprivate var appodealNativeViewModel : APDNativeOnViewModelView!
     private var apdLoader : APDNativeAdLoader! = APDNativeAdLoader()
     fileprivate var apdNativeArray : [APDNativeAd]!
+    
+    private lazy  var slider : UISlider = UISlider.init(frame: CGRect(x: (UIScreen.main.bounds.width - 200) / 2,
+                                                                      y: UIScreen.main.bounds.height - 65,
+                                                                      width: 200,
+                                                                      height: 35))
+    private lazy var countLabel : UILabel = UILabel(frame: CGRect(x: (UIScreen.main.bounds.width - 200) / 2,
+                                                                  y: UIScreen.main.bounds.height - 100,
+                                                                  width: 200,
+                                                                  height: 34))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,21 +33,61 @@ class APDNativeOnView: APDRootViewController, APDNativeAdLoaderDelegate {
         appodealNativeViewModel = APDNativeOnViewModelView.init(frame: self.view.frame)
         self.view.addSubview(appodealNativeViewModel)
         appodealNativeViewModel.isHidden = true
-        
+        createControls()
+        setAvailableAdCount(0)
         apdLoader.delegate = self
-        apdLoader.loadAd(with: APDNativeAdType.auto)
-        
+        apdLoader.loadAd(with: type, capacity: capacity)
     }
+    
+    func createControls() {
+        
+        slider.tintColor = UIColor.red
+        slider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
+        
+        countLabel.font = UIFont.systemFont(ofSize: 26)
+        countLabel.textColor = UIColor.darkText
+        countLabel.textAlignment = .center
+        
+        view.addSubview(slider)
+        view.addSubview(countLabel)
+    }
+    
+    func setAvailableAdCount(_ count : Int) {
+        guard count > 0 else {
+            countLabel.isHidden = true
+            slider.isHidden = true
+            return
+        }
+        
+        countLabel.isHidden = false
+        slider.isHidden = count <= 1
+        
+        let currentAd = 1
+        countLabel.text = String(format: "%d/%d", currentAd, count)
+        slider.maximumValue = Float(count)
+        slider.minimumValue = Float(currentAd)
+        slider.value = Float(currentAd)
+    }
+    
+    func sliderChanged() {
+        let currentAd = Int(slider.value)
+        countLabel.text = String(format: "%d/%d", currentAd, Int(apdNativeArray.count))
+        appodealNativeViewModel.customNativeView.setNativeAd(apdNativeArray[currentAd], withViewController: self)
+    }
+}
+
+extension APDNativeOnView : APDNativeAdLoaderDelegate {
     
     func nativeAdLoader(_ loader: APDNativeAdLoader!, didLoad nativeAds: [APDNativeAd]!) {
         apdNativeArray = nativeAds
         let _ = nativeAds.map {( $0.delegate = self )}
         appodealNativeViewModel.isHidden = false;
+        setAvailableAdCount(nativeAds.count)
         appodealNativeViewModel.customNativeView.setNativeAd(apdNativeArray.first!, withViewController: self)
     }
     
     func nativeAdLoader(_ loader: APDNativeAdLoader!, didFailToLoadWithError error: Error!){
-        
+        setAvailableAdCount(0)
     }
 }
 
@@ -49,6 +101,7 @@ extension APDNativeOnView : APDNativeAdPresentationDelegate {
         print("nativeAdWillLogUserInteraction ", apdNativeArray.index(of: nativeAd)!)
     }
 }
+
 
 class APDNativeOnViewModelView: APDRootView {
     
