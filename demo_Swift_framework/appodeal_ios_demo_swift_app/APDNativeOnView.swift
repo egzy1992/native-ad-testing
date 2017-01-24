@@ -11,9 +11,9 @@ import Appodeal
 
 class APDNativeOnView: APDRootViewController, APDNativeAdLoaderDelegate {
 
-    var appodealNativeViewModel : APDNativeOnViewModelView!
-    var apdLoader : APDNativeAdLoader! = APDNativeAdLoader()
-    var apdNativeArray : [APDNativeAd]!
+    fileprivate var appodealNativeViewModel : APDNativeOnViewModelView!
+    private var apdLoader : APDNativeAdLoader! = APDNativeAdLoader()
+    fileprivate var apdNativeArray : [APDNativeAd]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +29,24 @@ class APDNativeOnView: APDRootViewController, APDNativeAdLoaderDelegate {
     
     func nativeAdLoader(_ loader: APDNativeAdLoader!, didLoad nativeAds: [APDNativeAd]!) {
         apdNativeArray = nativeAds
+        let _ = nativeAds.map {( $0.delegate = self )}
         appodealNativeViewModel.isHidden = false;
         appodealNativeViewModel.customNativeView.setNativeAd(apdNativeArray.first!, withViewController: self)
     }
     
     func nativeAdLoader(_ loader: APDNativeAdLoader!, didFailToLoadWithError error: Error!){
         
+    }
+}
+
+extension APDNativeOnView : APDNativeAdPresentationDelegate {
+    
+    func nativeAdWillLogImpression(_ nativeAd: APDNativeAd!) {
+        print("nativeAdWillLogImpression at index ", apdNativeArray.index(of: nativeAd)!)
+    }
+    
+    func nativeAdWillLogUserInteraction(_ nativeAd: APDNativeAd!) {
+        print("nativeAdWillLogUserInteraction ", apdNativeArray.index(of: nativeAd)!)
     }
 }
 
@@ -71,9 +83,9 @@ class APDNativeCustonView : UIView {
         super.init(frame: frame)
         
         mediaView = APDMediaView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
-        mediaView.type = APDMediaViewType.mainImage
-        mediaView.skippable = true
-        mediaView.muted = false
+//        mediaView.type = APDMediaViewType.mainImage
+//        mediaView.skippable = true
+//        mediaView.muted = false
         
         adBadgeLabel = UILabel()
         adBadgeLabel.backgroundColor = UIColor.darkGray

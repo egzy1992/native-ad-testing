@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C8192EF1E376B3E002B347E /* Appodeal.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9C8192ED1E376B3E002B347E /* Appodeal.bundle */; };
+		9C8192F01E376B3E002B347E /* Appodeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C8192EE1E376B3E002B347E /* Appodeal.framework */; };
 		B90326491D819631004004EA /* APDRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90326481D819631004004EA /* APDRootViewController.swift */; };
 		B903264E1D819756004004EA /* APDStartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B903264D1D819756004004EA /* APDStartScreen.swift */; };
 		B9061C791D82C72C005B7B21 /* APDAppodealHUB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9061C781D82C72C005B7B21 /* APDAppodealHUB.swift */; };
@@ -56,6 +58,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C8192ED1E376B3E002B347E /* Appodeal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Appodeal.bundle; sourceTree = "<group>"; };
+		9C8192EE1E376B3E002B347E /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Appodeal.framework; sourceTree = "<group>"; };
 		B90326481D819631004004EA /* APDRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDRootViewController.swift; sourceTree = "<group>"; };
 		B903264D1D819756004004EA /* APDStartScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDStartScreen.swift; sourceTree = "<group>"; };
 		B9061C781D82C72C005B7B21 /* APDAppodealHUB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDAppodealHUB.swift; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 				B9563DC01D81A28900052053 /* CoreMedia.framework in Frameworks */,
 				B9563DC11D81A28900052053 /* CoreMotion.framework in Frameworks */,
 				B9563DC21D81A28900052053 /* CoreTelephony.framework in Frameworks */,
+				9C8192F01E376B3E002B347E /* Appodeal.framework in Frameworks */,
 				B9563DB21D81A26100052053 /* GLKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,6 +240,8 @@
 		B9C2707E1D818AA400C7FF15 = {
 			isa = PBXGroup;
 			children = (
+				9C8192ED1E376B3E002B347E /* Appodeal.bundle */,
+				9C8192EE1E376B3E002B347E /* Appodeal.framework */,
 				B9C270891D818AA400C7FF15 /* appodeal_ios_demo_swift_app */,
 				B9C270881D818AA400C7FF15 /* Products */,
 				B9563DB01D81A26100052053 /* Frameworks */,
@@ -319,6 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C8192EF1E376B3E002B347E /* Appodeal.bundle in Resources */,
 				B9563DF31D81A5E800052053 /* Launchscreen.storyboard in Resources */,
 				B9C270921D818AA400C7FF15 /* Assets.xcassets in Resources */,
 			);
