@@ -70,8 +70,8 @@ class APDNativeOnView: APDRootViewController {
     }
     
     func sliderChanged() {
-        let currentAd = Int(slider.value)
-        countLabel.text = String(format: "%d/%d", currentAd, Int(apdNativeArray.count))
+        let currentAd = Int(slider.value) - 1
+        countLabel.text = String(format: "%d/%d", Int(slider.value), Int(apdNativeArray.count))
         appodealNativeViewModel.customNativeView.setNativeAd(apdNativeArray[currentAd], withViewController: self)
     }
 }
