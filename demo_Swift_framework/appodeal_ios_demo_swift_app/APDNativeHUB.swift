@@ -26,6 +26,7 @@ class APDNativeHUB: APDRootViewController {
         let nextController : APDNativeOnView = APDNativeOnView()
         nextController.capacity = nativeViewHUBView.capacity
         nextController.type = nativeViewHUBView.selectedType
+        nextController.isAdQueue = nativeViewHUBView.isAdQueue
 
         self.navigationController?.pushViewController(nextController, animated: true)
     }
@@ -35,13 +36,18 @@ class APDNativeHUBView: APDRootView {
     
     var nativeOnViewButton : UIButton!
     var capacitySlider : UISlider!
+
     private var segmentedControl : UISegmentedControl!
+    private var swithControl : UISwitch!
+    private var adQueueLabel : UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         createSlider()
         createSegmentedControl()
         createButton()
+        createAdQueueLabel()
+        createSwith()
     }
     
     var selectedType : APDNativeAdType {
@@ -54,6 +60,12 @@ class APDNativeHUBView: APDRootView {
                 default :
                     return .auto
             }
+        }
+    }
+    
+    var isAdQueue : Bool {
+        get {
+            return swithControl.isOn
         }
     }
     
@@ -73,6 +85,24 @@ class APDNativeHUBView: APDRootView {
         get {
             return UIScreen.main.bounds.height
         }
+    }
+    
+    func createSwith() {
+        swithControl = UISwitch()
+        swithControl.layer.position = CGPoint(x: screenWidth/2, y: 180)
+        swithControl.setOn(false, animated: false)
+        swithControl.tintColor = UIColor.red
+        swithControl.onTintColor = UIColor.red
+        swithControl.addTarget(self, action: #selector(isAdQueueValueChanged(sender:)), for: UIControlEvents.valueChanged)
+        addSubview(swithControl)
+    }
+    
+    func createAdQueueLabel() {
+        adQueueLabel = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 50))
+        adQueueLabel.textAlignment = NSTextAlignment.center
+        adQueueLabel.text = NSLocalizedString("AdQueue mode: disabled", comment: "")
+        adQueueLabel.layer.position = CGPoint(x: screenWidth/2, y: 150)
+        addSubview(adQueueLabel)
     }
     
     func createButton() {
@@ -113,6 +143,10 @@ class APDNativeHUBView: APDRootView {
         segmentedControl.layer.borderWidth = 1.0
         segmentedControl.layer.borderColor = UIColor.red.cgColor
         addSubview(segmentedControl)
+    }
+    
+    func isAdQueueValueChanged(sender : AnyObject)  {
+        adQueueLabel.text = String(format: "AdQueue mode: %@", swithControl.isOn ? "enabled" : "disabled")
     }
     
     func capacitySliderChanged() {

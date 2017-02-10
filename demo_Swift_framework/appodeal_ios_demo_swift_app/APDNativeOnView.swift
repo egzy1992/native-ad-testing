@@ -10,15 +10,18 @@ import UIKit
 import Appodeal
 
 class APDNativeOnView: APDRootViewController {
-
+    
+    var isAdQueue : Bool!
     var capacity : Int = 1
     var type : APDNativeAdType = .auto
     
     fileprivate var appodealNativeViewModel : APDNativeOnViewModelView!
     private var apdLoader : APDNativeAdLoader! = APDNativeAdLoader()
-    fileprivate var apdNativeArray : [APDNativeAd]!
+    private var apdAdQueue : APDNativeAdQueue! = APDNativeAdQueue()
     
-    private lazy  var slider : UISlider = UISlider.init(frame: CGRect(x: (UIScreen.main.bounds.width - 200) / 2,
+    fileprivate var apdNativeArray : [APDNativeAd]! = Array()
+    
+    fileprivate lazy  var slider : UISlider = UISlider.init(frame: CGRect(x: (UIScreen.main.bounds.width - 200) / 2,
                                                                       y: UIScreen.main.bounds.height - 65,
                                                                       width: 200,
                                                                       height: 35))
@@ -33,14 +36,24 @@ class APDNativeOnView: APDRootViewController {
         appodealNativeViewModel = APDNativeOnViewModelView.init(frame: self.view.frame)
         self.view.addSubview(appodealNativeViewModel)
         appodealNativeViewModel.isHidden = true
+        
         createControls()
         setAvailableAdCount(0)
+        
+        guard !isAdQueue else {
+            apdAdQueue.delegate = self
+            apdAdQueue.setMaxAdSize(capacity)
+            apdAdQueue.loadAd(of: type)
+            return
+        }
+        
         apdLoader.delegate = self
         apdLoader.loadAd(with: type, capacity: capacity)
     }
     
     func createControls() {
         
+        slider.value = 1;
         slider.tintColor = UIColor.red
         slider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
         
@@ -62,17 +75,31 @@ class APDNativeOnView: APDRootViewController {
         countLabel.isHidden = false
         slider.isHidden = count <= 1
         
-        let currentAd = 1
+        let currentAd = Int(slider.value)
         countLabel.text = String(format: "%d/%d", currentAd, count)
         slider.maximumValue = Float(count)
-        slider.minimumValue = Float(currentAd)
-        slider.value = Float(currentAd)
+        slider.minimumValue = Float(1)
+        
+//        slider.value = Float(currentAd)
     }
     
     func sliderChanged() {
         let currentAd = Int(slider.value) - 1
-        countLabel.text = String(format: "%d/%d", Int(slider.value), Int(apdNativeArray.count))
-        appodealNativeViewModel.customNativeView.setNativeAd(apdNativeArray[currentAd], withViewController: self)
+        
+        if currentAd > apdNativeArray.count - 1{
+            let nativeAd : [APDNativeAd]! = apdAdQueue.getNativeAds(ofCount: 1)
+            
+            let _ = apdNativeArray.map {( $0.delegate = self )}
+            apdNativeArray.append(contentsOf:nativeAd)
+        }
+        
+        if isAdQueue == true {
+            countLabel.text = String(format: "%d/%d", Int(slider.value), Int(apdNativeArray.count + apdAdQueue.currentAdCount))
+        } else {
+            countLabel.text = String(format: "%d/%d", Int(slider.value), Int(apdNativeArray.count))
+        }
+        
+        appodealNativeViewModel.customNativeView.setNativeAd(apdNativeArray[currentAd % apdNativeArray.count], withViewController: self)
     }
 }
 
@@ -102,6 +129,31 @@ extension APDNativeOnView : APDNativeAdPresentationDelegate {
     }
 }
 
+extension APDNativeOnView : APDNativeAdQueueDelegate {
+    
+    func adQueue(_ adQueue: APDNativeAdQueue!, failedWithError error: Error!) {
+        setAvailableAdCount(0)
+    }
+    
+    func adQueueAdIsAvailable(_ adQueue: APDNativeAdQueue!, ofCount count: Int) {
+//        apdNativeArray.append(contentsOf:adQueue.getNativeAds(ofCount: count))
+//        let _ = apdNativeArray.map {( $0.delegate = self )}
+        
+        appodealNativeViewModel.isHidden = false;
+        
+        if apdNativeArray.count > 0 {
+            setAvailableAdCount(apdNativeArray.count + count)
+        } else {
+            apdNativeArray.append(contentsOf:adQueue.getNativeAds(ofCount: 1))
+            let _ = apdNativeArray.map {( $0.delegate = self )}
+            setAvailableAdCount(count)
+            
+            let currentAd = Int(slider.value) - 1
+            appodealNativeViewModel.customNativeView.setNativeAd(apdNativeArray[currentAd], withViewController: self)
+        }
+    }
+    
+}
 
 class APDNativeOnViewModelView: APDRootView {
     
