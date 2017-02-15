@@ -8,11 +8,11 @@
 
 import UIKit
 
-class APDDisableNetwork: APDRootViewController, UITableViewDelegate, UITableViewDataSource {
+class APDDisableNetwork: APDVisualRootViewController, UITableViewDelegate, UITableViewDataSource {
     
     var appodealDisableNetworkView : APDDisableNetworkView!
+    var disabledNetworks: NSMutableArray = (UIApplication.shared.delegate as! AppDelegate!).disabledNetworks
     var networks : [NSDictionary] = []
-    var disabledNetworks: NSMutableArray = NSMutableArray();
     var disabledAll : Bool = false
     
     override func viewDidLoad() {
@@ -24,7 +24,6 @@ class APDDisableNetwork: APDRootViewController, UITableViewDelegate, UITableView
         appodealDisableNetworkView.tableView.delegate = self;
         appodealDisableNetworkView.tableView.dataSource = self;
         appodealDisableNetworkView.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier:"cellWithAccessory")
-        appodealDisableNetworkView.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "next")
         
         self.view = appodealDisableNetworkView;
     }
@@ -99,7 +98,7 @@ class APDDisableNetwork: APDRootViewController, UITableViewDelegate, UITableView
     //MARK: --- Table
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3;
+        return 2;
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -132,9 +131,9 @@ class APDDisableNetwork: APDRootViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (indexPath.section == 2) {
-            segueToNextController();
-        }
+//        if (indexPath.section == 2) {
+//            segueToNextController();
+//        }
     }
     
     //MARK: -- Support
@@ -161,13 +160,13 @@ class APDDisableNetwork: APDRootViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func segueToNextController() {
-        (UIApplication.shared.delegate as! AppDelegate!).disabledNetworks = disabledNetworks;
-        
-        let nextController : APDAppodealConfiguration! = APDAppodealConfiguration();
-        nextController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve;
-        self.navigationController?.pushViewController(nextController, animated: true)
-    }
+//    func segueToNextController() {
+//        (UIApplication.shared.delegate as! AppDelegate!).disabledNetworks = disabledNetworks;
+//        
+//        let nextController : APDAppodealConfiguration! = APDAppodealConfiguration();
+//        nextController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve;
+//        self.navigationController?.pushViewController(nextController, animated: true)
+//    }
 }
 
 class APDDisableNetworkView: APDRootView {
@@ -178,6 +177,7 @@ class APDDisableNetworkView: APDRootView {
         super.init(frame: frame)
         
         tableView = UITableView.init(frame: self.frame, style: UITableViewStyle.plain)
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 44.0

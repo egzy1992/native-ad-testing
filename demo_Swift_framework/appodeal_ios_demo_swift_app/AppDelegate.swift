@@ -13,19 +13,46 @@ import Appodeal
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var disabledNetworks : NSArray = []
-
+    var disabledNetworks : NSMutableArray = []
+    var configuration : APDDemoModel! = APDDemoModel()
+    var userData : APDUserDataModel! = APDUserDataModel()
+    
+    private var mainTabBarController : UITabBarController = UITabBarController()
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.setAppearance()
         
-        let rootController : APDStartScreen = APDStartScreen()
         self.window = UIWindow.init(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = UINavigationController.init(rootViewController: rootController)
+        
+        self.initialTabBarController()
         
         return true
+    }
+    
+    func initialTabBarController(){
+        mainTabBarController.tabBar.tintColor = UIColor.blue
+        
+        let disabledNetworkController = APDDisableNetwork()
+        let disableNetworkBarItem = UITabBarItem(title: "network", image: nil, tag: 0)
+        disabledNetworkController.tabBarItem = disableNetworkBarItem;
+        
+        let configurationController = APDAppodealConfiguration()
+        let configurationBarItem = UITabBarItem(title: "config", image: nil, tag: 1)
+        configurationController.tabBarItem = configurationBarItem;
+        
+        let userDataController = APDUserDataConfiguration()
+        let userDataBarItem = UITabBarItem(title: "userData", image: nil, tag: 2)
+        userDataController.tabBarItem = userDataBarItem;
+
+        let initializeController = APDStartScreen()
+        let initializeBarItem = UITabBarItem(title: "init", image: nil, tag: 3)
+        initializeController.tabBarItem = initializeBarItem;
+        
+        mainTabBarController.setViewControllers([disabledNetworkController, configurationController, userDataController, initializeController], animated: true)
+        self.window?.rootViewController = UINavigationController.init(rootViewController: mainTabBarController)
     }
     
     func setAppearance (){
@@ -33,16 +60,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = true
     }
     
-    func initializeSdk(withParams params:APDDemoModel){
+    func initializeSdk (){
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "AppodealAppKey") as! String
-        Appodeal.setTestingEnabled(params.testMode)
-        Appodeal.setLocationTracking(params.locationTracking)
-        Appodeal.setBannerAnimationEnabled(params.bannerAnimation)
-        Appodeal.setBannerBackgroundVisible(params.bannerBackground)
-        Appodeal.setSmartBannersEnabled(params.bannerSmartSize)
+        Appodeal.setTestingEnabled(configuration.testMode)
+        Appodeal.setLocationTracking(configuration.locationTracking)
+        Appodeal.setBannerAnimationEnabled(configuration.bannerAnimation)
+        Appodeal.setBannerBackgroundVisible(configuration.bannerBackground)
+        Appodeal.setSmartBannersEnabled(configuration.bannerSmartSize)
         disableNetworkForArray(disabledNetwork: disabledNetworks)
         
-        if params.userSettings {
+        if userData.userSettings {
             Appodeal.setUserId("user_id")
             Appodeal.setUserEmail("dt@email.net")
             Appodeal.setUserBirthday(Date() as Date!)
@@ -55,11 +82,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Appodeal.setUserInterests("other")
         }
         
-        Appodeal.setAutocache(params.autoCache, types: params.adType)
-        Appodeal.initialize(withApiKey: apiKey, types: params.adType)
+        Appodeal.setAutocache(configuration.autoCache, types: configuration.adType)
+        Appodeal.initialize(withApiKey: apiKey, types: configuration.adType)
         
         let rootViewVontroller : APDAppodealHUB = APDAppodealHUB()
-        rootViewVontroller.isAutoCache = params.autoCache
+        rootViewVontroller.isAutoCache = configuration.autoCache
         self.window?.rootViewController = UINavigationController.init(rootViewController: rootViewVontroller)
     }
     

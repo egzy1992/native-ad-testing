@@ -9,10 +9,10 @@
 import UIKit
 import Appodeal
 
-class APDAppodealConfiguration: APDRootViewController, UITableViewDelegate, UITableViewDataSource{
+class APDAppodealConfiguration: APDVisualRootViewController, UITableViewDelegate, UITableViewDataSource{
 
     var appodealConfigurationView : APDAppodealConfigurationView!
-    var config : APDDemoModel! = APDDemoModel()
+    var config : APDDemoModel! = (UIApplication.shared.delegate as! AppDelegate!).configuration
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +79,6 @@ class APDAppodealConfiguration: APDRootViewController, UITableViewDelegate, UITa
             switch (indexPath as NSIndexPath).row {
             case 0: config.autoCache = isOn;        break
             case 1: config.locationTracking = isOn; break
-            case 2: config.userSettings = isOn;     break
             default : break
             }; break
         case 2:
@@ -101,13 +100,13 @@ class APDAppodealConfiguration: APDRootViewController, UITableViewDelegate, UITa
     
     //MARK: UITableViewDelegate
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (section) {
         case 0: return 5;
-        case 1: return 3;
+        case 1: return 2;
         case 2: return 2;
         case 3: return 3;
         case 4: return 1;
@@ -138,7 +137,6 @@ class APDAppodealConfiguration: APDRootViewController, UITableViewDelegate, UITa
             switch (indexPath.row) {
             case 0: flag = self.config.autoCache; text = "auto cache";          break
             case 1: flag = self.config.locationTracking; text = "location tracking";  break
-            case 2: flag = self.config.userSettings; text = "user settings";                 break
             default : break
             }; break
         case 2:
@@ -174,9 +172,6 @@ class APDAppodealConfiguration: APDRootViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 4 {
-            (UIApplication.shared.delegate as! AppDelegate).initializeSdk(withParams: config)
-        }
     }
 }
 
@@ -188,6 +183,7 @@ class APDAppodealConfigurationView: APDRootView {
         super.init(frame: frame)
         
         tableView = UITableView.init(frame: self.frame, style: UITableViewStyle.plain)
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 44.0
