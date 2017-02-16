@@ -17,7 +17,7 @@ class APDNativeOnView: APDRootViewController {
     
     fileprivate var appodealNativeViewModel : APDNativeOnViewModelView!
     private var apdLoader : APDNativeAdLoader! = APDNativeAdLoader()
-    private var apdAdQueue : APDNativeAdQueue! = APDNativeAdQueue()
+    private var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
     
     fileprivate var apdNativeArray : [APDNativeAd]! = Array()
     

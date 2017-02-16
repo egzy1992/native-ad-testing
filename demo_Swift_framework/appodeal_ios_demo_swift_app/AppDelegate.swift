@@ -70,16 +70,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         disableNetworkForArray(disabledNetwork: disabledNetworks)
         
         if userData.userSettings {
-            Appodeal.setUserId("user_id")
-            Appodeal.setUserEmail("dt@email.net")
-            Appodeal.setUserBirthday(Date() as Date!)
-            Appodeal.setUserAge(25)
-            Appodeal.setUserGender(AppodealUserGender.male)
-            Appodeal.setUserOccupation(AppodealUserOccupation.work)
-            Appodeal.setUserRelationship(AppodealUserRelationship.other)
-            Appodeal.setUserSmokingAttitude(AppodealUserSmokingAttitude.neutral)
-            Appodeal.setUserAlcoholAttitude(AppodealUserAlcoholAttitude.neutral)
-            Appodeal.setUserInterests("other")
+            Appodeal.setUserId(userData.userId)
+            Appodeal.setUserEmail(userData.userEmail)
+            Appodeal.setUserBirthday(userData.userBirthday as Date!)
+            Appodeal.setUserAge(userData.userAge)
+            Appodeal.setUserGender(userData.userGender)
+            Appodeal.setUserOccupation(userData.userOccupation)
+            Appodeal.setUserRelationship(userData.userRelationship)
+            Appodeal.setUserSmokingAttitude(userData.userSmokingAttitude)
+            Appodeal.setUserAlcoholAttitude(userData.userAlcoholAttitude)
+            Appodeal.setUserInterests(userData.userInterests)
         }
         
         Appodeal.setAutocache(configuration.autoCache, types: configuration.adType)

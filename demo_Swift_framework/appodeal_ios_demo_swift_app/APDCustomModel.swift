@@ -49,8 +49,29 @@ class APDDemoModel: NSObject {
 
 class APDUserDataModel: NSObject {
     var userSettings : Bool
+
+    var userId : String
+    var userEmail :String
+    var userBirthday : Date
+    var userAge : UInt
+    var userGender : AppodealUserGender
+    var userOccupation : AppodealUserOccupation
+    var userRelationship : AppodealUserRelationship
+    var userSmokingAttitude : AppodealUserSmokingAttitude
+    var userAlcoholAttitude : AppodealUserAlcoholAttitude
+    var userInterests : String
     
     override init () {
         userSettings = true
+        userId = "1"
+        userEmail = "test@test.net"
+        userBirthday = Date.init(timeIntervalSince1970: 123123)
+        userAge = 22
+        userGender = AppodealUserGender.male
+        userOccupation = AppodealUserOccupation.work
+        userRelationship = AppodealUserRelationship.married
+        userSmokingAttitude = AppodealUserSmokingAttitude.neutral
+        userAlcoholAttitude = AppodealUserAlcoholAttitude.neutral
+        userInterests = "cars"
     }
 }
