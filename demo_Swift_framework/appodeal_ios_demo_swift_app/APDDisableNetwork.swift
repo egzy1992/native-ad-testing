@@ -140,7 +140,9 @@ class APDDisableNetwork: APDVisualRootViewController, UITableViewDelegate, UITab
     
     func enabledAll(flag : Bool) {
         disabledAll = flag
-        disabledNetworks = []
+        if (!flag) {
+            disabledNetworks.removeAllObjects()
+        }
         if !flag {
             appodealDisableNetworkView.tableView.reloadData()
             return
