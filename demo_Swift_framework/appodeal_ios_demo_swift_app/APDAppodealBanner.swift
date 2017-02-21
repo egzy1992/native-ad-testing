@@ -74,8 +74,12 @@ class APDAppodealBanner: APDRootViewController, UITableViewDataSource, UITableVi
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            case 0: Appodeal.showAd(AppodealShowStyle.bannerTop, rootViewController: self); break
-            case 1: Appodeal.showAd(AppodealShowStyle.bannerBottom, rootViewController: self); break
+            case 0:
+                createAlertForPlacement(showStyle: AppodealShowStyle.bannerTop, rootController: self);
+                break
+            case 1:
+                createAlertForPlacement(showStyle: AppodealShowStyle.bannerBottom, rootController: self);
+                break
             default:break
             }; break
         case 1:

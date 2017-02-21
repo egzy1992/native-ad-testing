@@ -179,6 +179,7 @@ class APDNativeCustonView : UIView {
     var iconView : UIImageView!
     var titleLabel : UILabel!
     var descriptionLabel : UILabel!
+    var iconSizeLabel : UILabel!
     var mediaView : APDMediaView!
     var callToActionLabel : UILabel!
     var adBadgeLabel : UILabel!
@@ -218,7 +219,15 @@ class APDNativeCustonView : UIView {
         descriptionLabel.numberOfLines = 3
         descriptionLabel.textAlignment = NSTextAlignment.left
         descriptionLabel.textColor = UIColor.gray
- 
+        
+        iconSizeLabel = UILabel()
+        iconSizeLabel.font = UIFont.boldSystemFont(ofSize: 8)
+        iconSizeLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        iconSizeLabel.numberOfLines = 2
+        iconSizeLabel.textAlignment = NSTextAlignment.left
+        iconSizeLabel.textColor = UIColor.white
+        iconSizeLabel.backgroundColor = UIColor.black
+        
         self.nativeElementSetPosition()
     }
     
@@ -239,6 +248,7 @@ class APDNativeCustonView : UIView {
         titleLabel.text = self.nativeAd.title;
         descriptionLabel.text = self.nativeAd.descriptionText;
         callToActionLabel.text = self.nativeAd.callToActionText;
+        iconSizeLabel.text = "main:\(nativeAd.mainImage.size.width)x\(nativeAd.mainImage.size.height)\nicon:\(nativeAd.iconImage.size.width)x\(nativeAd.iconImage.size.height)";
     }
     
     func nativeElementSetPosition() {
@@ -248,6 +258,7 @@ class APDNativeCustonView : UIView {
         self.addSubview(adBadgeLabel)
         self.addSubview(titleLabel)
         self.addSubview(descriptionLabel)
+        self.addSubview(iconSizeLabel)
         
         let width : CGFloat = UIScreen.main.bounds.size.width
         let height : CGFloat = width * 9 / 16
@@ -257,5 +268,6 @@ class APDNativeCustonView : UIView {
         self.adBadgeLabel.frame = CGRect.init(x: self.frame.width  - 30, y: height + 5,width: 25,height: 12);
         self.titleLabel.frame = CGRect.init(x: 5, y: height + 5, width: self.frame.size.width - 100,height: 15);
         self.descriptionLabel.frame = CGRect.init(x: 5, y: height + self.titleLabel.frame.height + 10,width: self.frame.width - 130, height: 40);
+        self.iconSizeLabel.frame = CGRect.init(x: self.frame.size.width - 120, y: height, width: 95,height: 20);
     }
 }

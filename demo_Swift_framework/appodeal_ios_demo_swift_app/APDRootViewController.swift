@@ -25,4 +25,21 @@ class APDRootViewController: APDVisualRootViewController {
             self.navigationItem.titleView = titleLabel
         }
     }
+    
+    func createAlertForPlacement (showStyle: AppodealShowStyle, rootController: UIViewController) {
+        let alert = UIAlertController(title: "Setting the placement", message: "Enter the placement name", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = ""
+        }
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0]
+            if ((textField?.text?.isEmpty))! {
+                Appodeal.showAd(showStyle, rootViewController: rootController);
+            }
+            else {
+                Appodeal.showAd(showStyle, forPlacement: textField?.text, rootViewController: rootController)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

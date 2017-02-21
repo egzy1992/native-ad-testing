@@ -137,8 +137,10 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 0: Appodeal.showAd(AppodealShowStyle.interstitial, rootViewController: self); break
-        case 1: Appodeal.showAd(AppodealShowStyle.rewardedVideo, rootViewController: self); break
+        case 0:
+            createAlertForPlacement(showStyle: AppodealShowStyle.interstitial, rootController: self)
+            break
+        case 1: createAlertForPlacement(showStyle: AppodealShowStyle.rewardedVideo, rootController: self); break
         case 2 :
             switch indexPath.row {
             case 0:
@@ -197,6 +199,8 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
     func rewardedVideoDidClick(){
         
     }
+    
+    
 }
 
 class APDAppodealHUBView : APDRootView {
@@ -218,3 +222,4 @@ class APDAppodealHUBView : APDRootView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
