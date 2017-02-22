@@ -75,9 +75,11 @@ class APDAppodealBanner: APDRootViewController, UITableViewDataSource, UITableVi
         case 0:
             switch indexPath.row {
             case 0:
+                Appodeal.hideBanner();
                 createAlertForPlacement(showStyle: AppodealShowStyle.bannerTop, rootController: self);
                 break
             case 1:
+                Appodeal.hideBanner();
                 createAlertForPlacement(showStyle: AppodealShowStyle.bannerBottom, rootController: self);
                 break
             default:break
