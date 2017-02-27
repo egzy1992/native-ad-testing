@@ -67,8 +67,8 @@ class APDNativeOnView: APDRootViewController {
     
     func setAvailableAdCount(_ count : Int) {
         guard count > 0 else {
-            countLabel.isHidden = true
-            slider.isHidden = true
+            countLabel.isHidden = !(slider.maximumValue > 0);
+            slider.isHidden = countLabel.isHidden;
             return
         }
         
