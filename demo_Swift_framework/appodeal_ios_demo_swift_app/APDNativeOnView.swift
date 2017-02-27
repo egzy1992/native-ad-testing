@@ -106,6 +106,7 @@ class APDNativeOnView: APDRootViewController {
 extension APDNativeOnView : APDNativeAdLoaderDelegate {
     
     func nativeAdLoader(_ loader: APDNativeAdLoader!, didLoad nativeAds: [APDNativeAd]!) {
+        print("\n ****************** \n adLoader didLoadNativeAd... \n ************************* \n")
         apdNativeArray = nativeAds
         let _ = nativeAds.map {( $0.delegate = self )}
         appodealNativeViewModel.isHidden = false;
@@ -114,6 +115,7 @@ extension APDNativeOnView : APDNativeAdLoaderDelegate {
     }
     
     func nativeAdLoader(_ loader: APDNativeAdLoader!, didFailToLoadWithError error: Error!){
+        print("\n ****************** \n adLoader failed!!! \n ************************* \n")
         setAvailableAdCount(0)
     }
 }
@@ -121,24 +123,25 @@ extension APDNativeOnView : APDNativeAdLoaderDelegate {
 extension APDNativeOnView : APDNativeAdPresentationDelegate {
     
     func nativeAdWillLogImpression(_ nativeAd: APDNativeAd!) {
-        print("nativeAdWillLogImpression at index ", apdNativeArray.index(of: nativeAd)!)
+        print("\n ****************** \n nativeAdWillLogUserInteraction nativeAdWillLogImpression at index ", apdNativeArray.index(of: nativeAd)!, "\n ************************* \n")
     }
     
     func nativeAdWillLogUserInteraction(_ nativeAd: APDNativeAd!) {
-        print("nativeAdWillLogUserInteraction ", apdNativeArray.index(of: nativeAd)!)
+        print("\n ****************** \n nativeAdWillLogUserInteraction ", apdNativeArray.index(of: nativeAd)!, "\n ************************* \n")
     }
 }
 
 extension APDNativeOnView : APDNativeAdQueueDelegate {
     
     func adQueue(_ adQueue: APDNativeAdQueue!, failedWithError error: Error!) {
+        print("\n ****************** \n adQueue failed!!!... \n ************************* \n")
         setAvailableAdCount(0)
     }
     
     func adQueueAdIsAvailable(_ adQueue: APDNativeAdQueue!, ofCount count: Int) {
 //        apdNativeArray.append(contentsOf:adQueue.getNativeAds(ofCount: count))
 //        let _ = apdNativeArray.map {( $0.delegate = self )}
-        
+        print("\n ****************** \n adQueue is available now... \n ************************* \n")
         appodealNativeViewModel.isHidden = false;
         
         if apdNativeArray.count > 0 {
