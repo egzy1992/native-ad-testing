@@ -15,9 +15,7 @@ class APDAppodealBanner: APDRootViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Appodeal.setBannerBackgroundVisible(true)
-        Appodeal.setSmartBannersEnabled(false)
+
         Appodeal.setBannerDelegate(self)
         
         appodealBannerViewModel = APDAppodealBannerViewModel.init(frame: self.view.frame)
