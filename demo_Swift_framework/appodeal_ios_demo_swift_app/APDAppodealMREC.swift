@@ -36,6 +36,10 @@ class APDAppodealMREC: APDRootViewController, AppodealBannerViewDelegate {
     func bannerViewDidInteract(_ bannerView: APDBannerView!){
         
     }
+    
+    func precacheBannerViewDidLoadAd(_ precacheBannerView: APDBannerView!) {
+        
+    }
 }
 
 class APDAppodealMRECViewModel: APDRootView {
