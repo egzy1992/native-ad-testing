@@ -251,7 +251,9 @@ class APDNativeCustonView : UIView {
         titleLabel.text = self.nativeAd.title;
         descriptionLabel.text = self.nativeAd.descriptionText;
         callToActionLabel.text = self.nativeAd.callToActionText;
-        iconSizeLabel.text = "main:\(nativeAd.mainImage.size.width)x\(nativeAd.mainImage.size.height)\nicon:\(nativeAd.iconImage.size.width)x\(nativeAd.iconImage.size.height)";
+        if (((nativeAd.iconImage != nil)) && ((nativeAd.iconImage != nil))) {
+            iconSizeLabel.text = "main:\(nativeAd.mainImage.size.width)x\(nativeAd.mainImage.size.height)\nicon:\(nativeAd.iconImage.size.width)x\(nativeAd.iconImage.size.height)";
+        }
     }
     
     func nativeElementSetPosition() {
