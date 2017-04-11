@@ -29,7 +29,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>appodeal</string>
+				<string>ObCFrameworkDemo</string>
 			</array>
 		</dict>
 	</array>

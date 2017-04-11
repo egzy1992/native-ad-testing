@@ -4,16 +4,6 @@
 <dict>
 	<key>AppodealAppKey</key>
 	<string>dee74c5129f53fc629a44a690a02296694e3eef99f2d3a5f</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Advertising</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Advertising</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Advertising</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Advertising</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Advertising</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -32,6 +22,10 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>ObCFrameworkDemo</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -39,6 +33,16 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Advertising</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Advertising</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Advertising</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Advertising</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Advertising</string>
 	<key>UILaunchStoryboardName</key>
 	<string>Launchscreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

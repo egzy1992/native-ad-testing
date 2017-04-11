@@ -82,7 +82,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Appodeal.setUserInterests(userData.userInterests)
         }
         
-        Appodeal.setLogLevel(APDLogLevel.info)
         Appodeal.setAutocache(configuration.autoCache, types: configuration.adType)
         Appodeal.initialize(withApiKey: apiKey, types: configuration.adType)
         
