@@ -166,7 +166,7 @@ class APDNativeOnViewModelView: APDRootView {
         super.init(frame: frame)
         
         let width : CGFloat = UIScreen.main.bounds.size.width
-        let height : CGFloat = 50 + width * 9 / 16
+        let height : CGFloat = 100 + width * 9 / 16
         customNativeView = APDNativeCustonView.init(frame: CGRect.init(x: 0, y: 0, width: width, height: height))
         customNativeView.center = self.center
         self.addSubview(customNativeView)

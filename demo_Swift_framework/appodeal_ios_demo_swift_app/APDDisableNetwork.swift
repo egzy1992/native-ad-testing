@@ -55,6 +55,7 @@ class APDDisableNetwork: APDVisualRootViewController, UITableViewDelegate, UITab
                          ["Zplay"       : "zplay"],
                          ["Appodeal"    : "appodeal"],
                          ["Mraid"       : "mraid"],
+                         ["Nast"        : "nast"],
                          ["Vast"        : "vast"]]
         
         return propArray as NSArray
