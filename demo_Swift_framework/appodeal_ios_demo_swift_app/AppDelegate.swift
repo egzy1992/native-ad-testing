@@ -21,12 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         self.setAppearance()
         
-        self.window = UIWindow.init(frame: UIScreen.main.bounds)
+        self.window = MotionWindow.init(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
+        NotificationCenter.default.addObserver(self, selector: #selector(addMemoryWarningButton), name: Notification.Name(rawValue: "AppShaked"), object: nil)
         
+        application.applicationSupportsShakeToEdit = true;
         self.initialTabBarController()
         
         return true
@@ -89,6 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         rootViewVontroller.isAutoCache = configuration.autoCache
         self.window?.rootViewController = UINavigationController.init(rootViewController: rootViewVontroller)
     }
+
     
     func disableNetworkForArray(disabledNetwork : NSArray){
         if  disabledNetwork.count == 0{
@@ -104,7 +106,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
     }
-    
 //
 //    - (void) initializeSdk:(APDAdType)adType testMode:(BOOL)testMode locationTracking:(BOOL)locationTracking toast:(BOOL)toastMode{
 //    NSString * apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppodealAppKey"];
@@ -124,7 +125,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
 
     //----------------------------------------------------------------------------------------------------
+    func addMemoryWarningButton() {
+        let button = UIButton(type: .custom)
+        button .addTarget(self, action: #selector(synthesizeMemoryWarning), for: .touchUpInside)
+        
+        button.setTitle("Synthesize Memory Warning ", for: .normal)
+        button.setTitleColor(UIColor.gray, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        
+        button.layer.borderWidth = 1.5
+        button.layer.borderColor = UIColor.gray.cgColor
+        button.backgroundColor = UIColor.white
+        
+        let width  : CGFloat!  = UIScreen.main.bounds.width / 2
+        let height : CGFloat!  = 33.0
+        
+        let x = width / 2
+        let y = UIScreen.main.bounds.height / 2 - (height + 10.0)
+        
+        button.frame = CGRect(x: x, y: y, width: width, height: height)
+        topPresentedContoller()?.view.addSubview(button)
+        DispatchQueue.main.asyncAfter(deadline:  DispatchTime.now() + .seconds(1)) {
+            button.removeFromSuperview()
+        }
+    }
 
+    func topPresentedContoller() -> UIViewController? {
+        var controller = UIApplication.shared.keyWindow?.rootViewController;
+        
+        while ((controller?.presentedViewController) != nil) {
+            controller = controller?.presentedViewController;
+        }
+        
+        return controller;
+    }
+    
+    func synthesizeMemoryWarning() {
+        NotificationCenter.default.post(name: .UIApplicationDidReceiveMemoryWarning, object: nil)
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
