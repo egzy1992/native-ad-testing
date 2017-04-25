@@ -23,6 +23,7 @@ class APDAppodealMREC: APDRootViewController, AppodealBannerViewDelegate {
         mrecView = AppodealMRECView(rootViewController: self)
         
         mrecView.setDelegate(self)
+        mrecView.requestDelegate = self
         mrecView.loadAd()
     }
 
@@ -41,6 +42,34 @@ class APDAppodealMREC: APDRootViewController, AppodealBannerViewDelegate {
         
     }
 }
+
+extension APDAppodealMREC : APDBannerViewRequestDelegate {
+    
+    func bannerViewDidStartMediation(_ bannerView: APDBannerView!) {
+        print("[RRI] MREC mediation started")
+    }
+    
+    func bannerView(_ bannerView: APDBannerView!, willSendRequestToAdNetwork adNetwork: String!) {
+        print("[RRI] MREC send request to network ", adNetwork)
+    }
+    
+    func bannerView(_ bannerView: APDBannerView!, didRecieveResponseFromAdNetwork adNetwork: String!, wasFilled filled: Bool) {
+        print("[RRI] MREC send request to network ", adNetwork, " was filled ", filled ? "yes" : "no")
+    }
+    
+    func bannerView(_ bannerView: APDBannerView!, didFinishMediationAdWasFilled filled: Bool) {
+        print("[RRI] MREC mediation finished, ad was filled ", filled ? "yes" : "no")
+    }
+    
+    func bannerView(_ bannerView: APDBannerView!, logImpressionForAdNetwork adNetwork: String!) {
+        print("[RRI] MREC log impression for network ", adNetwork)
+    }
+    
+    func bannerView(_ bannerView: APDBannerView!, logClickForAdNetwork adNetwork: String!) {
+        print("[RRI] Banner log click for network ", adNetwork)
+    }
+}
+
 
 class APDAppodealMRECViewModel: APDRootView {
     

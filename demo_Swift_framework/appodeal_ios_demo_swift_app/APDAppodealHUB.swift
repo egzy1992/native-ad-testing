@@ -29,6 +29,7 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
         _cellStatusName = self.cellStatusName()
         
         Appodeal.setInterstitialDelegate(self)
+        Appodeal.setRequestDelegate(self)
         Appodeal.setRewardedVideoDelegate(self)
     }
     
@@ -201,6 +202,50 @@ class APDAppodealHUB: APDRootViewController, UITableViewDelegate, UITableViewDat
     }
     
     
+}
+
+
+
+extension APDAppodealHUB : AppodealRequestDelegate {
+    
+    func humanName(type: AppodealAdType) -> String! {
+        switch type {
+        case AppodealAdType.banner:
+            return "Banner"
+        case AppodealAdType.interstitial:
+            return "Interstitial"
+        case AppodealAdType.rewardedVideo:
+            return "Rewarded Video"
+        case AppodealAdType.nativeAd:
+            return "Native Ad"
+        default: return "Undefined type"
+        }
+    }
+    
+    func mediationDidStart(for adType: AppodealAdType) {
+        print("Mediation start for ", humanName(type: adType))
+    }
+    
+    func willStartAdRequest(forAdNetwork adNetwork: String!, adType: AppodealAdType) {
+       print(humanName(type: adType), " send request for ad network ", adNetwork)
+    }
+    
+    func didReceiveAdResponse(fromAdNetwork adNetwork: String!, adType: AppodealAdType, wasFilled filled: Bool) {
+        print(humanName(type: adType), " recieve request from ad network ", adNetwork, " ad filled ", filled ? "yes" : "no")
+    }
+    
+    func didFinishMediation(for adType: AppodealAdType, hasFilledAd filled: Bool) {
+        print("Mediation finish for ", humanName(type: adType), " ad was filled ", filled ? "yes" : "no")
+    }
+    
+    func didDetectImpression(forAdNetwork adNetwork: String!, adType: AppodealAdType) {
+        print(humanName(type: adType), " log impression for ad network ", adNetwork)
+    }
+    
+    func didDetectClick(forAdNetwork adNetwork: String!, adType: AppodealAdType) {
+        print(humanName(type: adType), " log click for ad network ", adNetwork)
+    }
+
 }
 
 class APDAppodealHUBView : APDRootView {
