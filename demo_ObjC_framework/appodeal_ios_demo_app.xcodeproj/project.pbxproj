@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9C8192EC1E376A06002B347E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C8192EB1E376A06002B347E /* StoreKit.framework */; };
+		9C9056321EB085DE001459EB /* Appodeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9056311EB085DE001459EB /* Appodeal.framework */; };
+		9C9056351EB08A61001459EB /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9056341EB08A61001459EB /* MotionWindow.m */; };
 		B90EC5681D5B00C700182B20 /* APDViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B90EC5671D5B00C700182B20 /* APDViewModel.m */; };
 		B91581DE1D0FD985000FC33F /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = B91581C31D0FD985000FC33F /* MASCompositeConstraint.m */; };
 		B91581DF1D0FD985000FC33F /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = B91581C61D0FD985000FC33F /* MASConstraint.m */; };
@@ -128,6 +130,9 @@
 
 /* Begin PBXFileReference section */
 		9C8192EB1E376A06002B347E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		9C9056311EB085DE001459EB /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Appodeal.framework; sourceTree = "<group>"; };
+		9C9056331EB08A61001459EB /* MotionWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionWindow.h; sourceTree = "<group>"; };
+		9C9056341EB08A61001459EB /* MotionWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionWindow.m; sourceTree = "<group>"; };
 		B90EC5661D5B00C700182B20 /* APDViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDViewModel.h; path = Root/APDViewModel.h; sourceTree = "<group>"; };
 		B90EC5671D5B00C700182B20 /* APDViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDViewModel.m; path = Root/APDViewModel.m; sourceTree = "<group>"; };
 		B91581C21D0FD985000FC33F /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
@@ -347,6 +352,7 @@
 				B92338D01D0AF93F00AC37D1 /* CoreGraphics.framework in Frameworks */,
 				B92338CE1D0AF93800AC37D1 /* CoreFoundation.framework in Frameworks */,
 				B92338CC1D0AF93100AC37D1 /* CFNetwork.framework in Frameworks */,
+				9C9056321EB085DE001459EB /* Appodeal.framework in Frameworks */,
 				B92338CA1D0AF92900AC37D1 /* AVFoundation.framework in Frameworks */,
 				B92338C81D0AF92300AC37D1 /* AudioToolbox.framework in Frameworks */,
 				B92338C61D0AF91C00AC37D1 /* AdSupport.framework in Frameworks */,
@@ -469,6 +475,7 @@
 		B92338801D0AA58D00AC37D1 = {
 			isa = PBXGroup;
 			children = (
+				9C9056311EB085DE001459EB /* Appodeal.framework */,
 				B923388B1D0AA58D00AC37D1 /* appodeal_ios_demo_app */,
 				B923388A1D0AA58D00AC37D1 /* Products */,
 				B91581C01D0FD985000FC33F /* SupportLib */,
@@ -499,6 +506,8 @@
 				B90EC5691D5B00CF00182B20 /* APDSupportClasses */,
 				B923388F1D0AA58D00AC37D1 /* AppDelegate.h */,
 				B92338901D0AA58D00AC37D1 /* AppDelegate.m */,
+				9C9056331EB08A61001459EB /* MotionWindow.h */,
+				9C9056341EB08A61001459EB /* MotionWindow.m */,
 				B99508DE1D59D39F005AEF1F /* APDDemo_PrefixHeader.pch */,
 				B92338981D0AA58D00AC37D1 /* Assets.xcassets */,
 				B923389A1D0AA58D00AC37D1 /* LaunchScreen.storyboard */,
@@ -977,6 +986,7 @@
 				B99509471D59EBFF005AEF1F /* APDInterstitialDoubleViewController.m in Sources */,
 				B995093A1D59EBA2005AEF1F /* APDBannerHiddenViewController.m in Sources */,
 				B99509541D59EC5E005AEF1F /* APDTripleBannerViewController.m in Sources */,
+				9C9056351EB08A61001459EB /* MotionWindow.m in Sources */,
 				B99508F91D59EA39005AEF1F /* APDVideoViewController.m in Sources */,
 				B92338A71D0AAB1100AC37D1 /* APDStartScreenViewController.m in Sources */,
 			);

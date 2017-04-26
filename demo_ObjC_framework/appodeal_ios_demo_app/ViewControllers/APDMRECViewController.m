@@ -10,7 +10,7 @@
 #import <Appodeal/Appodeal.h>
 #import "Masonry.h"
 
-@interface APDMRECViewController ()<APDBannerViewDelegate, AppodealBannerViewDelegate>
+@interface APDMRECViewController ()<APDBannerViewDelegate, AppodealBannerViewDelegate, APDBannerViewRequestDelegate>
 {
     AppodealMRECView * _bannerMRECView;
     APDMRECView * _apdBannerMRECView;
@@ -105,6 +105,7 @@
         if (!_bannerMRECView) {
             _bannerMRECView = [[AppodealMRECView alloc] initWithRootViewController:self];
             _bannerMRECView.delegate = self;
+            _bannerMRECView.requestDelegate = self;
         }
         
         if (![_bannerMRECView isReady]) {
@@ -125,6 +126,7 @@
     if (!_apdBannerMRECView) {
         _apdBannerMRECView = [[APDMRECView alloc] init];
         _apdBannerMRECView.rootViewController = self;
+        _apdBannerMRECView.requestDelegate = self;
         _apdBannerMRECView.delegate = self;
     }
     
@@ -141,6 +143,33 @@
         }];
     }
 }
+
+#pragma mark - APDBannerViewRequestDelegate
+
+- (void)bannerViewDidStartMediation:(APDBannerView *)bannerView {
+    NSLog(@"[RRI] MREC start mediation");
+}
+
+- (void)bannerView:(APDBannerView *)bannerView willSendRequestToAdNetwork:(NSString *)adNetwork{
+    NSLog(@"[RRI] MREC send request for ad network %@", adNetwork);
+}
+
+- (void)bannerView:(APDBannerView *)bannerView didRecieveResponseFromAdNetwork:(NSString *)adNetwork wasFilled:(BOOL)filled {
+    NSLog(@"[RRI] MREC recieve response from ad network %@, ad was filled %@", adNetwork, filled ? @"true" : @"false");
+}
+
+- (void)bannerView:(APDBannerView *)bannerView didFinishMediationAdWasFilled:(BOOL)filled {
+    NSLog(@"[RRI] MREC finish mediation, ad was filled %@", filled ? @"true" : @"false");
+}
+
+- (void)bannerView:(APDBannerView *)bannerView logImpressionForAdNetwork:(NSString *)adNetwork {
+    NSLog(@"[RRI] MREC log imoression from ad network %@", adNetwork);
+}
+
+- (void)bannerView:(APDBannerView *)bannerView logClickForAdNetwork:(NSString *)adNetwork {
+    NSLog(@"[RRI] MREC log user interaction from ad network %@", adNetwork);
+}
+
 
 -(IBAction)MRECHideClick:(id)sender{
     if (self.deprecateApi) {

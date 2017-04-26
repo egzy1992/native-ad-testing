@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <Appodeal/Appodeal.h>
 #import "APDDemoModel.h"
+#import "MotionWindow.h"
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) MotionWindow *window;
 @property (nonatomic, strong) NSArray * disabledAdNetwork;
 
 - (void) initializeSdkWithParams:(APDDemoModel *)params andApiVersion:(BOOL)api;

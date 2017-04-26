@@ -16,7 +16,7 @@
 #import "APDBackgroundWorkPresentationViewController.h"
 #import "APDViewabillityPresentationViewController.h"
 
-@interface APDHUBViewController () <AppodealInterstitialDelegate, AppodealRewardedVideoDelegate, APDInterstitalAdDelegate, APDRewardedVideoDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface APDHUBViewController () <AppodealInterstitialDelegate, AppodealRewardedVideoDelegate, APDInterstitalAdDelegate, APDRewardedVideoDelegate, UITableViewDelegate, UITableViewDataSource, AppodealRequestDelegate>
 
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableDictionary * cellStatusName;
@@ -39,6 +39,7 @@
     {
         [Appodeal setInterstitialDelegate:self];
         [Appodeal setRewardedVideoDelegate:self];
+        [Appodeal setRequestDelegate:self];
     }
 }
 
@@ -112,6 +113,44 @@
 
 - (NSIndexPath *) i_Ps:(NSUInteger)section index:(NSInteger)index{
     return [NSIndexPath indexPathForRow:index inSection:section];
+}
+
+#pragma mark - AppodealRequestDelegate
+
+- (NSString *)prettyNamedType:(AppodealAdType)adType {
+    switch (adType) {
+        case AppodealAdTypeMREC:                    return @"MREC";                     break;
+        case AppodealAdTypeNativeAd:                return @"Native ad";                break;
+        case AppodealAdTypeInterstitial:            return @"Interstitial ad";          break;
+        case AppodealAdTypeBanner:                  return @"Banenr";                   break;
+        case AppodealAdTypeRewardedVideo:           return @"Rewarded video";           break;
+        case AppodealAdTypeNonSkippableVideo:       return @"Non Skippable video";      break;
+        default: return @"Undefined"; break;
+    }
+}
+
+- (void)mediationDidStartForAdType:(AppodealAdType)adType {
+    NSLog(@"[RRI] %@ did start mediation", [self prettyNamedType:adType]);
+}
+
+- (void)willStartAdRequestForAdNetwork:(NSString *)adNetwork adType:(AppodealAdType)adType {
+    NSLog(@"[RRI] %@ send request for ad network %@", [self prettyNamedType:adType], adNetwork);
+}
+
+- (void)didReceiveAdResponseFromAdNetwork:(NSString *)adNetwork adType:(AppodealAdType)adType wasFilled:(BOOL)filled {
+    NSLog(@"[RRI] %@ recieve response from ad network %@ it was filled ad %@", [self prettyNamedType:adType], adNetwork, filled ? @"true" : @"false");
+}
+
+- (void)didFinishMediationForAdType:(AppodealAdType)adType hasFilledAd:(BOOL)filled {
+    NSLog(@"[RRI] %@ did finish mediation, ad was filled %@", [self prettyNamedType:adType], filled ? @"true" : @"false");
+}
+
+- (void)didDetectImpressionForAdNetwork:(NSString *)adNetwork adType:(AppodealAdType)adType {
+    NSLog(@"[RRI] %@ did log impression from ad network %@", [self prettyNamedType:adType], adNetwork);
+}
+
+- (void)didDetectClickForAdNetwork:(NSString *)adNetwork adType:(AppodealAdType)adType {
+    NSLog(@"[RRI] %@ did log user interaction from ad network %@", [self prettyNamedType:adType], adNetwork);
 }
 
 #pragma mark --- APD_STATUS

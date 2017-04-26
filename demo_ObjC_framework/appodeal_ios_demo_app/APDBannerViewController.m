@@ -9,7 +9,7 @@
 #import "APDBannerViewController.h"
 #import "Masonry.h"
 
-@interface APDBannerViewController () <AppodealBannerDelegate, AppodealBannerViewDelegate, APDBannerViewDelegate>
+@interface APDBannerViewController () <AppodealBannerDelegate, APDBannerViewRequestDelegate, AppodealBannerViewDelegate, APDBannerViewDelegate>
 
 @property (nonatomic, strong) UIButton * bannerTop;
 @property (nonatomic, strong) UIButton * bannerBottom;
@@ -90,6 +90,7 @@
         [self.bannerViewTop removeFromSuperview];
         self.bannerViewTop = [[AppodealBannerView alloc] initWithSize:self.isTablet ? kAPDAdSize728x90 : kAPDAdSize320x50 rootViewController:self];
         self.bannerViewTop.delegate = self;
+        self.bannerViewTop.requestDelegate = self;
         [self.bannerViewTop loadAd];
         
     } else if (self.deprecateApi) {
@@ -102,6 +103,7 @@
         self.apdBannerViewTop = [[APDBannerView alloc] initWithSize:self.isTablet ? kAPDAdSize728x90 : kAPDAdSize320x50];
         self.apdBannerViewTop.rootViewController = self;
         self.apdBannerViewTop.delegate = self;
+        self.bannerViewBottom.requestDelegate = self;
         [self.apdBannerViewTop loadAd];
     }
 }
@@ -127,6 +129,32 @@
         self.apdBannerViewBottom.delegate = self;
         [self.apdBannerViewBottom loadAd];
     }
+}
+
+#pragma mark - APDBannerViewRequestDelegate
+
+- (void)bannerViewDidStartMediation:(APDBannerView *)bannerView {
+    NSLog(@"[RRI] Banner start mediation");
+}
+
+- (void)bannerView:(APDBannerView *)bannerView willSendRequestToAdNetwork:(NSString *)adNetwork{
+    NSLog(@"[RRI] Banner send request for ad network %@", adNetwork);
+}
+
+- (void)bannerView:(APDBannerView *)bannerView didRecieveResponseFromAdNetwork:(NSString *)adNetwork wasFilled:(BOOL)filled {
+    NSLog(@"[RRI] Banner recieve response from ad network %@, ad was filled %@", adNetwork, filled ? @"true" : @"false");
+}
+
+- (void)bannerView:(APDBannerView *)bannerView didFinishMediationAdWasFilled:(BOOL)filled {
+    NSLog(@"[RRI] Banner finish mediation, ad was filled %@", filled ? @"true" : @"false");
+}
+
+- (void)bannerView:(APDBannerView *)bannerView logImpressionForAdNetwork:(NSString *)adNetwork {
+    NSLog(@"[RRI] Banner log imoression from ad network %@", adNetwork);
+}
+
+- (void)bannerView:(APDBannerView *)bannerView logClickForAdNetwork:(NSString *)adNetwork {
+    NSLog(@"[RRI] Banner log user interaction from ad network %@", adNetwork);
 }
 
 #pragma mark --- Property
