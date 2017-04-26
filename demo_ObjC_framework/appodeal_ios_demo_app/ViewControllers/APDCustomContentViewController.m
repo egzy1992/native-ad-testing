@@ -10,7 +10,7 @@
 #import "APDCustomNativeView.h"
 #import "Masonry.h"
 
-@interface APDCustomContentViewController () <APDNativeAdLoaderDelegate, APDNativeAdPresentationDelegate>
+@interface APDCustomContentViewController () <APDNativeAdLoaderDelegate, APDNativeAdPresentationDelegate, APDNativeAdRequestDelegate>
 {
     APDNativeAdLoader * _nativeAdLoader;
     NSArray <__kindof APDNativeAd *> * _nativeArray;
@@ -55,6 +55,7 @@
     if (!_nativeAdLoader) {
         _nativeAdLoader = [APDNativeAdLoader new];
         _nativeAdLoader.delegate = self;
+        _nativeAdLoader.requestDelegate = self;
     }
     
     [self.loadNativeButton apdSpinnerShowOnRight];
@@ -187,6 +188,26 @@
     [self appodealLoaderInitial];
 }
 
+#pragma mark - APDNativeAdRequestDelegate
+
+- (void)nativeAdLoaderDidStartMediation:(APDNativeAdLoader *)nativeAdLoader {
+    NSLog(@"[RRI] Native ad start mediation");
+}
+
+- (void)nativeAdLoader:(APDNativeAdLoader *)nativeAdLoader willSendRequestToAdNetwork:(NSString *)adNetwork {
+    NSLog(@"[RRI] Native ad send request for ad network %@", adNetwork);
+}
+
+- (void)nativeAdLoader:(APDNativeAdLoader *)nativeAdLoader didRecieveResponseFromAdNetwork:(NSString *)adNetwork wasFilled:(BOOL)filled {
+    NSLog(@"[RRI] Native ad recieve response from ad network %@, ad was filled %@", adNetwork, filled ? @"true" : @"false");
+
+}
+
+- (void)nativeAdLoader:(APDNativeAdLoader *)nativeAdLoader didFinishMediationAdWasFilled:(BOOL)filled {
+    NSLog(@"[RRI] Native ad finish mediation, ad was filled %@", filled ? @"true" : @"false");
+}
+
+
 #pragma mark --- NATIVE_AD_LOADER_DELEGATE
 
 - (void)nativeAdLoader:(APDNativeAdLoader *)loader didLoadNativeAds:(NSArray <APDNativeAd *>*)nativeAds{
@@ -226,12 +247,14 @@
 #pragma mark - APDNativeAdPresentationDelegate
 
 - (void)nativeAdWillLogImpression:(APDNativeAd *)nativeAd {
+    NSLog(@"[RRI] Native ad log impression");
     if (self.toastMode) {
         [AppodealToast showToastInView:self.view withMessage:[NSString stringWithFormat:@"nativeAdWillLogImpression at index %lu", (unsigned long)[_nativeArray indexOfObject:nativeAd]]];
     }
 }
 
 - (void)nativeAdWillLogUserInteraction:(APDNativeAd *)nativeAd {
+    NSLog(@"[RRI] Native ad log user unteraction");
     if (self.toastMode) {
         [AppodealToast showToastInView:self.view withMessage:[NSString stringWithFormat:@"nativeAdWillLogUserInteraction at index %lu", (unsigned long)[_nativeArray indexOfObject:nativeAd]]];
     }

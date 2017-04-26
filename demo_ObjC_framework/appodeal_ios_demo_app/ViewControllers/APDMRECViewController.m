@@ -163,7 +163,7 @@
 }
 
 - (void)bannerView:(APDBannerView *)bannerView logImpressionForAdNetwork:(NSString *)adNetwork {
-    NSLog(@"[RRI] MREC log imoression from ad network %@", adNetwork);
+    NSLog(@"[RRI] MREC log impression from ad network %@", adNetwork);
 }
 
 - (void)bannerView:(APDBannerView *)bannerView logClickForAdNetwork:(NSString *)adNetwork {
