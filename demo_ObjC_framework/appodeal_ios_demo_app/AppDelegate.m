@@ -11,6 +11,8 @@
 #import "APDDisableNetworkViewController.h"
 #import "APDHUBViewController.h"
 #import "MotionWindow.h"
+#import <AudioToolbox/AudioServices.h>
+
 
 @interface AppDelegate ()
 
@@ -22,7 +24,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     application.applicationSupportsShakeToEdit = YES;
     self.window = [[MotionWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMemoryWarningButton) name:@"DemoAppShaked" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(synthesizeMemoryWarning) name:@"DemoAppShaked" object:nil];
     
     [self.window makeKeyAndVisible];
     self.window.rootViewController = [UIViewController new];
@@ -151,30 +153,30 @@
 
 #pragma mark - Private
 
-- (void)addMemoryWarningButton {
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button addTarget:self action:@selector(synthesizeMemoryWarning) forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"Synthesize Memory Warning" forState:UIControlStateNormal];
-    
-    [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [button.titleLabel setFont:[UIFont systemFontOfSize:12]];
-    
-    button.layer.borderWidth = 1.5;
-    button.layer.borderColor = [UIColor grayColor].CGColor;
-    button.backgroundColor = [UIColor whiteColor];
-    
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-    CGFloat width = screenSize.width / 2;
-    CGFloat height = 33.0;
-    CGFloat x = width / 2;
-    CGFloat y = screenSize.height / 2 - (height + 10.0);
-    
-    [button setFrame:CGRectMake(x, y, width, height)];
-    [self.topPresentedContoller.view addSubview:button];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [button removeFromSuperview];
-    });
-}
+//- (void)addMemoryWarningButton {
+//    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button addTarget:self action:@selector(synthesizeMemoryWarning) forControlEvents:UIControlEventTouchUpInside];
+//    [button setTitle:@"Synthesize Memory Warning" forState:UIControlStateNormal];
+//    
+//    [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//    [button.titleLabel setFont:[UIFont systemFontOfSize:12]];
+//    
+//    button.layer.borderWidth = 1.5;
+//    button.layer.borderColor = [UIColor grayColor].CGColor;
+//    button.backgroundColor = [UIColor whiteColor];
+//    
+//    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+//    CGFloat width = screenSize.width / 2;
+//    CGFloat height = 33.0;
+//    CGFloat x = width / 2;
+//    CGFloat y = screenSize.height / 2 - (height + 10.0);
+//    
+//    [button setFrame:CGRectMake(x, y, width, height)];
+//    [self.topPresentedContoller.view addSubview:button];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [button removeFromSuperview];
+//    });
+//}
 
 - (UIViewController *)topPresentedContoller {
     UIViewController * controller = [[UIApplication sharedApplication] keyWindow].rootViewController;
@@ -187,6 +189,13 @@
 }
 
 - (void)synthesizeMemoryWarning {
+    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+    NSLog(@"[Demo] Synthesize memory warning");
+    UIAlertController * controller = [UIAlertController alertControllerWithTitle:@"App synthesize memory warning" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [self.topPresentedContoller presentViewController:controller animated:NO completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [controller dismissViewControllerAnimated:NO completion:nil];
+    });
     [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 }
 
