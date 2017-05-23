@@ -257,12 +257,12 @@
         [AppodealToast showToastInView:self.view withMessage:@"MREC didFailToLoadAdWithError"];
     }
     [self apd_updateButtonWithStatus:kAPD_STATUS_FAIL_TO_LOAD];
-    
-    if (self.deprecateApi) {
-       _bannerMRECView = nil;
-    } else {
-        _apdBannerMRECView = nil;
-    }
+
+//    if (self.deprecateApi) {
+//       _bannerMRECView = nil;
+//    } else {
+//        _apdBannerMRECView = nil;
+//    }
 }
 
 - (void)bannerViewDidReceiveTapAction:(APDBannerView *)bannerView{
