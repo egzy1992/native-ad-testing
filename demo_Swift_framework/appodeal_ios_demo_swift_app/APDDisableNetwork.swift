@@ -58,6 +58,7 @@ class APDDisableNetwork: APDVisualRootViewController, UITableViewDelegate, UITab
                          ["Zplay"       : "zplay"],
                          ["Appodeal"    : "appodeal"],
                          ["Mraid"       : "mraid"],
+                         ["MraidDFP"    : "mraid_dfp"],
                          ["Nast"        : "nast"],
                          ["Vast"        : "vast"]]
         

@@ -100,6 +100,7 @@
                                  @{@"Zplay" : @"zplay"},
                                  @{@"Appodeal" : @"appodeal"},
                                  @{@"Mraid" : @"mraid"},
+                                 @{@"MraidDFP" : @"mraid_dfp"},
                                  @{@"Vast" : @"vast"}];
     
     NSMutableArray * array = [NSMutableArray array];
