@@ -85,6 +85,7 @@
                                  @{@"InnerActiveSDK" : @"inneractive_sdk"},
                                  @{@"Twitter" : @"mopub"},
                                  @{@"OpenX" : @"openx"},
+                                 @{@"OpenXSDK" : @"openx_sdk"},
                                  @{@"Pubnative" : @"pubnative"},
                                  @{@"Smaato" : @"smaato"},
                                  @{@"SmaatoSDK" : @"smaato_sdk"},
