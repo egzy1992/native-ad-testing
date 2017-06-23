@@ -24,6 +24,8 @@
     [self.window makeKeyAndVisible];
     self.window.rootViewController = [UIViewController new];
     
+//    [NSClassFromString(@"FBAdSettings") performSelector: NSSelectorFromString(@"addTestDevice:") withObject:[NSClassFromString(@"FBAdSettings")  performSelector: NSSelectorFromString(@"testDeviceHash")]];
+    
     {
         APDStartScreenViewController * rootController = [APDStartScreenViewController new];
         UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:rootController];

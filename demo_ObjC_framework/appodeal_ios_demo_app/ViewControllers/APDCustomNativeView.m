@@ -83,6 +83,7 @@
     [self.mediaView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(self);
         make.top.equalTo(self.iconView.mas_bottom).with.offset(5);
+        make.height.greaterThanOrEqualTo(@(self.frame.size.width * 0.75));
         make.bottom.equalTo(self.callToActionLabel.mas_top).with.offset(-5);
     }];
 
