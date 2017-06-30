@@ -11,6 +11,8 @@
 #import "APDDisableNetworkViewController.h"
 #import "APDHUBViewController.h"
 
+NSString * appodealBaseURL = @"https://api.appodeal.com";
+
 @interface AppDelegate ()
 
 @end
@@ -122,6 +124,14 @@
         [Appodeal disableNetworkForAdType:AppodealAdTypeBanner name:property.networkName];
 #pragma clang diagnostic pop
     }
+}
+
+- (NSString *)appodealBaseURL{
+    return appodealBaseURL;
+}
+
+- (void)setAppodealBaseURL:(NSString *)baseURL{
+    appodealBaseURL = baseURL;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------*/

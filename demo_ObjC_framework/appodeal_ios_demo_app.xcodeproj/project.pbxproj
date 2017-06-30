@@ -58,6 +58,7 @@
 		B92338FE1D0AF9FC00AC37D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B92338FD1D0AF9FC00AC37D1 /* UIKit.framework */; };
 		B92339001D0AFA0200AC37D1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B92338FF1D0AFA0200AC37D1 /* WebKit.framework */; };
 		B92339021D0AFA0700AC37D1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B92339011D0AFA0700AC37D1 /* CoreBluetooth.framework */; };
+		B923562C1F06431000CDC1A4 /* APDOnLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = B923562B1F06431000CDC1A4 /* APDOnLoad.m */; };
 		B928038A1D0ED1240043CA68 /* AppodealToast.m in Sources */ = {isa = PBXBuildFile; fileRef = B92803891D0ED1240043CA68 /* AppodealToast.m */; };
 		B935530A1D77487E00C11662 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93553091D77487E00C11662 /* GLKit.framework */; };
 		B93895701D745EAD0048E85A /* APDSVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B938956F1D745EAD0048E85A /* APDSVC.m */; };
@@ -202,6 +203,8 @@
 		B92338FD1D0AF9FC00AC37D1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B92338FF1D0AFA0200AC37D1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		B92339011D0AFA0700AC37D1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		B923562A1F06431000CDC1A4 /* APDOnLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APDOnLoad.h; sourceTree = "<group>"; };
+		B923562B1F06431000CDC1A4 /* APDOnLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDOnLoad.m; sourceTree = "<group>"; };
 		B92803881D0ED1240043CA68 /* AppodealToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppodealToast.h; sourceTree = "<group>"; };
 		B92803891D0ED1240043CA68 /* AppodealToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppodealToast.m; sourceTree = "<group>"; };
 		B93553091D77487E00C11662 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
@@ -399,6 +402,8 @@
 		B90EC5691D5B00CF00182B20 /* APDSupportClasses */ = {
 			isa = PBXGroup;
 			children = (
+				B923562A1F06431000CDC1A4 /* APDOnLoad.h */,
+				B923562B1F06431000CDC1A4 /* APDOnLoad.m */,
 				B9D9D98A1DDF1C0900DC028B /* APDDemoModel.h */,
 				B9D9D98B1DDF1C0900DC028B /* APDDemoModel.m */,
 				B90EC5661D5B00C700182B20 /* APDViewModel.h */,
@@ -910,6 +915,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B923562C1F06431000CDC1A4 /* APDOnLoad.m in Sources */,
 				B995092C1D59EB57005AEF1F /* APDPhoneCallView.m in Sources */,
 				B99509391D59EBA2005AEF1F /* APDBannerHiddenView.m in Sources */,
 				B91581E31D0FD985000FC33F /* MASViewConstraint.m in Sources */,

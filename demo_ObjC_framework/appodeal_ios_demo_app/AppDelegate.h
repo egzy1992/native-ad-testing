@@ -15,6 +15,8 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) NSArray * disabledAdNetwork;
 
+@property (nonatomic, strong) NSString * appodealBaseURL;
+
 - (void) initializeSdkWithParams:(APDDemoModel *)params andApiVersion:(BOOL)api;
 
 @end
