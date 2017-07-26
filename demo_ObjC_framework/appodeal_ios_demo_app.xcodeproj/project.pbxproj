@@ -63,6 +63,7 @@
 		B935530A1D77487E00C11662 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B93553091D77487E00C11662 /* GLKit.framework */; };
 		B93895701D745EAD0048E85A /* APDSVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B938956F1D745EAD0048E85A /* APDSVC.m */; };
 		B97A5D681DA510E7001784A4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B97A5D671DA510E7001784A4 /* CoreText.framework */; };
+		B992E5251F28C50500D5181C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B992E5241F28C50500D5181C /* ImageIO.framework */; };
 		B99508BA1D59AFA4005AEF1F /* APDCustomContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508B91D59AFA4005AEF1F /* APDCustomContentViewController.m */; };
 		B99508C11D59B859005AEF1F /* APDCustomNativeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508C01D59B859005AEF1F /* APDCustomNativeView.m */; };
 		B99508C51D59CF6C005AEF1F /* RSSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508C41D59CF6C005AEF1F /* RSSModel.m */; };
@@ -211,6 +212,7 @@
 		B938956E1D745EAD0048E85A /* APDSVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDSVC.h; path = ViewControllers/APDSVC.h; sourceTree = "<group>"; };
 		B938956F1D745EAD0048E85A /* APDSVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDSVC.m; path = ViewControllers/APDSVC.m; sourceTree = "<group>"; };
 		B97A5D671DA510E7001784A4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		B992E5241F28C50500D5181C /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		B99508B81D59AFA4005AEF1F /* APDCustomContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDCustomContentViewController.h; path = ViewControllers/APDCustomContentViewController.h; sourceTree = "<group>"; };
 		B99508B91D59AFA4005AEF1F /* APDCustomContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDCustomContentViewController.m; path = ViewControllers/APDCustomContentViewController.m; sourceTree = "<group>"; };
 		B99508BF1D59B859005AEF1F /* APDCustomNativeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDCustomNativeView.h; path = ViewControllers/APDCustomNativeView.h; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B992E5251F28C50500D5181C /* ImageIO.framework in Frameworks */,
 				9C8192EC1E376A06002B347E /* StoreKit.framework in Frameworks */,
 				B97A5D681DA510E7001784A4 /* CoreText.framework in Frameworks */,
 				B92338EC1D0AF9B300AC37D1 /* MessageUI.framework in Frameworks */,
@@ -362,6 +365,7 @@
 		1C163E09495AE60F795672CA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B992E5241F28C50500D5181C /* ImageIO.framework */,
 				9C8192EB1E376A06002B347E /* StoreKit.framework */,
 				B97A5D671DA510E7001784A4 /* CoreText.framework */,
 				B93553091D77487E00C11662 /* GLKit.framework */,

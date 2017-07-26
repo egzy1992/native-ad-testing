@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) UIButton * bannerTop;
 @property (nonatomic, strong) UIButton * bannerBottom;
+@property (nonatomic, strong) UIButton * hideBanner;
 
 @property (nonatomic, strong) AppodealBannerView * bannerViewTop;
 @property (nonatomic, strong) AppodealBannerView * bannerViewBottom;
@@ -59,6 +60,7 @@
 }
 
 - (void) defAction{
+    [self.hideBanner addTarget:self action:@selector(hideBannerClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.bannerTop addTarget:self action:@selector(bannerTopClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.bannerBottom addTarget:self action:@selector(bannerBottomClick:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -71,17 +73,39 @@
         make.right.equalTo(self.view).with.offset(-20);
     }];
     
-    [self.bannerBottom mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bannerTop.mas_bottom).with.offset(5);
-        make.left.equalTo(self.view).with.offset(20);
-        make.right.equalTo(self.view).with.offset(-20);
-    }];
+    if (self.deprecateApi && !self.custom) {
+        [self.hideBanner mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.bannerTop.mas_bottom).with.offset(5);
+            make.left.equalTo(self.view).with.offset(20);
+            make.right.equalTo(self.view).with.offset(-20);
+        }];
+        
+        [self.bannerBottom mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.hideBanner.mas_bottom).with.offset(5);
+            make.left.equalTo(self.view).with.offset(20);
+            make.right.equalTo(self.view).with.offset(-20);
+        }];
+    } else {
+        [self.bannerBottom mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.bannerTop.mas_bottom).with.offset(5);
+            make.left.equalTo(self.view).with.offset(20);
+            make.right.equalTo(self.view).with.offset(-20);
+        }];
+    }
+    
+    
     
     
     [super updateViewConstraints];
 }
 
 #pragma mark --- Action
+
+- (IBAction)hideBannerClick:(id)sender {
+    if (self.deprecateApi && !self.custom) {
+        [Appodeal hideBanner];
+    }
+}
 
 - (IBAction)bannerTopClick:(id)sender {
     
@@ -107,7 +131,6 @@
 }
 
 - (IBAction)bannerBottomClick:(id)sender {
-    
     if (self.deprecateApi && self.custom) {
         
         [self.bannerViewBottom removeFromSuperview];
@@ -145,6 +168,16 @@
         [self.view addSubview:_bannerBottom];
     }
     return _bannerBottom;
+}
+
+- (UIButton *) hideBanner {
+    if (!_hideBanner) {
+        _hideBanner = k_apd_mainButtonWithTitle([NSLocalizedString(@"banner hidden", nil) uppercaseString]);
+        if (self.deprecateApi && !self.custom) {
+            [self.view addSubview:_hideBanner];
+        }
+    }
+    return _hideBanner;
 }
 
 #pragma mark --- AppodealBannerViewDelegate;
