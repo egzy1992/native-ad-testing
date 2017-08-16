@@ -7,10 +7,9 @@
 //
 
 #import "APDCustomContentViewController.h"
-#import "APDCustomNativeView.h"
 #import "Masonry.h"
 
-@interface APDCustomContentViewController () <APDNativeAdLoaderDelegate, APDNativeAdPresentationDelegate>
+@interface APDCustomContentViewController () <APDNativeAdLoaderDelegate>
 {
     APDNativeAdLoader * _nativeAdLoader;
     NSArray <__kindof APDNativeAd *> * _nativeArray;
@@ -20,10 +19,10 @@
 @property (nonatomic, strong) UIButton * loadNativeButton;
 @property (nonatomic, strong) UIButton * nextButton;
 @property (nonatomic, strong) UIButton * prevButton;
-
+@property (nonatomic, strong) UIView * nativeAdView;
 @property (nonatomic, strong) UILabel * countLabel;
 
-@property (nonatomic, strong) APDCustomNativeView * customNativeView;
+//@property (nonatomic, strong) APDCustomNativeView * customNativeView;
 
 @end
 
@@ -58,12 +57,11 @@
     }
     
     [self.loadNativeButton apdSpinnerShowOnRight];
-    [_nativeAdLoader loadAdWithType:self.nativeType capacity:self.capacityCount];
+    [_nativeAdLoader loadAd];
+//    [_nativeAdLoader loadAdWithType:self.nativeType capacity:self.capacityCount];
 }
 
-- (void) updateNativeViewWith:(APDNativeAd *)nativeAd onRootViewController:(UIViewController *)controller {
-    _customNativeView.hidden = NO;
-    [self.customNativeView setNativeAd:nativeAd fromViewController:controller];
+- (void)updateNativeViewWith:(APDNativeAd *)nativeAd onRootViewController:(UIViewController *)controller {
 }
 
 
@@ -71,7 +69,7 @@
 
 - (void) updateViewConstraints {
     
-    [self.customNativeView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.nativeAdView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
         make.width.equalTo(self.view).with.offset(-20);
         make.height.lessThanOrEqualTo(@(CGRectGetWidth(self.view.frame)*0.8));
@@ -79,7 +77,7 @@
     
     [self.loadNativeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.top.equalTo(self.customNativeView.mas_bottom).with.offset(10);
+        make.top.equalTo(self.nativeAdView.mas_bottom).with.offset(10);
         make.width.equalTo(@250);
     }];
     
@@ -97,7 +95,7 @@
     
     [self.countLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.bottom.equalTo(self.customNativeView.mas_top).with.offset(-10);
+        make.bottom.equalTo(self.nativeAdView.mas_top).with.offset(-10);
         make.left.and.right.equalTo(self.view);
     }];
     
@@ -105,21 +103,6 @@
 }
 
 #pragma mark --- PROPERTY
-
-- (APDCustomNativeView *) customNativeView {
-    if (!_customNativeView) {
-        _customNativeView = [[APDCustomNativeView alloc] init];
-        
-        _customNativeView.layer.borderColor = UIColor.darkGrayColor.CGColor;
-        _customNativeView.layer.borderWidth = .9;
-        _customNativeView.layer.cornerRadius = 2.;
-        
-        _customNativeView.hidden = YES; //
-        _customNativeView.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1]; 
-        [self.view addSubview:_customNativeView];
-    }
-    return _customNativeView;
-}
 
 -(UILabel * )countLabel {
     if (!_countLabel) {
@@ -194,9 +177,6 @@
         [AppodealToast showToastInView:self.view withMessage:@"nativeAdLoader didLoadNativeAd"];
     }
     _nativeArray = nativeAds;
-    [_nativeArray enumerateObjectsUsingBlock:^(__kindof APDNativeAd * _Nonnull nativeAd, NSUInteger idx, BOOL * _Nonnull stop) {
-        nativeAd.delegate = self;
-    }];
     [self.loadNativeButton apdSpinnerHide];
     
     {

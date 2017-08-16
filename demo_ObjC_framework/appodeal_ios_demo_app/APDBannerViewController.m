@@ -112,7 +112,7 @@
     if (self.deprecateApi && self.custom) {
         
         [self.bannerViewTop removeFromSuperview];
-        self.bannerViewTop = [[AppodealBannerView alloc] initWithSize:self.isTablet ? kAPDAdSize728x90 : kAPDAdSize320x50 rootViewController:self];
+        self.bannerViewTop = [[AppodealBannerView alloc] initWithSize:self.isTablet ? kAPDAdSize728x90 : kAPDAdSize320x50];
         self.bannerViewTop.delegate = self;
         [self.bannerViewTop loadAd];
         
@@ -134,7 +134,7 @@
     if (self.deprecateApi && self.custom) {
         
         [self.bannerViewBottom removeFromSuperview];
-        self.bannerViewBottom = [[AppodealBannerView alloc] initWithSize:self.isTablet ? kAPDAdSize728x90 : kAPDAdSize320x50 rootViewController:self];
+        self.bannerViewBottom = [[AppodealBannerView alloc] initWithSize:self.isTablet ? kAPDAdSize728x90 : kAPDAdSize320x50];
         self.bannerViewBottom.delegate = self;
         [self.bannerViewBottom loadAd];
         

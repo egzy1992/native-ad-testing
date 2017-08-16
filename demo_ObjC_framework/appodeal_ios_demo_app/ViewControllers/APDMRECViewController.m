@@ -103,7 +103,8 @@
     
     if (self.deprecateApi) {
         if (!_bannerMRECView) {
-            _bannerMRECView = [[AppodealMRECView alloc] initWithRootViewController:self];
+            _bannerMRECView = [[AppodealMRECView alloc] init];
+            _bannerMRECView.rootViewController = self;
             _bannerMRECView.delegate = self;
         }
         

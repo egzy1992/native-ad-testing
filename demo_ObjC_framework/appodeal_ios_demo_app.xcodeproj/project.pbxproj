@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9C8192EC1E376A06002B347E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C8192EB1E376A06002B347E /* StoreKit.framework */; };
+		9CA08BA41F4478CC004C44AE /* APDNativeAdViewTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA08BA31F4478CC004C44AE /* APDNativeAdViewTemplate.m */; };
 		B90EC5681D5B00C700182B20 /* APDViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B90EC5671D5B00C700182B20 /* APDViewModel.m */; };
 		B91581DE1D0FD985000FC33F /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = B91581C31D0FD985000FC33F /* MASCompositeConstraint.m */; };
 		B91581DF1D0FD985000FC33F /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = B91581C61D0FD985000FC33F /* MASConstraint.m */; };
@@ -65,7 +66,6 @@
 		B97A5D681DA510E7001784A4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B97A5D671DA510E7001784A4 /* CoreText.framework */; };
 		B992E5251F28C50500D5181C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B992E5241F28C50500D5181C /* ImageIO.framework */; };
 		B99508BA1D59AFA4005AEF1F /* APDCustomContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508B91D59AFA4005AEF1F /* APDCustomContentViewController.m */; };
-		B99508C11D59B859005AEF1F /* APDCustomNativeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508C01D59B859005AEF1F /* APDCustomNativeView.m */; };
 		B99508C51D59CF6C005AEF1F /* RSSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508C41D59CF6C005AEF1F /* RSSModel.m */; };
 		B99508C81D59CF7B005AEF1F /* RSSStream.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508C71D59CF7B005AEF1F /* RSSStream.m */; };
 		B99508D71D59D0CE005AEF1F /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = B99508CB1D59D0CE005AEF1F /* GTMNSString+HTML.m */; };
@@ -130,6 +130,8 @@
 
 /* Begin PBXFileReference section */
 		9C8192EB1E376A06002B347E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		9CA08BA21F4478CC004C44AE /* APDNativeAdViewTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APDNativeAdViewTemplate.h; sourceTree = "<group>"; };
+		9CA08BA31F4478CC004C44AE /* APDNativeAdViewTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDNativeAdViewTemplate.m; sourceTree = "<group>"; };
 		B90EC5661D5B00C700182B20 /* APDViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDViewModel.h; path = Root/APDViewModel.h; sourceTree = "<group>"; };
 		B90EC5671D5B00C700182B20 /* APDViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDViewModel.m; path = Root/APDViewModel.m; sourceTree = "<group>"; };
 		B91581C21D0FD985000FC33F /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
@@ -215,8 +217,6 @@
 		B992E5241F28C50500D5181C /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		B99508B81D59AFA4005AEF1F /* APDCustomContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDCustomContentViewController.h; path = ViewControllers/APDCustomContentViewController.h; sourceTree = "<group>"; };
 		B99508B91D59AFA4005AEF1F /* APDCustomContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDCustomContentViewController.m; path = ViewControllers/APDCustomContentViewController.m; sourceTree = "<group>"; };
-		B99508BF1D59B859005AEF1F /* APDCustomNativeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APDCustomNativeView.h; path = ViewControllers/APDCustomNativeView.h; sourceTree = "<group>"; };
-		B99508C01D59B859005AEF1F /* APDCustomNativeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APDCustomNativeView.m; path = ViewControllers/APDCustomNativeView.m; sourceTree = "<group>"; };
 		B99508C31D59CF6C005AEF1F /* RSSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSSModel.h; path = RSS/RSSModel.h; sourceTree = "<group>"; };
 		B99508C41D59CF6C005AEF1F /* RSSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSSModel.m; path = RSS/RSSModel.m; sourceTree = "<group>"; };
 		B99508C61D59CF7B005AEF1F /* RSSStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSSStream.h; path = RSS/RSSStream.h; sourceTree = "<group>"; };
@@ -575,10 +575,10 @@
 		B99508BB1D59AFB6005AEF1F /* APDCustomContent */ = {
 			isa = PBXGroup;
 			children = (
-				B99508BF1D59B859005AEF1F /* APDCustomNativeView.h */,
-				B99508C01D59B859005AEF1F /* APDCustomNativeView.m */,
 				B99508B81D59AFA4005AEF1F /* APDCustomContentViewController.h */,
 				B99508B91D59AFA4005AEF1F /* APDCustomContentViewController.m */,
+				9CA08BA21F4478CC004C44AE /* APDNativeAdViewTemplate.h */,
+				9CA08BA31F4478CC004C44AE /* APDNativeAdViewTemplate.m */,
 			);
 			name = APDCustomContent;
 			sourceTree = "<group>";
@@ -933,6 +933,7 @@
 				B9D9D9921DDF412C00DC028B /* APDBannerViewController.m in Sources */,
 				B9E0CAE81D17EF94009A7079 /* UIButton+Haneke.m in Sources */,
 				B99508D71D59D0CE005AEF1F /* GTMNSString+HTML.m in Sources */,
+				9CA08BA41F4478CC004C44AE /* APDNativeAdViewTemplate.m in Sources */,
 				B91581E71D0FD985000FC33F /* ViewController+MASAdditions.m in Sources */,
 				B92338BD1D0AAFB800AC37D1 /* APDInitilizeViewController.m in Sources */,
 				B9E0CAE61D17EF94009A7079 /* HNKNetworkFetcher.m in Sources */,
@@ -943,7 +944,6 @@
 				B9E0CAE91D17EF94009A7079 /* UIImageView+Haneke.m in Sources */,
 				B99509461D59EBFF005AEF1F /* APDInterstitialDoubleView.m in Sources */,
 				B99508C81D59CF7B005AEF1F /* RSSStream.m in Sources */,
-				B99508C11D59B859005AEF1F /* APDCustomNativeView.m in Sources */,
 				B99508DC1D59D0CE005AEF1F /* NSString+HTML.m in Sources */,
 				B99508F81D59EA39005AEF1F /* APDVideoView.m in Sources */,
 				B99509061D59EAA2005AEF1F /* APDTimerViewController.m in Sources */,

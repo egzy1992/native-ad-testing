@@ -61,7 +61,7 @@ NSString * appodealBaseURL = @"https://api.appodeal.com";
     [APDSdk sharedSdkWithApiKey:apiKey];
     [self disableNetworkForArray:self.disabledAdNetwork];
     
-    [[APDSdk sharedSdk] setTesingMode:params.testMode];
+    [[APDSdk sharedSdk] setTestingMode:params.testMode];
     [[APDSdk sharedSdk] setLocationTracking:params.locationTracking];
     [[APDSdk sharedSdk] initializeForAdTypes:(APDType)params.adType];
     
