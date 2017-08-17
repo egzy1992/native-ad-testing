@@ -49,7 +49,7 @@
 
 #pragma mark --- APPODEAL LOADER INITIAL
 
--(void) appodealLoaderInitial{
+-(void)appodealLoaderInitial{
     
     if (!_nativeAdLoader) {
         _nativeAdLoader = [APDNativeAdLoader new];
@@ -68,7 +68,6 @@
 #pragma mark --- CONSTRAIN
 
 - (void) updateViewConstraints {
-    
     [self.nativeAdView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
         make.width.equalTo(self.view).with.offset(-20);

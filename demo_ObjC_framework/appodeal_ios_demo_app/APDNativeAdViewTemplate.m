@@ -40,6 +40,7 @@
     
     self.descriptionLabel = [UILabel new];
     self.descriptionLabel.textColor = [UIColor grayColor];
+    self.descriptionLabel.numberOfLines = 3;
     
     self.callToActionLabel = [UILabel new];
     self.callToActionLabel.textColor = [UIColor redColor];
@@ -65,9 +66,11 @@
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.and.top.equalTo(self);
+        make.height.mas_equalTo(25);
     }];
     [self.descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.bottom.equalTo(self);
+        make.height.mas_equalTo(50);
     }];
     [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(55, 55));

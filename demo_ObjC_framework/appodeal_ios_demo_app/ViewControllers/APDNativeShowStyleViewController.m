@@ -84,6 +84,7 @@
     [self.currentAdView removeFromSuperview];
     self.currentAdView = view;
     [self.view addSubview:self.currentAdView];
+    [self layoutAdView];
 }
 
 #pragma mark - Layout
@@ -108,7 +109,7 @@
     [self.currentAdView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(self.view).offset(-10);
         make.center.equalTo(self.view);
-        make.height.equalTo(@200);
+        make.height.equalTo(@350);
     }];
 }
 
