@@ -15,6 +15,8 @@
 
 @property (nonatomic, strong) UIButton * legacyBtn;
 @property (nonatomic, strong) UIButton * favoriteBtn;
+
+@property (nonatomic, strong) UISwitch * childSwitch;
 @property (nonatomic, strong) UITextField * appodealBaseURLLabel;
 
 @end
@@ -52,6 +54,12 @@
         make.top.equalTo(self.view).with.offset(64);
         make.left.equalTo(self.view).with.offset(10);
         make.right.equalTo(self.view).with.offset(-10);
+    }];
+    
+    [self.childSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.appodealBaseURLLabel);
+        make.top.equalTo(self.appodealBaseURLLabel.mas_bottom).with.offset(20);
+        make.width.equalTo(@50);
     }];
     
     [super updateViewConstraints];
@@ -92,14 +100,28 @@
     return _appodealBaseURLLabel;
 }
 
+- (UISwitch *)childSwitch{
+    if (!_childSwitch) {
+        _childSwitch = [[UISwitch alloc] init];
+        [_childSwitch addTarget:self action:@selector(childAction:) forControlEvents:UIControlEventValueChanged];
+        _childSwitch.on = NO;
+        
+        [self.view addSubview:_childSwitch];
+    }
+    return _childSwitch;
+}
 
 #pragma mark --- DEF ACTION
 
-- (void) defAction{
+- (void)defAction{
     UITapGestureRecognizer * hideKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
     [self.view addGestureRecognizer:hideKeyboardTap];
     [self.legacyBtn addTarget:self action:@selector(legacyClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.favoriteBtn addTarget:self action:@selector(favoriteClick:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)childAction:(id)object{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] setAppodealChildApp:self.childSwitch.isOn];
 }
 
 #pragma mark ---- CLICK SEGUE 

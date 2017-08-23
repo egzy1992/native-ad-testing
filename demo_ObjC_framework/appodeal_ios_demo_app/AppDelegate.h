@@ -17,6 +17,8 @@
 
 @property (nonatomic, strong) NSString * appodealBaseURL;
 
+@property (nonatomic, assign) BOOL appodealChildApp;
+
 - (void) initializeSdkWithParams:(APDDemoModel *)params andApiVersion:(BOOL)api;
 
 @end
