@@ -79,6 +79,7 @@ NSString * appodealBaseURL = @"https://api.appodeal.com";
     
     [self disableNetworkForArray:self.disabledAdNetwork];
     
+    [Appodeal setLogLevel:APDLogLevelInfo];
     [Appodeal setChildDirectedTreatment:self.appodealChildApp];
     [Appodeal setTestingEnabled:params.testMode];
     [Appodeal setLocationTracking:params.locationTracking];
