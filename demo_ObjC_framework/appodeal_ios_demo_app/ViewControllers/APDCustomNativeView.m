@@ -18,6 +18,7 @@
 @property (nonatomic, strong) APDMediaView* mediaView;
 @property (nonatomic, strong) UILabel* callToActionLabel;
 @property (nonatomic, strong) UILabel* adBadgeLabel;
+@property (nonatomic, strong) UIView* adChoicesView;
 
 @property (nonatomic, strong) APDNativeAd* nativeAd;
 
@@ -47,6 +48,11 @@
     self.titleLabel.text = self.nativeAd.title;
     self.descriptionLabel.text = self.nativeAd.descriptionText;
     self.callToActionLabel.text = self.nativeAd.callToActionText;
+    
+    self.adChoicesView = nativeAd.adChoicesView;
+    [self addSubview:self.adChoicesView];
+
+    [self updateConstraints];
 }
 
 #pragma mark --- CONSTRAIN
@@ -63,6 +69,11 @@
         make.right.equalTo(self).with.offset(-5);
         make.width.lessThanOrEqualTo(@24);
     }];
+    [self.adChoicesView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).with.offset(5);
+        make.right.equalTo(self.adBadgeLabel).with.offset(-5);
+        make.width.and.height.equalTo(@24);
+    }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.iconView);
         make.left.equalTo(self.iconView.mas_right).with.offset(5);
@@ -72,6 +83,7 @@
     [self.mediaView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(self);
         make.top.equalTo(self.iconView.mas_bottom).with.offset(5);
+        make.height.greaterThanOrEqualTo(@(self.frame.size.width * 0.75));
         make.bottom.equalTo(self.callToActionLabel.mas_top).with.offset(-5);
     }];
 

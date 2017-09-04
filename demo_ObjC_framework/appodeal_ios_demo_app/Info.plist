@@ -4,6 +4,8 @@
 <dict>
 	<key>AppodealAppKey</key>
 	<string>dee74c5129f53fc629a44a690a02296694e3eef99f2d3a5f</string>
+	<key>AppodealSSLPinningDisabled</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -29,7 +31,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>appodeal</string>
+				<string>ObCFrameworkDemo</string>
 			</array>
 		</dict>
 	</array>
@@ -57,8 +59,6 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Advertising</string>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>

@@ -37,7 +37,8 @@
 }
 
 - (void) addAppodealBanner{
-    APDBannerView * banner = [[APDBannerView alloc] initWithSize:CGSizeMake(CGRectGetWidth(_tripleBannerView.frame), 50)];
+    BOOL isTablet = [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone ? NO : YES;
+    APDBannerView * banner = [[APDBannerView alloc] initWithSize:CGSizeMake(CGRectGetWidth(_tripleBannerView.frame), isTablet ? 90 : 50)];
     banner.delegate = self;
     banner.rootViewController = self;
     
@@ -48,8 +49,7 @@
 - (void)bannerViewDidLoadAd:(APDBannerView *)bannerView{
     _bannerCount += 1;
     [_tripleBannerView addSubview:bannerView];
-//    bannerView.layer.position = CGPointMake(_tripleBannerView.center.x, _tripleBannerView.center.y + _bannerCount * 75);
-    bannerView.frame = CGRectOffset(bannerView.frame, 0, _tripleBannerView.center.y + _bannerCount * 75);
+    bannerView.frame = CGRectOffset(bannerView.frame, 0, _tripleBannerView.center.y + _bannerCount * (IS_IPAD ? 120 : 75));
     [_tripleBannerView setCount:_bannerCount];
     if (_bannerCount < 3) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

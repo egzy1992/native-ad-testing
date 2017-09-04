@@ -10,9 +10,9 @@
 #import "APDVideoHiddenView.h"
 #import <Appodeal/Appodeal.h>
 
-static AppodealShowStyle style = AppodealShowStyleSkippableVideo;
+static AppodealShowStyle style = AppodealShowStyleRewardedVideo;
 
-@interface APDVideoHiddenViewController ()<AppodealSkippableVideoDelegate>
+@interface APDVideoHiddenViewController ()<AppodealRewardedVideoDelegate>
 {
     APDVideoHiddenView * _videoHiddenView;
 }
@@ -36,8 +36,8 @@ static AppodealShowStyle style = AppodealShowStyleSkippableVideo;
 }
 
 - (void) addVideo{
-    [Appodeal setSkippableVideoDelegate:self];
-    [Appodeal cacheAd:AppodealAdTypeSkippableVideo];
+    [Appodeal setRewardedVideoDelegate:self];
+    [Appodeal cacheAd:AppodealAdTypeRewardedVideo];
     [_videoHiddenView setTextDescription:NSLocalizedString(@"video start load", nil)];
 }
 
@@ -46,28 +46,22 @@ static AppodealShowStyle style = AppodealShowStyleSkippableVideo;
     [_videoHiddenView showTopLvlWindow];
 }
 
-#pragma mark --- VIDEO_DELEGATE
+#pragma mark --- REWARDED_VIDEO
 
-- (void)skippableVideoDidLoadAd {
+- (void)rewardedVideoDidLoadAd{
     _videoHiddenView.showVideo.enabled = YES;
     [_videoHiddenView setTextDescription:NSLocalizedString(@"video did load", nil)];
 }
-- (void)skippableVideoDidFailToLoadAd {
-    [Appodeal cacheAd:AppodealAdTypeSkippableVideo];
+- (void)rewardedVideoDidFailToLoadAd{
+    [Appodeal cacheAd:AppodealAdTypeRewardedVideo];
     [_videoHiddenView setTextDescription:NSLocalizedString(@"video did fail to load", nil)];
 }
-- (void)skippableVideoDidPresent {
+- (void)rewardedVideoDidPresent{
     _videoHiddenView.showVideo.enabled = NO;
     [_videoHiddenView setTextDescription:NSLocalizedString(@"video did present", nil)];
 }
-- (void)skippableVideoWillDismiss{
-    
-}
-- (void)skippableVideoDidFinish {
+- (void)rewardedVideoDidFinish:(NSUInteger)rewardAmount name:(NSString *)rewardName{
     [_videoHiddenView hideTopLvlWindow];
-}
-- (void)skippableVideoDidClick {
-    
 }
 
 @end

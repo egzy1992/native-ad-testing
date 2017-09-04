@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		631DFEDF768D6F02F8E48B24 /* libPods-appodeal_ios_demo_swift_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E94CDF5BF725B9C9707680DF /* libPods-appodeal_ios_demo_swift_app.a */; };
 		B90326491D819631004004EA /* APDRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90326481D819631004004EA /* APDRootViewController.swift */; };
 		B903264E1D819756004004EA /* APDStartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B903264D1D819756004004EA /* APDStartScreen.swift */; };
 		B9061C791D82C72C005B7B21 /* APDAppodealHUB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9061C781D82C72C005B7B21 /* APDAppodealHUB.swift */; };
@@ -53,11 +52,13 @@
 		B9563E161D81B15D00052053 /* APDAppodealConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9563E151D81B15D00052053 /* APDAppodealConfiguration.swift */; };
 		B9C2708B1D818AA400C7FF15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C2708A1D818AA400C7FF15 /* AppDelegate.swift */; };
 		B9C270921D818AA400C7FF15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9C270911D818AA400C7FF15 /* Assets.xcassets */; };
+		B9FD80761DE41C9800545C05 /* APDDisableNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD80751DE41C9800545C05 /* APDDisableNetwork.swift */; };
+		C452B4E9EAF1C0585910E5E5 /* libPods-appodeal_ios_demo_swift_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DABEA0FF8BD1E92C5D727806 /* libPods-appodeal_ios_demo_swift_app.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		32E98FD8F35FF5490CBE6077 /* Pods-appodeal_ios_demo_swift_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appodeal_ios_demo_swift_app.release.xcconfig"; path = "Pods/Target Support Files/Pods-appodeal_ios_demo_swift_app/Pods-appodeal_ios_demo_swift_app.release.xcconfig"; sourceTree = "<group>"; };
-		6245DBEC2B0F5191547B2E66 /* Pods-appodeal_ios_demo_swift_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appodeal_ios_demo_swift_app.debug.xcconfig"; path = "Pods/Target Support Files/Pods-appodeal_ios_demo_swift_app/Pods-appodeal_ios_demo_swift_app.debug.xcconfig"; sourceTree = "<group>"; };
+		928D4E4CE1FBD5BA85F815C5 /* Pods-appodeal_ios_demo_swift_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appodeal_ios_demo_swift_app.release.xcconfig"; path = "Pods/Target Support Files/Pods-appodeal_ios_demo_swift_app/Pods-appodeal_ios_demo_swift_app.release.xcconfig"; sourceTree = "<group>"; };
+		9CFE89332179B9EEB7108099 /* Pods-appodeal_ios_demo_swift_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appodeal_ios_demo_swift_app.debug.xcconfig"; path = "Pods/Target Support Files/Pods-appodeal_ios_demo_swift_app/Pods-appodeal_ios_demo_swift_app.debug.xcconfig"; sourceTree = "<group>"; };
 		B90326481D819631004004EA /* APDRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDRootViewController.swift; sourceTree = "<group>"; };
 		B903264D1D819756004004EA /* APDStartScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDStartScreen.swift; sourceTree = "<group>"; };
 		B9061C781D82C72C005B7B21 /* APDAppodealHUB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDAppodealHUB.swift; sourceTree = "<group>"; };
@@ -105,7 +106,8 @@
 		B9C2708A1D818AA400C7FF15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9C270911D818AA400C7FF15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9C270961D818AA400C7FF15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E94CDF5BF725B9C9707680DF /* libPods-appodeal_ios_demo_swift_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-appodeal_ios_demo_swift_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9FD80751DE41C9800545C05 /* APDDisableNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDDisableNetwork.swift; sourceTree = "<group>"; };
+		DABEA0FF8BD1E92C5D727806 /* libPods-appodeal_ios_demo_swift_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-appodeal_ios_demo_swift_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,22 +147,13 @@
 				B9563DC11D81A28900052053 /* CoreMotion.framework in Frameworks */,
 				B9563DC21D81A28900052053 /* CoreTelephony.framework in Frameworks */,
 				B9563DB21D81A26100052053 /* GLKit.framework in Frameworks */,
-				631DFEDF768D6F02F8E48B24 /* libPods-appodeal_ios_demo_swift_app.a in Frameworks */,
+				C452B4E9EAF1C0585910E5E5 /* libPods-appodeal_ios_demo_swift_app.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		55B25B53F7F5900F9A028495 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6245DBEC2B0F5191547B2E66 /* Pods-appodeal_ios_demo_swift_app.debug.xcconfig */,
-				32E98FD8F35FF5490CBE6077 /* Pods-appodeal_ios_demo_swift_app.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		B903253F1D818E3B004004EA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				B903264D1D819756004004EA /* APDStartScreen.swift */,
+				B9FD80751DE41C9800545C05 /* APDDisableNetwork.swift */,
 				B9563E151D81B15D00052053 /* APDAppodealConfiguration.swift */,
 				B9061C781D82C72C005B7B21 /* APDAppodealHUB.swift */,
 				B91418B61D82DF59004C6280 /* APDAppodealBanner.swift */,
@@ -232,7 +226,7 @@
 				B9563DB91D81A28900052053 /* CoreMotion.framework */,
 				B9563DBA1D81A28900052053 /* CoreTelephony.framework */,
 				B9563DB11D81A26100052053 /* GLKit.framework */,
-				E94CDF5BF725B9C9707680DF /* libPods-appodeal_ios_demo_swift_app.a */,
+				DABEA0FF8BD1E92C5D727806 /* libPods-appodeal_ios_demo_swift_app.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -250,7 +244,7 @@
 				B9C270891D818AA400C7FF15 /* appodeal_ios_demo_swift_app */,
 				B9C270881D818AA400C7FF15 /* Products */,
 				B9563DB01D81A26100052053 /* Frameworks */,
-				55B25B53F7F5900F9A028495 /* Pods */,
+				D09B977679933A4D941AEB16 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -272,6 +266,15 @@
 			path = appodeal_ios_demo_swift_app;
 			sourceTree = "<group>";
 		};
+		D09B977679933A4D941AEB16 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9CFE89332179B9EEB7108099 /* Pods-appodeal_ios_demo_swift_app.debug.xcconfig */,
+				928D4E4CE1FBD5BA85F815C5 /* Pods-appodeal_ios_demo_swift_app.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -279,12 +282,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B9C270991D818AA400C7FF15 /* Build configuration list for PBXNativeTarget "appodeal_ios_demo_swift_app" */;
 			buildPhases = (
-				D2B66A0419E8AE97A4350207 /* 📦 Check Pods Manifest.lock */,
+				89D31E50658C3CF87E60C6AC /* 📦 Check Pods Manifest.lock */,
 				B9C270831D818AA400C7FF15 /* Sources */,
 				B9C270841D818AA400C7FF15 /* Frameworks */,
 				B9C270851D818AA400C7FF15 /* Resources */,
-				66143800F1DEB939F6405610 /* 📦 Embed Pods Frameworks */,
-				0A18BBEB32769E996EDCB3FD /* 📦 Copy Pods Resources */,
+				7673EF80FA27F797DF016034 /* 📦 Embed Pods Frameworks */,
+				E4393BBB149C759C16361C32 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -343,22 +346,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0A18BBEB32769E996EDCB3FD /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-appodeal_ios_demo_swift_app/Pods-appodeal_ios_demo_swift_app-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		66143800F1DEB939F6405610 /* 📦 Embed Pods Frameworks */ = {
+		7673EF80FA27F797DF016034 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -373,7 +361,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-appodeal_ios_demo_swift_app/Pods-appodeal_ios_demo_swift_app-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D2B66A0419E8AE97A4350207 /* 📦 Check Pods Manifest.lock */ = {
+		89D31E50658C3CF87E60C6AC /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -386,6 +374,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E4393BBB149C759C16361C32 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-appodeal_ios_demo_swift_app/Pods-appodeal_ios_demo_swift_app-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -404,6 +407,7 @@
 				B9C2708B1D818AA400C7FF15 /* AppDelegate.swift in Sources */,
 				B9061C791D82C72C005B7B21 /* APDAppodealHUB.swift in Sources */,
 				B9563E161D81B15D00052053 /* APDAppodealConfiguration.swift in Sources */,
+				B9FD80761DE41C9800545C05 /* APDDisableNetwork.swift in Sources */,
 				B91418DD1D82FA7A004C6280 /* APDNativeOnView.swift in Sources */,
 				B90326491D819631004004EA /* APDRootViewController.swift in Sources */,
 			);
@@ -529,7 +533,7 @@
 		};
 		B9C2709A1D818AA400C7FF15 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6245DBEC2B0F5191547B2E66 /* Pods-appodeal_ios_demo_swift_app.debug.xcconfig */;
+			baseConfigurationReference = 9CFE89332179B9EEB7108099 /* Pods-appodeal_ios_demo_swift_app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -539,7 +543,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = appodeal_ios_demo_swift_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -552,7 +555,7 @@
 		};
 		B9C2709B1D818AA400C7FF15 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32E98FD8F35FF5490CBE6077 /* Pods-appodeal_ios_demo_swift_app.release.xcconfig */;
+			baseConfigurationReference = 928D4E4CE1FBD5BA85F815C5 /* Pods-appodeal_ios_demo_swift_app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -562,7 +565,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = appodeal_ios_demo_swift_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";

@@ -7,7 +7,10 @@
 //
 
 #import "APDRootViewController.h"
+#import "APDDemoModel.h"
 
 @interface APDInitilizeViewController : APDRootViewController
+
+@property (nonatomic, assign) BOOL newApi;
 
 @end
