@@ -12,6 +12,7 @@
 #import "APDHUBViewController.h"
 
 NSString * appodealBaseURL = @"https://api.appodeal.com";
+//simply comment
 
 @interface AppDelegate ()
 
