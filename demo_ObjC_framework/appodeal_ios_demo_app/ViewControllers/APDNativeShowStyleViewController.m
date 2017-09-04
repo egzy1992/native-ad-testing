@@ -7,168 +7,244 @@
 //
 
 #import "APDNativeShowStyleViewController.h"
-#import "APDNativeShowStyleView.h"
-
-#import "APDContentFeedViewController.h"
-#import "APDContentStreamViewController.h"
-#import "APDCollectionContentViewController.h"
-#import "APDBannerContentViewController.h"
-
-//#import "APDHelperTableViewController.h"
-//#import "APDHelperCollectionViewController.h"
-
 #import "APDCustomContentViewController.h"
+#import "Masonry.h"
+#import "UIView+APD_Spinner.h"
+#import <Appodeal/Appodeal.h>
+#import "APDNativeAdViewTemplate.h"
 
-#import "RSSStream.h"
 
-@interface APDNativeShowStyleViewController ()<RSSStreamDelegate>
-{
-    APDNativeShowStyleView * _nativeShowStyle;
-    RSSStream * _rssStream;
-    NSArray * _contentArray;
-}
+@interface APDNativeShowStyleViewController () <APDNativeAdLoaderDelegate>
+
+@property (nonatomic, strong) APDNativeAdLoader * adLoader;
+@property (nonatomic, strong) UILabel * informLabel;
+@property (nonatomic, strong) UIButton * loadButton;
+@property (nonatomic, strong) UIView * currentAdView;
+
+//@property (nonatomic, strong) UISegmentedControl * segmentControl;
+//@property (nonatomic, strong) UIButton * customContent;
+//@property (nonatomic, strong) UISlider * capacitySlider;
+
 @end
 
 @implementation APDNativeShowStyleViewController
 
-- (void) viewDidLoad {
+- (void)viewDidLoad {
+    self.view.backgroundColor = UIColor.whiteColor;
     
-    {
-        self.navigationItem.title = [NSLocalizedString(@"native show context", nil) uppercaseString];
-    }
+    [self createInformLabel];
+    [self layoutInformLabel];
     
-    [super viewDidLoad];
+    [self createLoadButton];
+    [self layoutLoadButton];
     
-    {
-        _nativeShowStyle = [[APDNativeShowStyleView alloc] initWithFrame:self.view.frame];
-        self.view = _nativeShowStyle;
-    }
-    
-    {
-        // without helper unused version
-        [_nativeShowStyle.contentFeed addTarget:self action:@selector(contentFeedClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_nativeShowStyle.contentStream addTarget:self action:@selector(contentStreamClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_nativeShowStyle.collectionContent addTarget:self action:@selector(collectionContentClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_nativeShowStyle.bannerConent addTarget:self action:@selector(bannerContentClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        // without helper
-        
-        [_nativeShowStyle.customContent addTarget:self action:@selector(customContentClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        // with helper
-//        [_nativeShowStyle.collectionHelperContent addTarget:self action:@selector(collectionHelperClick:) forControlEvents:UIControlEventTouchUpInside];
-//        [_nativeShowStyle.tableHelperContent addTarget:self action:@selector(tableHelperClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
+    [self createAdLoader];
 }
 
-#pragma mark --- ACTIONS WITHOUT HELPER UNUSED VERSION
+#pragma mark - UI
 
-- (IBAction)contentFeedClick:(id)sender{
-    APDContentFeedViewController * nextController = [APDContentFeedViewController new];
-    nextController.toastMode = self.toastMode;
-    nextController.nativeType = _nativeShowStyle.segmentControl.selectedSegmentIndex;
-    [self.navigationController pushViewController:nextController animated:YES];
+- (void)createInformLabel {
+    self.informLabel = [UILabel new];
+    self.informLabel.textColor      = [UIColor lightGrayColor];
+    self.informLabel.font           = [UIFont systemFontOfSize:10.0];
+    self.informLabel.text           = @"Native Ad API v2 beta";
+    self.informLabel.textAlignment  = NSTextAlignmentCenter;
 }
 
-- (IBAction)contentStreamClick:(id)sender{
-    APDContentStreamViewController * nextController = [APDContentStreamViewController new];
-    nextController.toastMode = self.toastMode;
-    nextController.nativeType = _nativeShowStyle.segmentControl.selectedSegmentIndex;
-    [self.navigationController pushViewController:nextController animated:YES];
+- (void)createLoadButton {
+    self.loadButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.loadButton addTarget:self
+                        action:@selector(loadButtonPressed)
+              forControlEvents:UIControlEventTouchUpInside];
+    self.loadButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
+    [self.loadButton setTitleColor:[UIColor grayColor]
+                          forState:UIControlStateNormal];
+    self.loadButton.layer.borderWidth = 0.5f;
+    self.loadButton.layer.borderColor = [UIColor grayColor].CGColor;
+    self.loadButton.layer.cornerRadius = 2.0f;
+    [self.loadButton setTitle:@"Load Ad"
+                     forState:UIControlStateNormal];
 }
 
-- (IBAction)collectionContentClick:(id)sender{
-    APDCollectionContentViewController * nextController = [APDCollectionContentViewController new];
-    nextController.toastMode = self.toastMode;
-    nextController.nativeType = _nativeShowStyle.segmentControl.selectedSegmentIndex;
-    [self.navigationController pushViewController:nextController animated:YES];
+- (void)showActivity {
+    self.loadButton.userInteractionEnabled = NO;
+    [self.loadButton apdSpinnerShow];
+    [self.loadButton setTitle:@"Loading..."
+                     forState:UIControlStateNormal];
 }
 
-- (IBAction)bannerContentClick:(id)sender{
-    APDBannerContentViewController * nextController = [APDBannerContentViewController new];
-    nextController.toastMode = self.toastMode;
-    nextController.nativeType = _nativeShowStyle.segmentControl.selectedSegmentIndex;
-    [self.navigationController pushViewController:nextController animated:YES];
+- (void)hideActivity {
+    self.loadButton.userInteractionEnabled = YES;
+    [self.loadButton apdSpinnerHide];
+    [self.loadButton setTitle:@"Reload Ad"
+                     forState:UIControlStateNormal];
 }
 
-#pragma mark --- ACTIONS WITHOUT HELPER
-
-- (IBAction)customContentClick:(id)sender{
-    APDCustomContentViewController * nextController = [APDCustomContentViewController new];
-    nextController.capacityCount = roundl(_nativeShowStyle.capacitySlider.value);
-    nextController.toastMode = self.toastMode;
-    nextController.nativeType = _nativeShowStyle.segmentControl.selectedSegmentIndex;
-    [self.navigationController pushViewController:nextController animated:YES];
+- (void)replaceCurrentAdViewWithView:(UIView *)view {
+    [self.currentAdView removeFromSuperview];
+    self.currentAdView = view;
+    [self.view addSubview:self.currentAdView];
+    [self layoutAdView];
 }
 
-//#pragma mark --- ACTIONS WITH HELPER
-//
-//- (IBAction)collectionHelperClick:(id)sender {
-//    [_nativeShowStyle.collectionHelperContent apdSpinnerShowOnRight];
-//    
-//    APDHelperCollectionViewController * nextController = [APDHelperCollectionViewController new];
-//    nextController.toastMode = self.toastMode;
-//    
-//    switch (_nativeShowStyle.apdTypeSegmentedControl.selectedSegmentIndex) {
-//        case 0: // NATIVE
-//        {
-//            nextController.adType = APDAdTypeNativeAd;
-//        } break;
-//        case 1: // BANNER
-//        {
-//            nextController.adType = APDAdTypeBanner;
-//        } break;
-//        case 2: // MREC
-//        {
-//            nextController.adType = APDAdTypeMREC;
-//        } break;
+#pragma mark - Layout
+
+- (void)layoutInformLabel {
+    [self.view addSubview:self.informLabel];
+    [self.informLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.and.bottom.equalTo(self.view);
+    }];
+}
+
+- (void)layoutLoadButton {
+    [self.view addSubview:self.loadButton];
+    [self.loadButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(100, 30));
+        make.top.equalTo(self.view).with.offset(70);
+        make.centerX.equalTo(self.view);
+    }];
+}
+
+- (void)layoutAdView {
+    [self.currentAdView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.view).offset(-10);
+        make.center.equalTo(self.view);
+        make.height.equalTo(@350);
+    }];
+}
+
+#pragma mark - User Interaction
+
+- (void)loadButtonPressed {
+    [self.adLoader loadAd];
+    [self showActivity];
+}
+
+#pragma mark - Ads 
+
+- (void)createAdLoader {
+    self.adLoader = [APDNativeAdLoader new];
+    self.adLoader.delegate = self;
+    APDNativeAdSettings * settings = [APDNativeAdSettings defaultSettings];
+    settings.adViewClass = [APDNativeAdViewTemplate class];
+    self.adLoader.settings = settings;
+}
+
+#pragma mark - APDNativeAdLoaderDelegate
+
+- (void)nativeAdLoader:(APDNativeAdLoader *)loader
+      didLoadNativeAds:(NSArray <__kindof APDNativeAd *> *)nativeAds {
+    [self hideActivity];
+    [self replaceCurrentAdViewWithView:[nativeAds.firstObject getAdViewForController:self]];
+}
+
+- (void)nativeAdLoader:(APDNativeAdLoader *)loader
+didFailToLoadWithError:(NSError *)error {
+    [self hideActivity];
+}
+
+#pragma mark - Legacy
+
+//- (void) viewDidLoad {
+//    {
+//        self.navigationItem.title = [NSLocalizedString(@"native show context", nil) uppercaseString];
 //    }
 //    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        _rssStream = [[RSSStream alloc] initWithURL:@"http://lenta.ru/rss/news" andController:self];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.view apdSpinnerHide];
-//            nextController.contentArray = _contentArray;
-//            [self.navigationController pushViewController:nextController animated:YES];
-//        });
-//    });
-//}
-//
-//- (IBAction)tableHelperClick:(id)sender {
-//    [_nativeShowStyle.tableHelperContent apdSpinnerShowOnRight];
+//    [super viewDidLoad];
 //    
-//    APDHelperTableViewController * nextController = [APDHelperTableViewController new];
-//    nextController.toastMode = self.toastMode;
-//    
-//    switch (_nativeShowStyle.apdTypeSegmentedControl.selectedSegmentIndex) {
-//        case 0: // NATIVE
-//        {
-//            nextController.adType = APDAdTypeNativeAd;
-//        } break;
-//        case 1: // BANNER
-//        {
-//            nextController.adType = APDAdTypeBanner;
-//        } break;
-//        case 2: // MREC
-//        {
-//            nextController.adType = APDAdTypeMREC;
-//        } break;
+//    {
+//        self.view.backgroundColor = UIColor.whiteColor;
+//        [self updateViewConstraints];
 //    }
 //    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        _rssStream = [[RSSStream alloc] initWithURL:@"http://lenta.ru/rss/news" andController:self];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.view apdSpinnerHide];
-//            nextController.contentArray = _contentArray;
-//            [self.navigationController pushViewController:nextController animated:YES];
-//        });
-//    });
+//    [self.customContent addTarget:self action:@selector(customContentClick:) forControlEvents:UIControlEventTouchUpInside];
 //}
 
-#pragma mark --- RSSDELEGATE
-
--(void) rssStreamWithArray:(NSArray *) array{
-    _contentArray = array;
-}
+//#pragma mark --- ACTIONS
+//
+//- (IBAction)capacitySliderValueChanged:(UISlider *)sender{
+//    int discreteValue = roundl([sender value]);
+//    [sender setValue:(float)discreteValue];
+//    NSAttributedString * attrString = k_apd_mainAttributedFromMainButton([NSString stringWithFormat:@"%@ (%li)",[NSLocalizedString(@"custom", nil) uppercaseString],@(sender.value).integerValue]);
+//    [self.customContent setAttributedTitle:attrString forState:UIControlStateNormal];
+//}
+//
+//#pragma mark --- CONSTRAIN
+//
+//- (void) updateViewConstraints {
+//    
+//    [self.customContent mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.center.equalTo(self.view);
+//        make.width.equalTo(@250);
+//        make.centerY.equalTo(self.view);
+//    }];
+//    
+//    [self.capacitySlider mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.customContent.mas_bottom).with.offset(10);
+//        make.width.equalTo(@200);
+//        make.centerX.equalTo(self.view);
+//    }];
+//    
+//    [self.segmentControl mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(self.view);
+//        make.top.equalTo(self.view).with.offset(64);
+//        make.left.equalTo(self.view).with.offset(50);
+//        make.right.equalTo(self.view).with.offset(-50);
+//    }];
+//    
+//    [super updateViewConstraints];
+//}
+//
+//#pragma mark --- PROPERTY
+//
+//- (UIButton *) customContent {
+//    if (!_customContent) {
+//        _customContent = k_apd_mainButtonWithTitle([NSString stringWithFormat:@"%@ (%li)",[NSLocalizedString(@"custom", nil) uppercaseString],@(self.capacitySlider.value).integerValue]);
+//        [self.view addSubview:_customContent];
+//    }
+//    return _customContent;
+//}
+//
+//- (UISlider *) capacitySlider {
+//    if (!_capacitySlider) {
+//        _capacitySlider = [[UISlider alloc] init];
+//        _capacitySlider.minimumValue = 1;
+//        _capacitySlider.maximumValue = 8;
+//        _capacitySlider.tintColor = UIColor.redColor;
+//        [_capacitySlider addTarget:self action:@selector(capacitySliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+//        
+//        _capacitySlider.value = 5;
+//        
+//        [self.view addSubview:_capacitySlider];
+//    }
+//    return _capacitySlider;
+//}
+//
+//- (UISegmentedControl *) segmentControl {
+//    if (!_segmentControl) {
+//        _segmentControl = [[UISegmentedControl alloc] initWithItems:@[NSLocalizedString(@"auto", nil), NSLocalizedString(@"video", nil), NSLocalizedString(@"no video", nil)]];
+//        _segmentControl.selectedSegmentIndex = 0;
+//        _segmentControl.tintColor = UIColor.redColor;
+//        
+//        _segmentControl.clipsToBounds = YES;
+//        _segmentControl.layer.cornerRadius = 4.0f;
+//        _segmentControl.layer.borderWidth = 1.0f;
+//        _segmentControl.layer.borderColor = UIColor.redColor.CGColor;
+//        
+//        [self.view addSubview:_segmentControl];
+//    }
+//    return _segmentControl;
+//}
+//
+//#pragma mark -- Segue
+//
+//- (IBAction)customContentClick:(id)sender{
+//    APDCustomContentViewController * nextController = [APDCustomContentViewController new];
+//    nextController.capacityCount = roundl(self.capacitySlider.value);
+//    nextController.toastMode = self.toastMode;
+//    nextController.nativeType = self.segmentControl.selectedSegmentIndex;
+//    [self.navigationController pushViewController:nextController animated:YES];
+//}
+//
 
 @end

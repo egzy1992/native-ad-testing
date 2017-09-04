@@ -9,22 +9,10 @@
 import UIKit
 import Appodeal
 
-class APDAppodealConfiguration: APDRootViewController, UITableViewDelegate, UITableViewDataSource{
+class APDAppodealConfiguration: APDVisualRootViewController, UITableViewDelegate, UITableViewDataSource{
 
     var appodealConfigurationView : APDAppodealConfigurationView!
-    var _cellDictName : NSMutableDictionary = NSMutableDictionary()
-    var _cellDescriptionName : NSMutableDictionary = NSMutableDictionary()
-    var _cellHeaderName : NSMutableDictionary = NSMutableDictionary()
-    var _enableModules : NSMutableDictionary = NSMutableDictionary()
-    var _adModules : NSArray = []
-    
-    var _locationPermition : Bool! = true
-    var _autoCache : Bool! = true
-    var _userData : Bool! = false
-    var _testMode : Bool! = false
-    var _debugMode : Bool! = false
-    var _toastMode : Bool! = true
-    
+    var config : APDDemoModel! = (UIApplication.shared.delegate as! AppDelegate!).configuration
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,79 +23,9 @@ class APDAppodealConfiguration: APDRootViewController, UITableViewDelegate, UITa
         appodealConfigurationView.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier:"cellWithAccessory")
         appodealConfigurationView.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "initialize")
         
-        _cellDictName = self.cellDictName()
-        _cellDescriptionName = self.cellDescriptionName()
-        _cellHeaderName = self.cellHeaderName()
-        _enableModules = self.enabledModules()
-        
         self.view = appodealConfigurationView
     }
     
-    //MARK: --- CELL_NAME
-    
-    func cellDictName() -> NSMutableDictionary {
-        let dict : NSMutableDictionary = [
-            self.i_Ps(0, index: 0) : NSLocalizedString("banner", comment: ""),
-            self.i_Ps(0, index: 1) : NSLocalizedString("interstitial ad", comment: ""),
-            self.i_Ps(0, index: 2) : NSLocalizedString("skippable video", comment: ""),
-            self.i_Ps(0, index: 3) : NSLocalizedString("rewarded video", comment: ""),
-            self.i_Ps(0, index: 4) : NSLocalizedString("native ads", comment: ""),
-            self.i_Ps(0, index: 5) : NSLocalizedString("MREC", comment: ""),
-            self.i_Ps(1, index: 0) : NSLocalizedString("disable location permition check", comment: ""),
-            self.i_Ps(1, index: 1) : NSLocalizedString("set auto cache", comment: ""),
-            self.i_Ps(1, index: 2) : NSLocalizedString("user data", comment: ""),
-            self.i_Ps(2, index: 0) : NSLocalizedString("test mode", comment: ""),
-            self.i_Ps(2, index: 1) : NSLocalizedString("toast mode", comment: ""),
-            self.i_Ps(3, index: 0) : NSLocalizedString("Initialize", comment: "")]
-        
-        _adModules = [
-            NSNumber(value : AppodealAdType.banner.rawValue),
-            NSNumber(value : AppodealAdType.interstitial.rawValue),
-            NSNumber(value : AppodealAdType.skippableVideo.rawValue),
-            NSNumber(value : AppodealAdType.rewardedVideo.rawValue),
-            NSNumber(value : AppodealAdType.nativeAd.rawValue),
-            NSNumber(value : AppodealAdType.MREC.rawValue)]
-    
-        _cellDictName = dict
-        return _cellDictName
-    }
-    
-    func cellDescriptionName() -> NSMutableDictionary {
-        let dict : NSMutableDictionary = [
-            self.i_Ps(0, index: 0) : NSLocalizedString("/* [Appodeal disableNetworkForAdType:AppodealAdTypeBanner name:@\"networkName\"] */", comment: ""),
-            self.i_Ps(0, index: 1) : NSLocalizedString("/* [Appodeal disableNetworkForAdType:AppodealAdTypeInterstitial name:@\"networkName\"] */", comment: ""),
-            self.i_Ps(0, index: 2) : NSLocalizedString("/* [Appodeal disableNetworkForAdType:AppodealAdTypeSkippableVideo name:@\"networkName\"] */", comment: ""),
-            self.i_Ps(0, index: 3) : NSLocalizedString("/* [Appodeal disableNetworkForAdType:AppodealAdTypeRewardedVideo name:@\"networkName\"] */", comment: ""),
-            self.i_Ps(0, index: 4) : NSLocalizedString("/* [Appodeal disableNetworkForAdType:AppodealAdTypeNativeAd name:@\"networkName\"] */", comment: ""),
-            self.i_Ps(0, index: 5) : NSLocalizedString("/* [Appodeal disableNetworkForAdType:AppodealAdTypeMREC name:@\"networkName\"] */", comment: "")]
-        _cellDescriptionName = dict
-        return _cellDescriptionName
-    }
-    
-    func cellHeaderName() -> NSMutableDictionary {
-        let dict : NSMutableDictionary = [
-            0 : NSLocalizedString("ad modules", comment: ""),
-            1 : NSLocalizedString("advanced", comment: ""),
-            2 : NSLocalizedString("debug", comment: "")]
-        _cellHeaderName = dict
-        return _cellHeaderName
-    }
-    
-    func i_Ps(_ section : Int, index : Int) ->  IndexPath{
-        return IndexPath.init(row: index, section: section)
-    }
-    
-    func enabledModules() -> NSMutableDictionary {
-        let dict : NSMutableDictionary = NSMutableDictionary()
-        var index : Int = 0
-        for obj in _adModules {
-            dict[self.i_Ps(0, index: index)] = obj
-            index += 1
-        }
-        _enableModules = dict
-        return _enableModules
-    }
-
     //MARK: --- SWITCH_CONTROLL
     
     func switchWith(IndexPath indexPath : IndexPath, andCheck check : Bool) -> UISwitch {
@@ -134,26 +52,48 @@ class APDAppodealConfiguration: APDRootViewController, UITableViewDelegate, UITa
         }
         
         let indexPath : IndexPath = self.indexPathFromTag((sender as! UISwitch).tag)
+        let isOn : Bool = (sender as! UISwitch).isOn
+        
+        if (indexPath.section == 0) {
+            let adType : NSInteger = indexPath.row == 0 ? AppodealAdType.interstitial.rawValue : indexPath.row == 1 ? AppodealAdType.rewardedVideo.rawValue : indexPath.row == 2 ? AppodealAdType.banner.rawValue : indexPath.row == 3 ? AppodealAdType.MREC.rawValue : AppodealAdType.nativeAd.rawValue;
+            if (isOn) {
+                let type = self.config.adType.rawValue + adType
+                self.config.adType = AppodealAdType.init(rawValue: type);
+            } else {
+                let type = self.config.adType.rawValue - adType
+                self.config.adType = AppodealAdType.init(rawValue: type);
+            }
+        }
+        
         switch (indexPath as NSIndexPath).section {
         case 0:
-            if _adModules.count > (indexPath as NSIndexPath).row {
-                _enableModules[indexPath] = (sender as! UISwitch).isOn ? _adModules[indexPath.row] : nil
-            }
-            break
+            switch (indexPath as NSIndexPath).row {
+            case 0: config.interstitial = isOn;     break
+            case 1: config.rewardedVideo = isOn;    break
+            case 2: config.banner = isOn;           break
+            case 3: config.MREC = isOn;             break
+            case 4: config.nativeAds = isOn;        break
+            default : break
+            }; break
         case 1:
             switch (indexPath as NSIndexPath).row {
-            case 0: _locationPermition = (sender as! UISwitch).isOn; break
-            case 1: _autoCache =  (sender as! UISwitch).isOn; break
-            case 2: _userData =  (sender as! UISwitch).isOn; break
+            case 0: config.autoCache = isOn;        break
+            case 1: config.locationTracking = isOn; break
             default : break
             }; break
         case 2:
             switch (indexPath as NSIndexPath).row {
-            case 0: _testMode = (sender as! UISwitch).isOn; break
-            case 1: _toastMode =  (sender as! UISwitch).isOn; break
+            case 0: config.testMode = isOn;         break
+            case 1: config.toastMode = isOn;        break
             default : break
             }; break
-
+        case 3:
+            switch (indexPath as NSIndexPath).row {
+            case 0: config.bannerSmartSize = isOn;  break
+            case 1: config.bannerBackground = isOn; break
+            case 2: config.bannerAnimation = isOn;  break
+            default : break
+            }; break
         default : break
         }
     }
@@ -164,102 +104,74 @@ class APDAppodealConfiguration: APDRootViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? _enableModules.count : section == 1 ? 3 : section == 2 ? 2 : 1;
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if _cellHeaderName[section] == nil {
-            return nil;
+        switch (section) {
+        case 0: return 5;
+        case 1: return 2;
+        case 2: return 2;
+        case 3: return 3;
+        case 4: return 1;
+        default: break;
         }
-        return appodealConfigurationView.headerView(withTitle: (_cellHeaderName[section] as! String),
-                                                    tintColor: UIColor.black,
-                                                    fontSize: 12,
-                                                    backgroundColor: UIColor.init(white: 0.95, alpha: 1))
+        return 0;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cellName : String = String(describing: self)
-        var cell : UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: cellName)
+        let cellName : String = indexPath.section != 4 ? "cellWithAccessory" : "initialize"
+        let cell : UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath)
         
-        if ((cell == nil)) {
-            cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellName)
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
-        }
-        
-        if (_cellDictName[indexPath] != nil) {
-            cell.textLabel?.attributedText = NSAttributedString.init(string: (_cellDictName[indexPath] as! String),
-                                                                     attributes: [
-                                                                        NSForegroundColorAttributeName : UIColor.black,
-                                                                        NSFontAttributeName : UIFont.systemFont(ofSize: 16),
-                                                                        NSKernAttributeName : 1.2])
-        }
-        
-        if (_cellDescriptionName[indexPath] != nil) {
-            cell.detailTextLabel?.attributedText = NSAttributedString.init(string: (_cellDescriptionName[indexPath] as! String),
-                                                                           attributes: [
-                                                                            NSForegroundColorAttributeName : UIColor.lightGray,
-                                                                            NSFontAttributeName : UIFont.systemFont(ofSize: 12),
-                                                                            NSKernAttributeName : 1.0])
-        }
+        var flag : Bool = false
+        var text : String = ""
         
         switch indexPath.section {
         case 0:
-            cell.accessoryView = self.switchWith(IndexPath: indexPath, andCheck: _enableModules[indexPath] != nil ? true : false)
-            break;
+            switch (indexPath.row) {
+            case 0: flag = self.config.interstitial; text = "interstitial";     break
+            case 1: flag = self.config.rewardedVideo; text = "rewarded video";  break
+            case 2: flag = self.config.banner; text = "banner";                 break
+            case 3: flag = self.config.MREC; text = "MREC";                     break
+            case 4: flag = self.config.nativeAds; text = "native Ads";           break
+            default : break
+            }; break
         case 1:
-                switch (indexPath.row) {
-                case 0:
-                    cell.accessoryView = self.switchWith(IndexPath: indexPath, andCheck: _locationPermition); break
-                case 1:
-                    cell.accessoryView = self.switchWith(IndexPath: indexPath, andCheck: _autoCache); break
-                case 2:
-                    cell.accessoryView = self.switchWith(IndexPath: indexPath, andCheck: _userData); break
-                default : break
-                }; break
+            switch (indexPath.row) {
+            case 0: flag = self.config.autoCache; text = "auto cache";          break
+            case 1: flag = self.config.locationTracking; text = "location tracking";  break
+            default : break
+            }; break
         case 2:
             switch (indexPath.row) {
-            case 0:
-                cell.accessoryView = self.switchWith(IndexPath: indexPath, andCheck: _testMode); break
-            case 1:
-                cell.accessoryView = self.switchWith(IndexPath: indexPath, andCheck: _toastMode); break
+            case 0: flag = self.config.testMode; text = "test mode";     break
+            case 1: flag = self.config.toastMode; text = "toast mode";  break
             default : break
             }; break
         case 3:
-                switch (indexPath.row) {
-                case 0:
-                        if _cellDictName[indexPath] == nil {
-                            break
-                        }
-                        
-                        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-                        cell.textLabel?.attributedText = NSAttributedString.init(string: (_cellDictName[indexPath] as! String),
-                                                                                 attributes: [
-                                                                                    NSForegroundColorAttributeName : UIColor.red,
-                                                                                    NSFontAttributeName : UIFont.systemFont(ofSize: 16),
-                                                                                    NSKernAttributeName : 1.0]) ; break
-                default : break
-                }; break
-        default : break
+            switch (indexPath.row) {
+            case 0: flag = self.config.bannerSmartSize; text = "banner smart size";     break
+            case 1: flag = self.config.bannerBackground; text = "banner background";  break
+            case 2: flag = self.config.bannerAnimation; text = "banner anamation";                 break
+            default : break
+            }; break
+        case 4: text = "initialize"; break
+        default :   break
+        }
+        
+        let attributesMainText : [String : Any] = [NSForegroundColorAttributeName: UIColor.black,
+                                                   NSFontAttributeName: UIFont.init(name: "HelveticaNeue", size: 16)!,
+                                                   NSKernAttributeName: 1.2]
+        
+        cell.textLabel?.attributedText = NSAttributedString.init(string: text, attributes: attributesMainText)
+        
+        if (indexPath.section != 4) {
+            cell.accessoryView = switchWith(IndexPath: indexPath, andCheck: flag)
+        } else {
+            cell.textLabel?.textAlignment = NSTextAlignment.center;
         }
         
         return cell;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 {
-            if _enableModules.count == 0 {
-                return;
-            }
-            var bitMask : Int = 0
-            for module in _enableModules.allValues {
-                bitMask = bitMask + (module as AnyObject).intValue
-            }
-            
-            let appodealAdType : AppodealAdType = [AppodealAdType(rawValue: bitMask)]
-            
-            (UIApplication.shared.delegate as! AppDelegate).initializeSdk(withAdType: appodealAdType, testMode: _testMode, locationTracking: _locationPermition, autoCache: _autoCache, userData: _userData, toastMode: _toastMode)
-        }
     }
 }
 
@@ -271,6 +183,7 @@ class APDAppodealConfigurationView: APDRootView {
         super.init(frame: frame)
         
         tableView = UITableView.init(frame: self.frame, style: UITableViewStyle.plain)
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 44.0
