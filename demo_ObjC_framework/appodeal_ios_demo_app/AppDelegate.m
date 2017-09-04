@@ -13,6 +13,7 @@
 
 NSString * appodealBaseURL = @"https://api.appodeal.com";
 //simply comment
+//another comment
 
 @interface AppDelegate ()
 
