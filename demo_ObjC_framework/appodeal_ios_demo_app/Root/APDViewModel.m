@@ -31,4 +31,18 @@ NSAttributedString * k_apd_mainAttributedFromMainButton(NSString * string){
 
 @implementation APDViewModel
 
++ (void) logWithString:(NSString *)string {
+    NSLog(@"%@", string);
+}
+
+@end
+
+
+@implementation DescriptionCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+    return self;
+}
+
 @end

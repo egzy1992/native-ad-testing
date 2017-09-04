@@ -25,6 +25,7 @@ class APDBanner: APDRootViewController, APDBannerViewDelegate {
         bannerView.rootViewController = self
         bannerView.center = self.view.center
         bannerView.loadAd()
+        bannerView.requestDelegate = self
         self.view.addSubview(bannerView)
     }
     
@@ -42,6 +43,32 @@ class APDBanner: APDRootViewController, APDBannerViewDelegate {
     }
     func bannerViewDidReceiveTapAction(_ bannerView: APDBannerView!){
         
+    }
+}
+
+extension APDBanner : APDBannerViewRequestDelegate {
+    func bannerViewDidStartMediation(_ bannerView: APDBannerView!) {
+        print("[RRI] Banner mediation started")
+    }
+    
+    func bannerView(_ bannerView: APDBannerView!, willSendRequestToAdNetwork adNetwork: String!) {
+        print("[RRI] Banner send request to network ", adNetwork)
+    }
+    
+    func bannerView(_ bannerView: APDBannerView!, didRecieveResponseFromAdNetwork adNetwork: String!, wasFilled filled: Bool) {
+        print("[RRI] Banner send request to network ", adNetwork, " was filled ", filled ? "yes" : "no")
+    }
+    
+    func bannerView(_ bannerView: APDBannerView!, didFinishMediationAdWasFilled filled: Bool) {
+        print("[RRI] Banner mediation finished, ad was filled ", filled ? "yes" : "no")
+    }
+    
+    func bannerView(_ bannerView: APDBannerView!, logImpressionForAdNetwork adNetwork: String!) {
+        print("[RRI] Banner log impression for network ", adNetwork)
+    }
+    
+    func bannerView(_ bannerView: APDBannerView!, logClickForAdNetwork adNetwork: String!) {
+        print("[RRI] Banner log click for network ", adNetwork)
     }
 }
 

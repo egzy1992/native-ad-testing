@@ -29,6 +29,7 @@ DerivedData
 */*.perspectivev3
 */!default.perspectivev3
 */xcuserdata
+*/**/xcuserdata
 
 ## Other
 
@@ -65,6 +66,7 @@ Carthage/Build
 
 */Appodeal.framework
 */Appodeal.bundle
+*/Resources
 
 */Appodeal
 */appodeal-ios-sdk-mobile-adapters-master

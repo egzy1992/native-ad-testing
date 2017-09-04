@@ -13,18 +13,47 @@ import Appodeal
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var disabledNetworks : NSMutableArray = []
+    var configuration : APDDemoModel! = APDDemoModel()
+    var userData : APDUserDataModel! = APDUserDataModel()
+    
+    private var mainTabBarController : UITabBarController = UITabBarController()
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         self.setAppearance()
         
-        let rootController : APDStartScreen = APDStartScreen()
-        self.window = UIWindow.init(frame: UIScreen.main.bounds)
+        self.window = MotionWindow.init(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = UINavigationController.init(rootViewController: rootController)
+        NotificationCenter.default.addObserver(self, selector: #selector(addMemoryWarningButton), name: Notification.Name(rawValue: "AppShaked"), object: nil)
+        
+        application.applicationSupportsShakeToEdit = true;
+        self.initialTabBarController()
         
         return true
+    }
+    
+    func initialTabBarController(){
+        mainTabBarController.tabBar.tintColor = UIColor.blue
+        
+        let disabledNetworkController = APDDisableNetwork()
+        let disableNetworkBarItem = UITabBarItem(title: "network", image: nil, tag: 0)
+        disabledNetworkController.tabBarItem = disableNetworkBarItem;
+        
+        let configurationController = APDAppodealConfiguration()
+        let configurationBarItem = UITabBarItem(title: "config", image: nil, tag: 1)
+        configurationController.tabBarItem = configurationBarItem;
+        
+        let userDataController = APDUserDataConfiguration()
+        let userDataBarItem = UITabBarItem(title: "userData", image: nil, tag: 2)
+        userDataController.tabBarItem = userDataBarItem;
+
+        let initializeController = APDStartScreen()
+        let initializeBarItem = UITabBarItem(title: "init", image: nil, tag: 3)
+        initializeController.tabBarItem = initializeBarItem;
+        
+        mainTabBarController.setViewControllers([disabledNetworkController, configurationController, userDataController, initializeController], animated: true)
+        self.window?.rootViewController = UINavigationController.init(rootViewController: mainTabBarController)
     }
     
     func setAppearance (){
@@ -32,44 +61,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = true
     }
     
-    func initializeSdk(withAdType adType:AppodealAdType, testMode:Bool, locationTracking:Bool, autoCache:Bool, userData:Bool, toastMode toast:Bool){
+    func initializeSdk (){
         let apiKey = Bundle.main.object(forInfoDictionaryKey: "AppodealAppKey") as! String
-        Appodeal.setTestingEnabled(testMode)
-        Appodeal.setLocationTracking(!locationTracking)
+        Appodeal.setTestingEnabled(configuration.testMode)
+        Appodeal.setLocationTracking(configuration.locationTracking)
+        Appodeal.setBannerAnimationEnabled(configuration.bannerAnimation)
+        Appodeal.setBannerBackgroundVisible(configuration.bannerBackground)
+        Appodeal.setSmartBannersEnabled(configuration.bannerSmartSize)
+        disableNetworkForArray(disabledNetwork: disabledNetworks)
         
-        if userData {
-            Appodeal.setUserId("user_id")
-            Appodeal.setUserEmail("dt@email.net")
-            Appodeal.setUserBirthday(Date() as Date!)
-            Appodeal.setUserAge(25)
-            Appodeal.setUserGender(AppodealUserGender.male)
-            Appodeal.setUserOccupation(AppodealUserOccupation.work)
-            Appodeal.setUserRelationship(AppodealUserRelationship.other)
-            Appodeal.setUserSmokingAttitude(AppodealUserSmokingAttitude.neutral)
-            Appodeal.setUserAlcoholAttitude(AppodealUserAlcoholAttitude.neutral)
-            Appodeal.setUserInterests("other")
+        if userData.userSettings {
+            Appodeal.setUserId(userData.userId)
+            Appodeal.setUserEmail(userData.userEmail)
+            Appodeal.setUserBirthday(userData.userBirthday as Date!)
+            Appodeal.setUserAge(userData.userAge)
+            Appodeal.setUserGender(userData.userGender)
+            Appodeal.setUserOccupation(userData.userOccupation)
+            Appodeal.setUserRelationship(userData.userRelationship)
+            Appodeal.setUserSmokingAttitude(userData.userSmokingAttitude)
+            Appodeal.setUserAlcoholAttitude(userData.userAlcoholAttitude)
+            Appodeal.setUserInterests(userData.userInterests)
         }
         
-        Appodeal.setAutocache(autoCache, types: adType)
-//        let adTypes: AppodealAdType = [.banner, .interstitial] //
-        Appodeal.initialize(withApiKey: apiKey, types: adType)
-
-        let rootViewVontroller : APDAppodealHUB = APDAppodealHUB()
-        rootViewVontroller.isAutoCache = autoCache
-        self.window?.rootViewController = UINavigationController.init(rootViewController: rootViewVontroller)
+        Appodeal.setAutocache(configuration.autoCache, types: configuration.adType)
+        Appodeal.initialize(withApiKey: apiKey, types: configuration.adType)
         
-        //
-        //    {
-        //    APDAdTypePresentationViewController * rootController = [APDAdTypePresentationViewController new];
-        //    [rootController wasInitializedLikeDeprecated];
-        //    rootController.toastMode = toastMode;
-        //    rootController.isAutoCache = autoCache;
-        //    APDRootNavigationController * navigationController = [[APDRootNavigationController alloc] initWithRootViewController:rootController];
-        //    self.window.rootViewController = navigationController;
-        //    }
+        let rootViewVontroller : APDAppodealHUB = APDAppodealHUB()
+        rootViewVontroller.isAutoCache = configuration.autoCache
+        self.window?.rootViewController = UINavigationController.init(rootViewController: rootViewVontroller)
     }
+
     
-//    
+    func disableNetworkForArray(disabledNetwork : NSArray){
+        if  disabledNetwork.count == 0{
+            return
+        }
+    
+        for networkName in disabledNetwork {
+            Appodeal.disableNetwork(for: AppodealAdType.interstitial, name: networkName as! String)
+            Appodeal.disableNetwork(for: AppodealAdType.banner, name: networkName as! String)
+            Appodeal.disableNetwork(for: AppodealAdType.rewardedVideo, name: networkName as! String)
+            Appodeal.disableNetwork(for: AppodealAdType.MREC, name: networkName as! String)
+            Appodeal.disableNetwork(for: AppodealAdType.nativeAd, name: networkName as! String)
+        }
+        
+    }
+//
 //    - (void) initializeSdk:(APDAdType)adType testMode:(BOOL)testMode locationTracking:(BOOL)locationTracking toast:(BOOL)toastMode{
 //    NSString * apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppodealAppKey"];
 //    
@@ -88,7 +125,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
 
     //----------------------------------------------------------------------------------------------------
+    func addMemoryWarningButton() {
+        let button = UIButton(type: .custom)
+        button .addTarget(self, action: #selector(synthesizeMemoryWarning), for: .touchUpInside)
+        
+        button.setTitle("Synthesize Memory Warning ", for: .normal)
+        button.setTitleColor(UIColor.gray, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        
+        button.layer.borderWidth = 1.5
+        button.layer.borderColor = UIColor.gray.cgColor
+        button.backgroundColor = UIColor.white
+        
+        let width  : CGFloat!  = UIScreen.main.bounds.width / 2
+        let height : CGFloat!  = 33.0
+        
+        let x = width / 2
+        let y = UIScreen.main.bounds.height / 2 - (height + 10.0)
+        
+        button.frame = CGRect(x: x, y: y, width: width, height: height)
+        topPresentedContoller()?.view.addSubview(button)
+        DispatchQueue.main.asyncAfter(deadline:  DispatchTime.now() + .seconds(1)) {
+            button.removeFromSuperview()
+        }
+    }
 
+    func topPresentedContoller() -> UIViewController? {
+        var controller = UIApplication.shared.keyWindow?.rootViewController;
+        
+        while ((controller?.presentedViewController) != nil) {
+            controller = controller?.presentedViewController;
+        }
+        
+        return controller;
+    }
+    
+    func synthesizeMemoryWarning() {
+        NotificationCenter.default.post(name: .UIApplicationDidReceiveMemoryWarning, object: nil)
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

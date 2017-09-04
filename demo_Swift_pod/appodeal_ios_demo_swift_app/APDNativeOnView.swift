@@ -27,8 +27,8 @@ class APDNativeOnView: APDRootViewController, APDNativeAdLoaderDelegate {
         
     }
     
-    func nativeAdLoader(_ loader: APDNativeAdLoader!, didLoad nativeAd: APDNativeAd!) {
-        apdNativeArray = [nativeAd]
+    func nativeAdLoader(_ loader: APDNativeAdLoader!, didLoad nativeAds: [APDNativeAd]!) {
+        apdNativeArray = nativeAds
         appodealNativeViewModel.isHidden = false;
         appodealNativeViewModel.customNativeView.setNativeAd(apdNativeArray.first!, withViewController: self)
     }

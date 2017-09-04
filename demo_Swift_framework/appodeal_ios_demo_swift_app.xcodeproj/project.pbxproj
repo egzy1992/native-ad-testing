@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C5DD2A21EAF7648002EB1AA /* Appodeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5DD2831EAF7648002EB1AA /* Appodeal.framework */; };
+		9C5DD2CB1EAF8D2C002EB1AA /* MotionWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5DD2CA1EAF8D2C002EB1AA /* MotionWindow.swift */; };
 		B90326491D819631004004EA /* APDRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90326481D819631004004EA /* APDRootViewController.swift */; };
 		B903264E1D819756004004EA /* APDStartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B903264D1D819756004004EA /* APDStartScreen.swift */; };
 		B9061C791D82C72C005B7B21 /* APDAppodealHUB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9061C781D82C72C005B7B21 /* APDAppodealHUB.swift */; };
@@ -50,11 +52,18 @@
 		B9563DF31D81A5E800052053 /* Launchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9563DF11D81A5E800052053 /* Launchscreen.storyboard */; };
 		B9563DF51D81A69100052053 /* APDRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9563DF41D81A69100052053 /* APDRootView.swift */; };
 		B9563E161D81B15D00052053 /* APDAppodealConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9563E151D81B15D00052053 /* APDAppodealConfiguration.swift */; };
+		B9A6AB551E54333B0094B50F /* APDUserDataConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6AB541E54333B0094B50F /* APDUserDataConfiguration.swift */; };
+		B9A6AB571E543B470094B50F /* APDVisualRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6AB561E543B470094B50F /* APDVisualRootViewController.swift */; };
+		B9A6AB591E544CEC0094B50F /* APDCustomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6AB581E544CEC0094B50F /* APDCustomModel.swift */; };
+		B9A6AB5B1E5453220094B50F /* APDUserDataPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A6AB5A1E5453220094B50F /* APDUserDataPresentation.swift */; };
 		B9C2708B1D818AA400C7FF15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C2708A1D818AA400C7FF15 /* AppDelegate.swift */; };
 		B9C270921D818AA400C7FF15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9C270911D818AA400C7FF15 /* Assets.xcassets */; };
+		B9FD80761DE41C9800545C05 /* APDDisableNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FD80751DE41C9800545C05 /* APDDisableNetwork.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C5DD2831EAF7648002EB1AA /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Appodeal.framework; sourceTree = "<group>"; };
+		9C5DD2CA1EAF8D2C002EB1AA /* MotionWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionWindow.swift; sourceTree = "<group>"; };
 		B90326481D819631004004EA /* APDRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDRootViewController.swift; sourceTree = "<group>"; };
 		B903264D1D819756004004EA /* APDStartScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDStartScreen.swift; sourceTree = "<group>"; };
 		B9061C781D82C72C005B7B21 /* APDAppodealHUB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDAppodealHUB.swift; sourceTree = "<group>"; };
@@ -98,10 +107,15 @@
 		B9563DF21D81A5E800052053 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Launchscreen.storyboard; sourceTree = "<group>"; };
 		B9563DF41D81A69100052053 /* APDRootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDRootView.swift; sourceTree = "<group>"; };
 		B9563E151D81B15D00052053 /* APDAppodealConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDAppodealConfiguration.swift; sourceTree = "<group>"; };
+		B9A6AB541E54333B0094B50F /* APDUserDataConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUserDataConfiguration.swift; sourceTree = "<group>"; };
+		B9A6AB561E543B470094B50F /* APDVisualRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDVisualRootViewController.swift; sourceTree = "<group>"; };
+		B9A6AB581E544CEC0094B50F /* APDCustomModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDCustomModel.swift; sourceTree = "<group>"; };
+		B9A6AB5A1E5453220094B50F /* APDUserDataPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDUserDataPresentation.swift; sourceTree = "<group>"; };
 		B9C270871D818AA400C7FF15 /* appodeal_ios_demo_swift_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appodeal_ios_demo_swift_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C2708A1D818AA400C7FF15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9C270911D818AA400C7FF15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9C270961D818AA400C7FF15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9FD80751DE41C9800545C05 /* APDDisableNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APDDisableNetwork.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +154,7 @@
 				B9563DC01D81A28900052053 /* CoreMedia.framework in Frameworks */,
 				B9563DC11D81A28900052053 /* CoreMotion.framework in Frameworks */,
 				B9563DC21D81A28900052053 /* CoreTelephony.framework in Frameworks */,
+				9C5DD2A21EAF7648002EB1AA /* Appodeal.framework in Frameworks */,
 				B9563DB21D81A26100052053 /* GLKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				B9C2708A1D818AA400C7FF15 /* AppDelegate.swift */,
+				9C5DD2CA1EAF8D2C002EB1AA /* MotionWindow.swift */,
 				B9C270911D818AA400C7FF15 /* Assets.xcassets */,
 				B9C270961D818AA400C7FF15 /* Info.plist */,
 				B9563DF11D81A5E800052053 /* Launchscreen.storyboard */,
@@ -163,7 +179,10 @@
 			isa = PBXGroup;
 			children = (
 				B903264D1D819756004004EA /* APDStartScreen.swift */,
+				B9FD80751DE41C9800545C05 /* APDDisableNetwork.swift */,
 				B9563E151D81B15D00052053 /* APDAppodealConfiguration.swift */,
+				B9A6AB541E54333B0094B50F /* APDUserDataConfiguration.swift */,
+				B9A6AB5A1E5453220094B50F /* APDUserDataPresentation.swift */,
 				B9061C781D82C72C005B7B21 /* APDAppodealHUB.swift */,
 				B91418B61D82DF59004C6280 /* APDAppodealBanner.swift */,
 				B91418B41D82DF2C004C6280 /* APDAppodealMREC.swift */,
@@ -177,7 +196,9 @@
 		B903264A1D819637004004EA /* APDROOT */ = {
 			isa = PBXGroup;
 			children = (
+				B9A6AB581E544CEC0094B50F /* APDCustomModel.swift */,
 				B9563DF41D81A69100052053 /* APDRootView.swift */,
+				B9A6AB561E543B470094B50F /* APDVisualRootViewController.swift */,
 				B90326481D819631004004EA /* APDRootViewController.swift */,
 			);
 			name = APDROOT;
@@ -232,6 +253,7 @@
 		B9C2707E1D818AA400C7FF15 = {
 			isa = PBXGroup;
 			children = (
+				9C5DD2831EAF7648002EB1AA /* Appodeal.framework */,
 				B9C270891D818AA400C7FF15 /* appodeal_ios_demo_swift_app */,
 				B9C270881D818AA400C7FF15 /* Products */,
 				B9563DB01D81A26100052053 /* Frameworks */,
@@ -330,14 +352,20 @@
 			files = (
 				B91418BD1D82DFF9004C6280 /* APDBanner.swift in Sources */,
 				B9563DF51D81A69100052053 /* APDRootView.swift in Sources */,
+				B9A6AB5B1E5453220094B50F /* APDUserDataPresentation.swift in Sources */,
 				B91418BB1D82DF96004C6280 /* APDNativeHUB.swift in Sources */,
 				B903264E1D819756004004EA /* APDStartScreen.swift in Sources */,
 				B91418B51D82DF2C004C6280 /* APDAppodealMREC.swift in Sources */,
 				B91418B71D82DF59004C6280 /* APDAppodealBanner.swift in Sources */,
 				B9C2708B1D818AA400C7FF15 /* AppDelegate.swift in Sources */,
+				9C5DD2CB1EAF8D2C002EB1AA /* MotionWindow.swift in Sources */,
+				B9A6AB591E544CEC0094B50F /* APDCustomModel.swift in Sources */,
 				B9061C791D82C72C005B7B21 /* APDAppodealHUB.swift in Sources */,
 				B9563E161D81B15D00052053 /* APDAppodealConfiguration.swift in Sources */,
+				B9FD80761DE41C9800545C05 /* APDDisableNetwork.swift in Sources */,
 				B91418DD1D82FA7A004C6280 /* APDNativeOnView.swift in Sources */,
+				B9A6AB551E54333B0094B50F /* APDUserDataConfiguration.swift in Sources */,
+				B9A6AB571E543B470094B50F /* APDVisualRootViewController.swift in Sources */,
 				B90326491D819631004004EA /* APDRootViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

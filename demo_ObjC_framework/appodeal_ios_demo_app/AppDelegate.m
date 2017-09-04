@@ -7,10 +7,12 @@
 //
 
 #import "AppDelegate.h"
-#import "APDRootNavigationController.h"
 #import "APDStartScreenViewController.h"
-#import "APDAdTypePresentationViewController.h"
-#import "APDFavoriteAdTypePresentationViewController.h"
+#import "APDDisableNetworkViewController.h"
+#import "APDHUBViewController.h"
+#import "MotionWindow.h"
+#import <AudioToolbox/AudioServices.h>
+
 
 @interface AppDelegate ()
 
@@ -20,8 +22,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    application.applicationSupportsShakeToEdit = YES;
+    self.window = [[MotionWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(synthesizeMemoryWarning) name:@"DemoAppShaked" object:nil];
     
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
     self.window.rootViewController = [UIViewController new];
     
@@ -44,16 +48,44 @@
     [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.9 green:0.0 blue:0.0 alpha:0.95]];
 }
 
-- (void) initializeSdk:(AppodealAdType)adType testMode:(BOOL)testMode debugMode:(BOOL)debug locationTracking:(BOOL)locationTracking autoCache:(BOOL)autoCache userData:(BOOL)userData toast:(BOOL)toastMode{
+- (void) initializeSdkWithParams:(APDDemoModel *)params andApiVersion:(BOOL)api {
+    if (api) {
+        [self initAPDWithParams:params];
+    } else {
+        [self initAppodealWithParams:params];
+    }
+}
+
+- (void) initAPDWithParams:(APDDemoModel *)params {
     NSString * apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppodealAppKey"];
     
-//    [Appodeal disableNetworkForAdType:AppodealAdTypeBanner name:@"admob"];
+    [APDSdk sharedSdkWithApiKey:apiKey];
+    [self disableNetworkForArray:self.disabledAdNetwork];
     
-    [Appodeal setTestingEnabled:testMode];
-    [Appodeal setDebugEnabled:debug];
-    [Appodeal setLocationTracking:!locationTracking];
+    [[APDSdk sharedSdk] setTesingMode:params.testMode];
+    [[APDSdk sharedSdk] setLocationTracking:params.locationTracking];
+    [[APDSdk sharedSdk] initializeForAdTypes:(APDType)params.adType];
     
-    if (userData) {
+    {
+        APDHUBViewController * rootController = [APDHUBViewController new];
+        rootController.toastMode = params.toastMode;
+        UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:rootController];
+        self.window.rootViewController = navigationController;
+    }
+}
+
+- (void) initAppodealWithParams:(APDDemoModel *)params {
+    NSString * apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppodealAppKey"];
+    
+    
+    [self disableNetworkForArray:self.disabledAdNetwork];
+    [Appodeal setTestingEnabled:params.testMode];
+    [Appodeal setLocationTracking:params.locationTracking];
+    [Appodeal setSmartBannersEnabled:params.bannerSmartSize];
+    [Appodeal setBannerBackgroundVisible:params.bannerBackground];
+    [Appodeal setBannerAnimationEnabled:params.bannerAnimation];
+    
+    if (params.userSettings) {
         [Appodeal setUserId:@"user_id"];
         [Appodeal setUserEmail:@"dt@email.net"];
         [Appodeal setUserBirthday:[NSDate date]];
@@ -65,33 +97,33 @@
         [Appodeal setUserAlcoholAttitude:AppodealUserAlcoholAttitudeNeutral];
         [Appodeal setUserInterests:@"other"];
     }
-    [Appodeal setAutocache:autoCache types:adType];
-    [Appodeal initializeWithApiKey:apiKey types:adType];
+    [Appodeal setAutocache:params.autoCache types:params.adType];
+    [Appodeal initializeWithApiKey:apiKey types:params.adType];
     
     {
-        APDAdTypePresentationViewController * rootController = [APDAdTypePresentationViewController new];
+        APDHUBViewController * rootController = [APDHUBViewController new];
         [rootController wasInitializedLikeDeprecated];
-        rootController.toastMode = toastMode;
-        rootController.isAutoCache = autoCache;
-        APDRootNavigationController * navigationController = [[APDRootNavigationController alloc] initWithRootViewController:rootController];
+        rootController.toastMode = params.toastMode;
+        rootController.isAutoCache = params.autoCache;
+        UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:rootController];
         self.window.rootViewController = navigationController;
     }
 }
 
-- (void) initializeSdk:(APDAdType)adType testMode:(BOOL)testMode locationTracking:(BOOL)locationTracking toast:(BOOL)toastMode{
-    NSString * apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"AppodealAppKey"];
+- (void)disableNetworkForArray:(NSArray *)disabledNetwork{
+    if (!disabledNetwork) {
+        return;
+    }
     
-    [APDSdk sharedSdkWithApiKey:apiKey];
-    [[APDSdk sharedSdk] setTesingMode:testMode];
-    [[APDSdk sharedSdk] setLocationTracking:locationTracking];
-    [[APDSdk sharedSdk] initializeForAdTypes:adType];
-//    [[APDSdk sharedSdk] setLogLevel:APDLogLevelDebug];
-    
-    {
-        APDFavoriteAdTypePresentationViewController * rootController = [APDFavoriteAdTypePresentationViewController new];
-        rootController.toastMode = toastMode;
-        APDRootNavigationController * navigationController = [[APDRootNavigationController alloc] initWithRootViewController:rootController];
-        self.window.rootViewController = navigationController;
+    for (NetworkProperty * property in disabledNetwork) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        [Appodeal disableNetworkForAdType:AppodealAdTypeNativeAd name:property.networkName];
+        [Appodeal disableNetworkForAdType:AppodealAdTypeRewardedVideo name:property.networkName];
+        [Appodeal disableNetworkForAdType:AppodealAdTypeMREC name:property.networkName];
+        [Appodeal disableNetworkForAdType:AppodealAdTypeInterstitial name:property.networkName];
+        [Appodeal disableNetworkForAdType:AppodealAdTypeBanner name:property.networkName];
+#pragma clang diagnostic pop
     }
 }
 
@@ -117,6 +149,54 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Private
+
+//- (void)addMemoryWarningButton {
+//    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button addTarget:self action:@selector(synthesizeMemoryWarning) forControlEvents:UIControlEventTouchUpInside];
+//    [button setTitle:@"Synthesize Memory Warning" forState:UIControlStateNormal];
+//    
+//    [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//    [button.titleLabel setFont:[UIFont systemFontOfSize:12]];
+//    
+//    button.layer.borderWidth = 1.5;
+//    button.layer.borderColor = [UIColor grayColor].CGColor;
+//    button.backgroundColor = [UIColor whiteColor];
+//    
+//    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+//    CGFloat width = screenSize.width / 2;
+//    CGFloat height = 33.0;
+//    CGFloat x = width / 2;
+//    CGFloat y = screenSize.height / 2 - (height + 10.0);
+//    
+//    [button setFrame:CGRectMake(x, y, width, height)];
+//    [self.topPresentedContoller.view addSubview:button];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [button removeFromSuperview];
+//    });
+//}
+
+- (UIViewController *)topPresentedContoller {
+    UIViewController * controller = [[UIApplication sharedApplication] keyWindow].rootViewController;
+    
+    while (controller.presentedViewController) {
+        controller = controller.presentedViewController;
+    }
+    
+    return controller;
+}
+
+- (void)synthesizeMemoryWarning {
+    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+    NSLog(@"[Demo] Synthesize memory warning");
+    UIAlertController * controller = [UIAlertController alertControllerWithTitle:@"App synthesize memory warning" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [self.topPresentedContoller presentViewController:controller animated:NO completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [controller dismissViewControllerAnimated:NO completion:nil];
+    });
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 }
 
 @end

@@ -7,49 +7,88 @@
 //
 
 #import "APDStartScreenViewController.h"
-#import "APDStartScreenView.h"
-#import "APDLegacyInitilizeViewController.h"
-#import "APDInitilizeViewController.h"
+#import "APDDisableNetworkViewController.h"
+#import "Masonry.h"
 
 @interface APDStartScreenViewController ()
-{
-    APDStartScreenView * _startScreenView;
-}
+
+@property (nonatomic, strong) UIButton * legacyBtn;
+@property (nonatomic, strong) UIButton * favoriteBtn;
+
 @end
 
 @implementation APDStartScreenViewController
 
 - (void) viewDidLoad{
     [super viewDidLoad];
+    [self updateViewConstraints];
     
     {
-        _startScreenView = [[APDStartScreenView alloc] initWithFrame:self.view.frame];
-        self.view = _startScreenView;
-    }
-    
-    {
+        self.view.backgroundColor = UIColor.whiteColor;
         [self defAction];
     }
 }
 
+#pragma mark --- CONSTRAIN
+
+- (void) updateViewConstraints {
+    
+    [self.legacyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self);
+        make.bottom.equalTo(self.view.mas_centerY).with.offset(-20);
+        make.width.equalTo(@150);
+    }];
+    
+    [self.favoriteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self);
+        make.bottom.equalTo(self.view.mas_centerY).with.offset(20);
+        make.width.equalTo(@150);
+    }];
+    
+    [super updateViewConstraints];
+}
+
+#pragma mark --- PROPERY
+
+- (UIButton *) legacyBtn {
+    if (!_legacyBtn) {
+        _legacyBtn = k_apd_mainButtonWithTitle([NSLocalizedString(@"api 0.10.x", nil) uppercaseString]);
+        [self.view addSubview:_legacyBtn];
+    }
+    return _legacyBtn;
+}
+
+- (UIButton *) favoriteBtn{
+    if (!_favoriteBtn) {
+        _favoriteBtn = k_apd_mainButtonWithTitle([NSLocalizedString(@"api 1.0.x", nil) uppercaseString]);
+        [self.view addSubview:_favoriteBtn];
+    }
+    return _favoriteBtn;
+}
+
+
 #pragma mark --- DEF ACTION
 
 - (void) defAction{
-    [_startScreenView.legacyBtn addTarget:self action:@selector(legacyClick:) forControlEvents:UIControlEventTouchUpInside];
-    [_startScreenView.favoriteBtn addTarget:self action:@selector(favoriteClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.legacyBtn addTarget:self action:@selector(legacyClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.favoriteBtn addTarget:self action:@selector(favoriteClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark ---- CLICK SEGUE 
 
 -(IBAction)legacyClick:(id)sender{
-    APDLegacyInitilizeViewController * nextController = [APDLegacyInitilizeViewController new];
+    
+    APDDisableNetworkViewController * nextController = [APDDisableNetworkViewController new];
     nextController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    nextController.newApi = NO;
     [self.navigationController pushViewController:nextController animated:YES];
 }
 
 -(IBAction)favoriteClick:(id)sender{
-    APDInitilizeViewController * nextController = [APDInitilizeViewController new];
+    
+    APDDisableNetworkViewController * nextController = [APDDisableNetworkViewController new];
     nextController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    nextController.newApi = YES;
     [self.navigationController pushViewController:nextController animated:YES];
 }
 

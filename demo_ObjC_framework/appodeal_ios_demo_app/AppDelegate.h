@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <Appodeal/Appodeal.h>
+#import "APDDemoModel.h"
+#import "MotionWindow.h"
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) MotionWindow *window;
+@property (nonatomic, strong) NSArray * disabledAdNetwork;
 
-- (void) initializeSdk:(AppodealAdType)adType testMode:(BOOL)testMode debugMode:(BOOL)debug locationTracking:(BOOL)locationTracking autoCache:(BOOL)autoCache userData:(BOOL)userData toast:(BOOL)toastMode;
-- (void) initializeSdk:(APDAdType)adType testMode:(BOOL)testMode locationTracking:(BOOL)locationTracking toast:(BOOL)toastMode;
+- (void) initializeSdkWithParams:(APDDemoModel *)params andApiVersion:(BOOL)api;
 
 @end
 

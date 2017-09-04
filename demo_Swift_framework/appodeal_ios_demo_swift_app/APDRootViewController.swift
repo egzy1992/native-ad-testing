@@ -9,28 +9,16 @@
 import UIKit
 import Appodeal
 
-class APDRootViewController: UIViewController {
-    
-    public enum APD_STATUS : Int {
-        case kAPD_STATUS_LOAD
-        case kAPD_STATUS_FAIL_TO_LOAD
-        case kAPD_STATUS_FAIL_TO_PRESENT
-        case kAPD_STATUS_LOADED
-        case kAPD_STATUS_PRESENTED
-        case kAPD_STATUS_NILL
-    }
-    
+class APDRootViewController: APDVisualRootViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = UIColor.white
-        self.setNeedsStatusBarAppearanceUpdate()
-        
+
         let titleLabel : UILabel = UILabel()
         let attributes : NSDictionary = [NSForegroundColorAttributeName : UINavigationBar.appearance().tintColor,
-                                         NSFontAttributeName : UIFont.systemFont(ofSize: 18.0, weight: UIFontWeightLight),
+                                         NSFontAttributeName : UIFont.systemFont(ofSize: 18.0),
                                          NSKernAttributeName : 2]
-        
+
         if self.navigationItem.title != nil {
             titleLabel.attributedText = NSAttributedString.init(string: self.navigationItem.title!, attributes: (attributes as! [String : AnyObject]))
             titleLabel.sizeToFit()
@@ -38,13 +26,20 @@ class APDRootViewController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        get {
-            return true
+    func createAlertForPlacement (showStyle: AppodealShowStyle, rootController: UIViewController) {
+        let alert = UIAlertController(title: "Setting the placement", message: "Enter the placement name", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = ""
         }
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0]
+            if ((textField?.text?.isEmpty))! {
+                Appodeal.showAd(showStyle, rootViewController: rootController);
+            }
+            else {
+                Appodeal.showAd(showStyle, forPlacement: textField?.text, rootViewController: rootController)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
