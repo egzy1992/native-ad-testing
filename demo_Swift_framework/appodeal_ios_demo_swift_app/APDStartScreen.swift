@@ -8,10 +8,9 @@
 
 import UIKit
 
-class APDStartScreen: APDRootViewController {
+class APDStartScreen: APDVisualRootViewController {
     
     var startScreenView : APDStartScreenView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +21,7 @@ class APDStartScreen: APDRootViewController {
     }
     
     func appodealApiClick(){
-        let nextController : APDAppodealConfiguration! = APDAppodealConfiguration();
-        nextController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve;
-        self.navigationController?.pushViewController(nextController, animated: true)
+        (UIApplication.shared.delegate as! AppDelegate).initializeSdk()
     }
 }
 

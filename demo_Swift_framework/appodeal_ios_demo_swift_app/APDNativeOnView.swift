@@ -9,11 +9,26 @@
 import UIKit
 import Appodeal
 
-class APDNativeOnView: APDRootViewController, APDNativeAdLoaderDelegate {
-
-    var appodealNativeViewModel : APDNativeOnViewModelView!
-    var apdLoader : APDNativeAdLoader! = APDNativeAdLoader()
-    var apdNativeArray : [APDNativeAd]!
+class APDNativeOnView: APDRootViewController {
+    
+    var isAdQueue : Bool!
+    var capacity : Int = 1
+    var type : APDNativeAdType = .auto
+    
+    fileprivate var appodealNativeViewModel : APDNativeOnViewModelView!
+    private var apdLoader : APDNativeAdLoader! = APDNativeAdLoader()
+    private var apdAdQueue : APDNativeAdQueue = APDNativeAdQueue()
+    
+    fileprivate var apdNativeArray : [APDNativeAd]! = Array()
+    
+    fileprivate lazy  var slider : UISlider = UISlider.init(frame: CGRect(x: (UIScreen.main.bounds.width - 200) / 2,
+                                                                      y: UIScreen.main.bounds.height - 65,
+                                                                      width: 200,
+                                                                      height: 35))
+    private lazy var countLabel : UILabel = UILabel(frame: CGRect(x: (UIScreen.main.bounds.width - 200) / 2,
+                                                                  y: UIScreen.main.bounds.height - 100,
+                                                                  width: 200,
+                                                                  height: 34))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,20 +37,125 @@ class APDNativeOnView: APDRootViewController, APDNativeAdLoaderDelegate {
         self.view.addSubview(appodealNativeViewModel)
         appodealNativeViewModel.isHidden = true
         
-        apdLoader.delegate = self
-        apdLoader.loadAd(with: APDNativeAdType.auto)
+        createControls()
+        setAvailableAdCount(0)
         
+        guard !isAdQueue else {
+            apdAdQueue.delegate = self
+            apdAdQueue.setMaxAdSize(capacity)
+            apdAdQueue.loadAd(of: type)
+            return
+        }
+        
+        apdLoader.delegate = self
+        apdLoader.loadAd(with: type, capacity: capacity)
     }
     
-    func nativeAdLoader(_ loader: APDNativeAdLoader!, didLoad nativeAd: APDNativeAd!) {
-        apdNativeArray = [nativeAd]
+    func createControls() {
+        
+        slider.value = 1;
+        slider.tintColor = UIColor.red
+        slider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
+        
+        countLabel.font = UIFont.systemFont(ofSize: 26)
+        countLabel.textColor = UIColor.darkText
+        countLabel.textAlignment = .center
+        
+        view.addSubview(slider)
+        view.addSubview(countLabel)
+    }
+    
+    func setAvailableAdCount(_ count : Int) {
+        guard count > 0 else {
+            countLabel.isHidden = !(slider.maximumValue > 0);
+            slider.isHidden = countLabel.isHidden;
+            return
+        }
+        
+        countLabel.isHidden = false
+        slider.isHidden = count <= 1
+        
+        let currentAd = Int(slider.value)
+        countLabel.text = String(format: "%d/%d", currentAd, count)
+        slider.maximumValue = Float(count)
+        slider.minimumValue = Float(1)
+        
+//        slider.value = Float(currentAd)
+    }
+    
+    func sliderChanged() {
+        let currentAd = Int(slider.value) - 1
+        
+        if currentAd > apdNativeArray.count - 1{
+            let nativeAd : [APDNativeAd]! = apdAdQueue.getNativeAds(ofCount: 1)
+            
+            let _ = apdNativeArray.map {( $0.delegate = self )}
+            apdNativeArray.append(contentsOf:nativeAd)
+        }
+        
+        if isAdQueue == true {
+            countLabel.text = String(format: "%d/%d", Int(slider.value), Int(apdNativeArray.count + apdAdQueue.currentAdCount))
+        } else {
+            countLabel.text = String(format: "%d/%d", Int(slider.value), Int(apdNativeArray.count))
+        }
+        
+        appodealNativeViewModel.customNativeView.setNativeAd(apdNativeArray[currentAd % apdNativeArray.count], withViewController: self)
+    }
+}
+
+extension APDNativeOnView : APDNativeAdLoaderDelegate {
+    
+    func nativeAdLoader(_ loader: APDNativeAdLoader!, didLoad nativeAds: [APDNativeAd]!) {
+        print("\n ****************** \n adLoader didLoadNativeAd... \n ************************* \n")
+        apdNativeArray = nativeAds
+        let _ = nativeAds.map {( $0.delegate = self )}
         appodealNativeViewModel.isHidden = false;
+        setAvailableAdCount(nativeAds.count)
         appodealNativeViewModel.customNativeView.setNativeAd(apdNativeArray.first!, withViewController: self)
     }
     
     func nativeAdLoader(_ loader: APDNativeAdLoader!, didFailToLoadWithError error: Error!){
-        
+        print("\n ****************** \n adLoader failed!!! \n ************************* \n")
+        setAvailableAdCount(0)
     }
+}
+
+extension APDNativeOnView : APDNativeAdPresentationDelegate {
+    
+    func nativeAdWillLogImpression(_ nativeAd: APDNativeAd!) {
+        print("\n ****************** \n nativeAdWillLogUserInteraction nativeAdWillLogImpression at index ", apdNativeArray.index(of: nativeAd)!, "\n ************************* \n")
+    }
+    
+    func nativeAdWillLogUserInteraction(_ nativeAd: APDNativeAd!) {
+        print("\n ****************** \n nativeAdWillLogUserInteraction ", apdNativeArray.index(of: nativeAd)!, "\n ************************* \n")
+    }
+}
+
+extension APDNativeOnView : APDNativeAdQueueDelegate {
+    
+    func adQueue(_ adQueue: APDNativeAdQueue!, failedWithError error: Error!) {
+        print("\n ****************** \n adQueue failed!!!... \n ************************* \n")
+        setAvailableAdCount(0)
+    }
+    
+    func adQueueAdIsAvailable(_ adQueue: APDNativeAdQueue!, ofCount count: Int) {
+//        apdNativeArray.append(contentsOf:adQueue.getNativeAds(ofCount: count))
+//        let _ = apdNativeArray.map {( $0.delegate = self )}
+        print("\n ****************** \n adQueue is available now... \n ************************* \n")
+        appodealNativeViewModel.isHidden = false;
+        
+        if apdNativeArray.count > 0 {
+            setAvailableAdCount(apdNativeArray.count + count)
+        } else {
+            apdNativeArray.append(contentsOf:adQueue.getNativeAds(ofCount: 1))
+            let _ = apdNativeArray.map {( $0.delegate = self )}
+            setAvailableAdCount(count)
+            
+            let currentAd = Int(slider.value) - 1
+            appodealNativeViewModel.customNativeView.setNativeAd(apdNativeArray[currentAd], withViewController: self)
+        }
+    }
+    
 }
 
 class APDNativeOnViewModelView: APDRootView {
@@ -46,7 +166,7 @@ class APDNativeOnViewModelView: APDRootView {
         super.init(frame: frame)
         
         let width : CGFloat = UIScreen.main.bounds.size.width
-        let height : CGFloat = 50 + width * 9 / 16
+        let height : CGFloat = 100 + width * 9 / 16
         customNativeView = APDNativeCustonView.init(frame: CGRect.init(x: 0, y: 0, width: width, height: height))
         customNativeView.center = self.center
         self.addSubview(customNativeView)
@@ -62,6 +182,7 @@ class APDNativeCustonView : UIView {
     var iconView : UIImageView!
     var titleLabel : UILabel!
     var descriptionLabel : UILabel!
+    var iconSizeLabel : UILabel!
     var mediaView : APDMediaView!
     var callToActionLabel : UILabel!
     var adBadgeLabel : UILabel!
@@ -71,9 +192,9 @@ class APDNativeCustonView : UIView {
         super.init(frame: frame)
         
         mediaView = APDMediaView.init(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
-        mediaView.type = APDMediaViewType.mainImage
-        mediaView.skippable = true
-        mediaView.muted = false
+//        mediaView.type = APDMediaViewType.mainImage
+//        mediaView.skippable = true
+//        mediaView.muted = false
         
         adBadgeLabel = UILabel()
         adBadgeLabel.backgroundColor = UIColor.darkGray
@@ -101,7 +222,15 @@ class APDNativeCustonView : UIView {
         descriptionLabel.numberOfLines = 3
         descriptionLabel.textAlignment = NSTextAlignment.left
         descriptionLabel.textColor = UIColor.gray
- 
+        
+        iconSizeLabel = UILabel()
+        iconSizeLabel.font = UIFont.boldSystemFont(ofSize: 8)
+        iconSizeLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        iconSizeLabel.numberOfLines = 2
+        iconSizeLabel.textAlignment = NSTextAlignment.left
+        iconSizeLabel.textColor = UIColor.white
+        iconSizeLabel.backgroundColor = UIColor.black
+        
         self.nativeElementSetPosition()
     }
     
@@ -122,6 +251,9 @@ class APDNativeCustonView : UIView {
         titleLabel.text = self.nativeAd.title;
         descriptionLabel.text = self.nativeAd.descriptionText;
         callToActionLabel.text = self.nativeAd.callToActionText;
+        if (((nativeAd.iconImage != nil)) && ((nativeAd.iconImage != nil))) {
+            iconSizeLabel.text = "main:\(nativeAd.mainImage.size.width)x\(nativeAd.mainImage.size.height)\nicon:\(nativeAd.iconImage.size.width)x\(nativeAd.iconImage.size.height)";
+        }
     }
     
     func nativeElementSetPosition() {
@@ -131,6 +263,7 @@ class APDNativeCustonView : UIView {
         self.addSubview(adBadgeLabel)
         self.addSubview(titleLabel)
         self.addSubview(descriptionLabel)
+        self.addSubview(iconSizeLabel)
         
         let width : CGFloat = UIScreen.main.bounds.size.width
         let height : CGFloat = width * 9 / 16
@@ -140,5 +273,6 @@ class APDNativeCustonView : UIView {
         self.adBadgeLabel.frame = CGRect.init(x: self.frame.width  - 30, y: height + 5,width: 25,height: 12);
         self.titleLabel.frame = CGRect.init(x: 5, y: height + 5, width: self.frame.size.width - 100,height: 15);
         self.descriptionLabel.frame = CGRect.init(x: 5, y: height + self.titleLabel.frame.height + 10,width: self.frame.width - 130, height: 40);
+        self.iconSizeLabel.frame = CGRect.init(x: self.frame.size.width - 120, y: height, width: 95,height: 20);
     }
 }
